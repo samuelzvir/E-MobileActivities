@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import br.com.samuelzvir.meuabc.R;
 
-public class CreateMessageActivity extends Activity {
+public class CreateTextActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

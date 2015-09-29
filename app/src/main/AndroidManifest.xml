@@ -12,12 +12,12 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activities.CreateMessageActivity"
-            android:label="@string/title_activity_create_message" >
+            android:name=".activities.CreateTextActivity"
+            android:label="@string/title_activity_create_text" >
         </activity>
         <activity
             android:name=".activities.ReceiveTextActivity"
-            android:label="@string/title_activity_receive_message" >
+            android:label="@string/title_activity_receive_text" >
         </activity>
         <activity
             android:name=".activities.MenuActivity"

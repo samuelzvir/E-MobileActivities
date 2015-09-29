@@ -68,7 +68,7 @@ public class MenuActivity extends Activity {
     }
 
     public void onToMessages(View view){
-        Intent intent = new Intent(this, CreateMessageActivity.class);
+        Intent intent = new Intent(this, CreateTextActivity.class);
         startActivity(intent);
     }
 
