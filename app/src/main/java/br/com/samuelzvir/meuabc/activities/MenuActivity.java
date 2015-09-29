@@ -18,7 +18,6 @@ package br.com.samuelzvir.meuabc.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -70,6 +69,11 @@ public class MenuActivity extends Activity {
 
     public void onToMessages(View view){
         Intent intent = new Intent(this, CreateMessageActivity.class);
+        startActivity(intent);
+    }
+
+    public void onToCamera(View view){
+        Intent intent = new Intent(this, TakePhotoActivity.class);
         startActivity(intent);
     }
 

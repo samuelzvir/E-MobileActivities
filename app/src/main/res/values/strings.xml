@@ -3,23 +3,28 @@
     <string name="title_activity_take_photo">TakePhotoActivity</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_create_message">CreateMessageActivity</string>
+    <string name="title_activity_create_text">CreateTextActivity</string>
     
-    <string name="send">SEND MESSAGE</string>
-    <string name="title_activity_receive_message">ReceiveMessageActivity</string>
+    <string name="send">Salvar Palavra(s)</string>
+    <string name="title_activity_receive_text">ReceivTextActivity</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_menu">Meu ABC</string>
 
     <!-- Menu -->
-    <string name="messages">Messages</string>
+    <string name="messages">Cadastra palavras</string>
     <string name="title_activity_photo_intent">PhotoIntentActivity</string>
 
     <!-- Camera -->
-    <string name="btnIntend">Take (big) Picture</string>
-    <string name="btnIntendS">Take (small) Picture</string>
-    <string name="btnIntendV">Take Video</string>
+    <string name="btnIntend">Captura imagem grande</string>
+    <string name="btnIntendS">Captura imagem pequena</string>
+    <string name="btnIntendV">Captura Video</string>
     <string name="cannot">Cannot</string>
     <string name="album_name">CameraSample</string>
+
+    <string name="speech_toggle_on">Inicia fala</string>
+    <string name="speech_toggle_off">para fala</string>
+
+    <string name="start_speaking">Start</string>
+    <string name="stop_speaking">Stop</string>
 
 </resources>

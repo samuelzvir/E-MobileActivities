@@ -34,6 +34,8 @@ public class Challenge extends BaseModel{
     private long id;
     @Column
     private String name;
+    @Column
+    private String text;
 
 
     @Column
@@ -66,5 +68,13 @@ public class Challenge extends BaseModel{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

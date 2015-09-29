@@ -16,7 +16,7 @@
             android:label="@string/title_activity_create_message" >
         </activity>
         <activity
-            android:name=".activities.ReceiveMessageActivity"
+            android:name=".activities.ReceiveTextActivity"
             android:label="@string/title_activity_receive_message" >
         </activity>
         <activity
@@ -27,6 +27,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.TakePhotoActivity"
+            android:label="@string/title_activity_take_photo" >
         </activity>
     </application>
 
