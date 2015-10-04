@@ -26,5 +26,14 @@
 
     <string name="start_speaking">Start</string>
     <string name="stop_speaking">Stop</string>
+    <string name="title_activity_drag_and_drop">DragAndDropActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#1887C7</color>
+    <color name="red">#E60E0E</color>
+    <color name="green">#83BF25</color>
 
 </resources>

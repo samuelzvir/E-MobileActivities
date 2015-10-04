@@ -32,6 +32,10 @@
             android:name=".activities.TakePhotoActivity"
             android:label="@string/title_activity_take_photo" >
         </activity>
+        <activity
+            android:name=".DragAndDropActivity"
+            android:label="@string/title_activity_drag_and_drop" >
+        </activity>
     </application>
 
 </manifest>

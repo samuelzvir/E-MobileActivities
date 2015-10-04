@@ -1,12 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="wrap_content" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/white"
     tools:context="br.com.samuelzvir.meuabc.activities.CreateTextActivity">
 
-<ImageView
+    <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,54 +18,76 @@
 
     <Button
         android:id="@+id/messages"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:text="@string/messages"
         android:onClick="onToMessages"
+        android:drawableTop="@drawable/ic_font_download_black_48dp"
         android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="84dp" />
+        android:layout_toLeftOf="@+id/play"
+        android:layout_toStartOf="@+id/play"
+        android:layout_marginRight="58dp"
+        android:layout_marginEnd="58dp"
+        android:textSize="10dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gerenciar Usuários"
-        android:id="@+id/manageUsers"
-        android:layout_below="@+id/messages"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:text="Jogar"
+        android:id="@+id/play"
+        android:drawableTop="@drawable/ic_puzzle_black_48dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignLeft="@+id/camera"
+        android:layout_alignStart="@+id/camera"
+        android:textSize="10dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Configurações"
-        android:id="@+id/settings"
-        android:layout_below="@+id/manageUsers"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Multimedia"
-        android:id="@+id/multimedia"
-        android:layout_below="@+id/settings"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:text="Câmera"
         android:id="@+id/camera"
-        android:layout_below="@+id/multimedia"
         android:onClick="onToCamera"
-        android:layout_centerHorizontal="true" />
+        android:drawableTop="@drawable/ic_camera_alt_black_48dp"
+        android:layout_below="@+id/play"
+        android:layout_alignRight="@+id/settings"
+        android:layout_alignEnd="@+id/settings"
+        android:textSize="10dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Student"
-        android:id="@+id/button"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:text="Usuários"
+        android:id="@+id/users"
+        android:drawableTop="@drawable/ic_supervisor_account_black_48dp"
+        android:onClick="onCreateUser"
+        android:layout_below="@+id/messages"
+        android:layout_alignLeft="@+id/messages"
+        android:layout_alignRight="@+id/messages"
+        android:textSize="10dp" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:text="Análise de dados"
+        android:id="@+id/dataAnalysis"
+        android:drawableTop="@drawable/ic_trending_up_black_48dp"
+        android:onClick="onCreateUser"
+        android:layout_below="@+id/users"
+        android:layout_alignLeft="@+id/users"
+        android:layout_alignStart="@+id/users"
+        android:textSize="10dp" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:text="Configurações"
+        android:id="@+id/settings"
+        android:drawableTop="@drawable/ic_build_black_48dp"
+        android:layout_marginRight="140dp"
+        android:layout_marginEnd="140dp"
+        android:textSize="10dp"
         android:layout_below="@+id/camera"
-        android:layout_centerHorizontal="true"
-        android:onClick="onCreateUser"/>
+        android:layout_alignRight="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView" />
 
 </RelativeLayout>
