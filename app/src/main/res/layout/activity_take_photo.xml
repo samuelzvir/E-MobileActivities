@@ -32,10 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1" />
-        <Button android:text="@string/btnIntendV" android:id="@+id/btnIntendV"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1" />
     </LinearLayout>
     <ImageView
         android:layout_height="wrap_content"

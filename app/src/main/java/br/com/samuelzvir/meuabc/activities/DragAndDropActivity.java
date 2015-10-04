@@ -1,9 +1,11 @@
-package br.com.samuelzvir.meuabc;
+package br.com.samuelzvir.meuabc.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import br.com.samuelzvir.meuabc.R;
 
 public class DragAndDropActivity extends AppCompatActivity {
 
