@@ -33,6 +33,7 @@
             android:textStyle="bold"
             android:typeface="serif"
             tools:ignore="NestedWeights"
+            android:focusable="false"
             android:background="#1887C7"></EditText>
 
         <Button
