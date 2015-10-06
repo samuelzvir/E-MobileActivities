@@ -39,6 +39,7 @@
         android:layout_below="@+id/imageView"
         android:layout_alignLeft="@+id/camera"
         android:layout_alignStart="@+id/camera"
+        android:onClick="onPlayChallenge"
         android:textSize="10dp" />
 
     <Button

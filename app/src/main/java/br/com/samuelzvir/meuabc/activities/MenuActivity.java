@@ -103,4 +103,9 @@ public class MenuActivity extends Activity {
             }
         }
     }
+
+    public void onPlayChallenge(View view){
+        Intent intent = new Intent(this, ScrabbleActivity.class);
+        startActivity(intent);
+    }
 }

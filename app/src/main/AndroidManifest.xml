@@ -33,16 +33,16 @@
             android:label="@string/title_activity_take_photo" >
         </activity>
         <activity
-            android:name=".activities.DragAndDropActivity"
-            android:label="@string/title_activity_drag_and_drop" >
-        </activity>
-        <activity
             android:name=".activities.BuildChallengesActivity"
             android:label="@string/title_activity_build_challenges" >
         </activity>
         <activity
             android:name=".activities.PlayChallengesActivity"
             android:label="@string/title_activity_play_challenges" >
+        </activity>
+        <activity
+            android:name=".activities.ScrabbleActivity"
+            android:label="@string/title_activity_scrabble" >
         </activity>
     </application>
 

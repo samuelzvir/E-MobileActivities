@@ -21,21 +21,33 @@
     <string name="cannot">Cannot</string>
     <string name="album_name">CameraSample</string>
 
-    <string name="speech_toggle_on">Inicia fala</string>
-    <string name="speech_toggle_off">para fala</string>
+    <string name="speech_toggle_on">Falar</string>
+    <string name="speech_toggle_off">Parar</string>
 
     <string name="start_speaking">Start</string>
-    <string name="stop_speaking">Stop</string>
+    <string name="stop_speaking"></string>
     <string name="title_activity_drag_and_drop">DragAndDropActivity</string>
 
     <string name="hello_world">Hello world!</string>
+
+    <string name="next">próximo</string>
+    <string name="information">informações</string>
+    <string name="clear">&lt;</string>
+    <string name="try_again">Tente novamente...</string>
+    <string name="wrong">Errou</string>
+    <string name="build_the_words">Construa a(s) palavra(s)</string>
+    <string name="correct">Correto!</string>
+
 
     <!-- Colors -->
     <color name="white">#FFFFFF</color>
     <color name="blue">#1887C7</color>
     <color name="red">#E60E0E</color>
     <color name="green">#83BF25</color>
+
+
     <string name="title_activity_build_challenges">BuildChallengesActivity</string>
     <string name="title_activity_play_challenges">PlayChallengesActivity</string>
+    <string name="title_activity_scrabble">ScrabbleActivity</string>
 
 </resources>
