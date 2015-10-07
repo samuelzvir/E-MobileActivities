@@ -14,7 +14,7 @@ public class CreateTextActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_text);
+        setContentView(R.layout.activity_create_challenge);
     }
 
     public void onSendMessage(View view){

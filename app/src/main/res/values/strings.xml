@@ -5,13 +5,13 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_create_text">CreateTextActivity</string>
     
-    <string name="send">Salvar Palavra(s)</string>
+    <string name="send">Salvar</string>
     <string name="title_activity_receive_text">ReceivTextActivity</string>
 
     <string name="title_activity_menu">Meu ABC</string>
 
     <!-- Menu -->
-    <string name="messages">Cadastra palavras</string>
+    <string name="messages">Palavras</string>
     <string name="title_activity_photo_intent">PhotoIntentActivity</string>
 
     <!-- Camera -->
@@ -35,7 +35,7 @@
     <string name="clear">&lt;</string>
     <string name="try_again">Tente novamente...</string>
     <string name="wrong">Errou</string>
-    <string name="build_the_words">Construa a(s) palavra(s)</string>
+    <string name="build_the_words">Construa a palavra</string>
     <string name="correct">Correto!</string>
 
 
