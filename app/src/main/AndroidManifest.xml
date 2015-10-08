@@ -50,6 +50,18 @@
             android:name=".activities.ABCActivity"
             android:label="@string/title_activity_abc" >
         </activity>
+        <activity
+            android:name=".ProfilesActivity"
+            android:label="@string/title_activity_profiles" >
+        </activity>
+        <activity
+            android:name=".DataAnalysisActivity"
+            android:label="@string/title_activity_data_analysis" >
+        </activity>
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

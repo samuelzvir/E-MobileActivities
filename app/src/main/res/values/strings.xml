@@ -50,5 +50,8 @@
     <string name="title_activity_play_challenges">PlayChallengesActivity</string>
     <string name="title_activity_scrabble">ScrabbleActivity</string>
     <string name="title_activity_abc">ABCActivity</string>
+    <string name="title_activity_profiles">ProfilesActivity</string>
+    <string name="title_activity_data_analysis">DataAnalysisActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 
 </resources>

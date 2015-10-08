@@ -5,7 +5,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@color/white"
-    tools:context="br.com.samuelzvir.meuabc.activities.CreateTextActivity">
+    tools:context="br.com.samuelzvir.meuabc.activities.MenuActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -47,6 +47,7 @@
         android:layout_height="110dp"
         android:text="abc"
         android:id="@+id/abc"
+        android:onClick="onToABC"
         android:drawableTop="@drawable/abc_48p"
         android:layout_below="@+id/play"
         android:layout_alignRight="@+id/settings"
@@ -59,7 +60,7 @@
         android:text="Usuários"
         android:id="@+id/users"
         android:drawableTop="@drawable/ic_supervisor_account_black_48dp"
-        android:onClick="onCreateUser"
+        android:onClick="onToProfiles"
         android:layout_below="@+id/messages"
         android:layout_alignLeft="@+id/messages"
         android:layout_alignRight="@+id/messages"
@@ -71,7 +72,7 @@
         android:text="Análise de dados"
         android:id="@+id/dataAnalysis"
         android:drawableTop="@drawable/ic_trending_up_black_48dp"
-        android:onClick="onCreateUser"
+        android:onClick="onToDataAnalysis"
         android:layout_below="@+id/users"
         android:layout_alignLeft="@+id/users"
         android:layout_alignStart="@+id/users"
@@ -85,6 +86,7 @@
         android:drawableTop="@drawable/ic_build_black_48dp"
         android:layout_marginRight="140dp"
         android:layout_marginEnd="140dp"
+        android:onClick="onToSettings"
         android:textSize="10dp"
         android:layout_below="@+id/abc"
         android:layout_alignRight="@+id/imageView"

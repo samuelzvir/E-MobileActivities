@@ -30,6 +30,8 @@ import com.raizlabs.android.dbflow.sql.language.Select;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.samuelzvir.meuabc.DataAnalysisActivity;
+import br.com.samuelzvir.meuabc.ProfilesActivity;
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.Challenge;
 import br.com.samuelzvir.meuabc.entities.Student;
@@ -74,6 +76,26 @@ public class MenuActivity extends Activity {
 
     public void onToCamera(View view){
         Intent intent = new Intent(this, TakePhotoActivity.class);
+        startActivity(intent);
+    }
+
+    public void onToProfiles(View view){
+        Intent intent = new Intent(this, ProfilesActivity.class);
+        startActivity(intent);
+    }
+
+    public void onToDataAnalysis(View view){
+        Intent intent = new Intent(this, DataAnalysisActivity.class);
+        startActivity(intent);
+    }
+
+    public void onToSettings(View view){
+        Intent intent = new Intent(this, DataAnalysisActivity.class);
+        startActivity(intent);
+    }
+
+    public void onToABC(View view){
+        Intent intent = new Intent(this, ABCActivity.class);
         startActivity(intent);
     }
 
