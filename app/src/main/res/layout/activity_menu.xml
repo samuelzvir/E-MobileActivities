@@ -37,18 +37,17 @@
         android:id="@+id/play"
         android:drawableTop="@drawable/ic_puzzle_black_48dp"
         android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/camera"
-        android:layout_alignStart="@+id/camera"
+        android:layout_alignLeft="@+id/abc"
+        android:layout_alignStart="@+id/abc"
         android:onClick="onPlayChallenge"
         android:textSize="10dp" />
 
     <Button
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:text="Câmera"
-        android:id="@+id/camera"
-        android:onClick="onToCamera"
-        android:drawableTop="@drawable/ic_camera_alt_black_48dp"
+        android:text="abc"
+        android:id="@+id/abc"
+        android:drawableTop="@drawable/abc_48p"
         android:layout_below="@+id/play"
         android:layout_alignRight="@+id/settings"
         android:layout_alignEnd="@+id/settings"
@@ -87,7 +86,7 @@
         android:layout_marginRight="140dp"
         android:layout_marginEnd="140dp"
         android:textSize="10dp"
-        android:layout_below="@+id/camera"
+        android:layout_below="@+id/abc"
         android:layout_alignRight="@+id/imageView"
         android:layout_alignEnd="@+id/imageView" />
 

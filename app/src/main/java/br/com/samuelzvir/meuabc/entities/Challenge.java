@@ -36,7 +36,8 @@ public class Challenge extends BaseModel{
     private String name;
     @Column
     private String text;
-
+    @Column
+    private String imagePath;
 
     @Column
     @ForeignKey(
@@ -76,5 +77,13 @@ public class Challenge extends BaseModel{
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

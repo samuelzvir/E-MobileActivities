@@ -49,5 +49,6 @@
     <string name="title_activity_build_challenges">BuildChallengesActivity</string>
     <string name="title_activity_play_challenges">PlayChallengesActivity</string>
     <string name="title_activity_scrabble">ScrabbleActivity</string>
+    <string name="title_activity_abc">ABCActivity</string>
 
 </resources>

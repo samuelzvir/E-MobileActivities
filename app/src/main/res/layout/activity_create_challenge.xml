@@ -24,7 +24,7 @@
         android:ems="10"
         android:layout_weight="2"
         android:background="#1887C7"
-        android:layout_alignBottom="@+id/camera"
+        android:layout_alignBottom="@+id/abc"
         android:layout_alignRight="@+id/image"
         android:layout_alignEnd="@+id/image" />
 
@@ -32,7 +32,7 @@
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:text="Imagem"
-        android:id="@+id/camera"
+        android:id="@+id/abc"
         android:onClick="onToCamera"
         android:drawableTop="@drawable/ic_camera_alt_black_48dp"
         android:textSize="10dp"
