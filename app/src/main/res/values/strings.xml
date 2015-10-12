@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_create_text">CreateTextActivity</string>
     
-    <string name="send">Salvar</string>
+    <string name="save">Salvar</string>
     <string name="title_activity_receive_text">ReceivTextActivity</string>
 
     <string name="title_activity_menu">Meu ABC</string>
@@ -39,6 +39,13 @@
     <string name="correct">Correto!</string>
 
 
+    <string name="name">Nome</string>
+    <string name="users">Usuários</string>
+    <string name="settings">Configurações</string>
+    <string name="newUser">Novo Usuário</string>
+    <string name="goBack">Voltar</string>
+
+
     <!-- Colors -->
     <color name="white">#FFFFFF</color>
     <color name="blue">#1887C7</color>
@@ -52,6 +59,6 @@
     <string name="title_activity_abc">ABCActivity</string>
     <string name="title_activity_profiles">ProfilesActivity</string>
     <string name="title_activity_data_analysis">DataAnalysisActivity</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_user">UserActivity</string>
 
 </resources>

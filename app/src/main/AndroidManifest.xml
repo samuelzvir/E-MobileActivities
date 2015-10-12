@@ -51,16 +51,20 @@
             android:label="@string/title_activity_abc" >
         </activity>
         <activity
-            android:name=".ProfilesActivity"
+            android:name=".activities.ProfilesActivity"
             android:label="@string/title_activity_profiles" >
         </activity>
         <activity
-            android:name=".DataAnalysisActivity"
+            android:name=".activities.DataAnalysisActivity"
             android:label="@string/title_activity_data_analysis" >
         </activity>
         <activity
+            android:name=".activities.UserActivity"
+            android:label="@string/title_activity_user" >
+        </activity>
+        <activity
             android:name=".activities.SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/settings" >
         </activity>
     </application>
 

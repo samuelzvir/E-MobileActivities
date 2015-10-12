@@ -7,7 +7,7 @@
     tools:context="br.com.samuelzvir.meuabc.activities.ReceiveTextActivity">
 
     <TextView
-        android:id="@+id/message"
+        android:id="@+id/word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

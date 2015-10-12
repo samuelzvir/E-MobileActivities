@@ -30,8 +30,6 @@ import com.raizlabs.android.dbflow.sql.language.Select;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.samuelzvir.meuabc.DataAnalysisActivity;
-import br.com.samuelzvir.meuabc.ProfilesActivity;
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.Challenge;
 import br.com.samuelzvir.meuabc.entities.Student;
@@ -69,7 +67,7 @@ public class MenuActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onToMessages(View view){
+    public void onToWords(View view){
         Intent intent = new Intent(this, CreateTextActivity.class);
         startActivity(intent);
     }
@@ -90,40 +88,13 @@ public class MenuActivity extends Activity {
     }
 
     public void onToSettings(View view){
-        Intent intent = new Intent(this, DataAnalysisActivity.class);
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
     public void onToABC(View view){
         Intent intent = new Intent(this, ABCActivity.class);
         startActivity(intent);
-    }
-
-    public void onCreateUser(View view){
-        Student student = new Student();
-        student.setNickname("Cisco");
-        Challenge challenge = new Challenge();
-        challenge.setName("Challenge of Vegetables");
-        List notes = new ArrayList<String>();
-        notes.add("this is a test note");
-
-        student.setNotes(notes);
-        student.save();
-
-        List<Student> s = new Select().from(Student.class).queryList();
-
-        for (Student studt : s){
-            Log.i(TAG, "Student: ");
-            Log.i(TAG, " -ID: "+ studt.getId());
-            Log.i(TAG, " -name: "+ studt.getNickname());
-            if(studt.getMyChallenges().size() > 0){
-                Log.i(TAG, " -Challenge: "+ studt.getMyChallenges().get(0).getName());
-            }
-
-            if(studt.getNotes() != null && studt.getNotes().size() > 0){
-                Log.i(TAG, " -My note: " + studt.getNotes().get(0));
-            }
-        }
     }
 
     public void onPlayChallenge(View view){

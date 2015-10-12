@@ -32,11 +32,11 @@ public class Challenge extends BaseModel{
     @Column
     @PrimaryKey(autoincrement = true)
     private long id;
-    @Column
+    @Column(name = "name")
     private String name;
-    @Column
+    @Column(name = "text")
     private String text;
-    @Column
+    @Column(name = "path")
     private String imagePath;
 
     @Column

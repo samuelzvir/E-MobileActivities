@@ -4,6 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/white"
     tools:context="br.com.samuelzvir.meuabc.activities.CreateTextActivity">
 
     <Button
@@ -14,11 +15,11 @@
         android:layout_alignParentLeft="true"
         android:textSize="10dp"
         android:layout_alignParentTop="true"
-        android:onClick="onSendMessage"
-        android:text="@string/send" />
+        android:onClick="saveWord"
+        android:text="@string/save" />
 
     <EditText
-        android:id="@+id/message"
+        android:id="@+id/word"
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:ems="10"
@@ -27,6 +28,17 @@
         android:layout_alignBottom="@+id/abc"
         android:layout_alignRight="@+id/image"
         android:layout_alignEnd="@+id/image" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/information"
+        android:textSize="@dimen/activity_horizontal_margin"
+        android:typeface="serif"
+        android:layout_below="@+id/word"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="110dp"

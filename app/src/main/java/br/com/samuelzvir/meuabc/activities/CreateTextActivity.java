@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import br.com.samuelzvir.meuabc.R;
+import br.com.samuelzvir.meuabc.entities.Challenge;
 
 public class CreateTextActivity extends Activity {
 
@@ -34,7 +35,7 @@ public class CreateTextActivity extends Activity {
     }
 
     public void onSendMessage(View view){
-        EditText messageView = (EditText) findViewById(R.id.message);
+        EditText messageView = (EditText) findViewById(R.id.word);
         String messageText = messageView.getText().toString();
 
         Intent intent = new Intent(this,ReceiveTextActivity.class);
@@ -45,6 +46,21 @@ public class CreateTextActivity extends Activity {
     public void onToCamera(View view){
         Intent intent = new Intent(this, TakePhotoActivity.class);
         startActivity(intent);
+    }
+
+    public void saveWord(View view){
+        EditText messageView = (EditText) findViewById(R.id.word);
+        String word = messageView.getText().toString();
+
+        Challenge challenge = new Challenge();
+        challenge.setName(word);
+        challenge.setText(word);
+        //TODO add image path
+        challenge.save();
+
+//        Intent intent = new Intent(this,ReceiveTextActivity.class);
+//        intent.putExtra("message", messageText);
+//        startActivity(intent);
     }
 
 }

@@ -52,7 +52,7 @@ public class ReceiveTextActivity extends Activity{
         setContentView(R.layout.activity_receive_text);
         Intent intent = getIntent();
         String messageText = intent.getStringExtra("message");
-        textView = (TextView) findViewById(R.id.message);
+        textView = (TextView) findViewById(R.id.word);
         textView.setText(messageText);
         toggle = (ToggleButton)findViewById(R.id.speechToggle);
 
