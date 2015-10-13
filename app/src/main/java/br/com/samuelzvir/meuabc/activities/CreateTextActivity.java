@@ -19,28 +19,37 @@ package br.com.samuelzvir.meuabc.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+
+import java.io.File;
 
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.Challenge;
 
 public class CreateTextActivity extends Activity {
 
+    private static final String TAG = "CreateTextActivity";
+    private ImageView image;
+    private String appPath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_challenge);
-    }
-
-    public void onSendMessage(View view){
-        EditText messageView = (EditText) findViewById(R.id.word);
-        String messageText = messageView.getText().toString();
-
-        Intent intent = new Intent(this,ReceiveTextActivity.class);
-        intent.putExtra("message", messageText);
-        startActivity(intent);
+        appPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        Intent intent = getIntent();
+        String imagePath = intent.getStringExtra("path");
+        if(imagePath != null){
+            setImageView(imagePath);
+        }
     }
 
     public void onToCamera(View view){
@@ -57,10 +66,15 @@ public class CreateTextActivity extends Activity {
         challenge.setText(word);
         //TODO add image path
         challenge.save();
-
-//        Intent intent = new Intent(this,ReceiveTextActivity.class);
-//        intent.putExtra("message", messageText);
-//        startActivity(intent);
     }
 
+    private void setImageView(String path) {
+        Log.i(TAG, "Adding image " + path);
+        File imgFile = new File(path);
+        if (imgFile.exists()) {
+            Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            ImageView imageView = (ImageView) findViewById(R.id.imageViewPicture);
+            imageView.setImageBitmap(bitmap);
+        }
+    }
 }

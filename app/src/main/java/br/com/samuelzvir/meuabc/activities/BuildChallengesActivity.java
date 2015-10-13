@@ -27,6 +27,7 @@ import br.com.samuelzvir.meuabc.R;
 
 public class BuildChallengesActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,4 +60,5 @@ public class BuildChallengesActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TakePhotoActivity.class);
         startActivity(intent);
     }
+
 }

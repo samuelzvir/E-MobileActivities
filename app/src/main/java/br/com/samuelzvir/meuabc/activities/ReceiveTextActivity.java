@@ -35,16 +35,11 @@ public class ReceiveTextActivity extends Activity{
 
     TextView textView;
     private final int CHECK_CODE = 0x1;
-//    private final int LONG_DURATION = 5000;
-//    private final int SHORT_DURATION = 1200;
 
     private Speaker speaker;
 
     private ToggleButton toggle;
     private OnCheckedChangeListener toggleListener;
-
-    private BroadcastReceiver broadcastReceiver;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

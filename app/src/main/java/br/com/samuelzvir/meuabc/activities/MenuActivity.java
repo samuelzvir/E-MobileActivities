@@ -19,20 +19,13 @@ package br.com.samuelzvir.meuabc.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
-import com.raizlabs.android.dbflow.sql.language.Select;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import br.com.samuelzvir.meuabc.R;
-import br.com.samuelzvir.meuabc.entities.Challenge;
-import br.com.samuelzvir.meuabc.entities.Student;
 
 public class MenuActivity extends Activity {
 

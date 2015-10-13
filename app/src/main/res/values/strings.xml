@@ -15,11 +15,10 @@
     <string name="title_activity_photo_intent">PhotoIntentActivity</string>
 
     <!-- Camera -->
-    <string name="btnIntend">Captura imagem grande</string>
-    <string name="btnIntendS">Captura imagem pequena</string>
-    <string name="btnIntendV">Captura Video</string>
-    <string name="cannot">Cannot</string>
-    <string name="album_name">CameraSample</string>
+    <string name="takeBigPicture">Foto</string>
+    <string name="takeSmallPicture">Foto pequena</string>
+    <string name="cannot">Não pode</string>
+    <string name="album_name">MeuABCAlbum</string>
 
     <string name="speech_toggle_on">Falar</string>
     <string name="speech_toggle_off">Parar</string>
@@ -51,7 +50,6 @@
     <color name="blue">#1887C7</color>
     <color name="red">#E60E0E</color>
     <color name="green">#83BF25</color>
-
 
     <string name="title_activity_build_challenges">BuildChallengesActivity</string>
     <string name="title_activity_play_challenges">PlayChallengesActivity</string>
