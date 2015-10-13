@@ -172,13 +172,6 @@ public class TakePhotoActivity extends AppCompatActivity {
                 MediaStore.ACTION_IMAGE_CAPTURE
         );
 
-//        Button picSBtn = (Button) findViewById(R.id.btnIntendS);
-//        setBtnListenerOrDisable(
-//                picSBtn,
-//                mTakePicSOnClickListener,
-//                MediaStore.ACTION_IMAGE_CAPTURE
-//        );
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
             mAlbumStorageDirFactory = new FroyoAlbumDirFactory();
         } else {

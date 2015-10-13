@@ -25,6 +25,20 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/takeBigPicture"
+            android:id="@+id/textView"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        >
         <Button android:text="@string/takeBigPicture" android:id="@+id/btnIntend"
             android:layout_height="wrap_content"
             android:layout_width="0dp"

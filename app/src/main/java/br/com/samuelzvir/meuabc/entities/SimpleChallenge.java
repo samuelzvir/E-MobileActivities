@@ -12,11 +12,11 @@ public class SimpleChallenge extends BaseModel {
 
     @Column
     @PrimaryKey(autoincrement = true)
-    private long id;
+    long id;
     @Column
-    private String word;
+    String word;
     @Column
-    private String imagePath;
+    String imagePath;
 
     public long getId() {
         return id;

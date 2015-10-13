@@ -16,37 +16,40 @@
 
 package br.com.samuelzvir.meuabc.activities;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.io.File;
+import java.util.List;
 
 import br.com.samuelzvir.meuabc.R;
-import br.com.samuelzvir.meuabc.entities.Challenge;
+import br.com.samuelzvir.meuabc.entities.SimpleChallenge;
+import br.com.samuelzvir.meuabc.entities.Student;
 
 public class CreateTextActivity extends Activity {
 
     private static final String TAG = "CreateTextActivity";
     private ImageView image;
-    private String appPath;
+    private String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_challenge);
-        appPath = Environment.getExternalStorageDirectory().getAbsolutePath();
         Intent intent = getIntent();
         String imagePath = intent.getStringExtra("path");
+        this.imagePath = imagePath;
         if(imagePath != null){
             setImageView(imagePath);
         }
@@ -60,12 +63,15 @@ public class CreateTextActivity extends Activity {
     public void saveWord(View view){
         EditText messageView = (EditText) findViewById(R.id.word);
         String word = messageView.getText().toString();
-
-        Challenge challenge = new Challenge();
-        challenge.setName(word);
-        challenge.setText(word);
-        //TODO add image path
-        challenge.save();
+        Log.d(TAG,"adding word "+word);
+        SimpleChallenge simpleChallenge = new SimpleChallenge();
+        simpleChallenge.setWord(word);
+        simpleChallenge.setImagePath(this.imagePath);
+        simpleChallenge.insert();
+        Log.d(TAG,"created with id: "+simpleChallenge.getId());
+        TextView info = (TextView) findViewById(R.id.status);
+        info.setTextColor(Color.GREEN);
+        info.setText(R.string.saved);
     }
 
     private void setImageView(String path) {
@@ -77,4 +83,5 @@ public class CreateTextActivity extends Activity {
             imageView.setImageBitmap(bitmap);
         }
     }
+
 }

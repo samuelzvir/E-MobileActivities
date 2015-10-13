@@ -6,6 +6,7 @@
     <string name="title_activity_create_text">CreateTextActivity</string>
     
     <string name="save">Salvar</string>
+    <string name="saved">Salvo</string>
     <string name="title_activity_receive_text">ReceivTextActivity</string>
 
     <string name="title_activity_menu">Meu ABC</string>
