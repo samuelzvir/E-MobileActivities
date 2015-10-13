@@ -28,14 +28,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.raizlabs.android.dbflow.sql.language.Select;
-
 import java.io.File;
-import java.util.List;
 
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.SimpleChallenge;
-import br.com.samuelzvir.meuabc.entities.Student;
 
 public class CreateTextActivity extends Activity {
 

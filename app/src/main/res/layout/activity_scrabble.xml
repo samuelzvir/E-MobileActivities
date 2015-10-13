@@ -33,8 +33,7 @@
             android:textStyle="bold"
             android:typeface="serif"
             tools:ignore="NestedWeights"
-            android:focusable="false"
-            android:background="#1887C7"></EditText>
+            android:focusable="false"></EditText>
 
         <Button
             android:id="@+id/clear"
@@ -48,17 +47,16 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/images"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
         android:layout_weight="50"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
+            android:id="@+id/scrambbleImage"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/car"
             />
     </LinearLayout>
 

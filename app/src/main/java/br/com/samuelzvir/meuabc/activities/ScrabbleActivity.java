@@ -18,32 +18,43 @@ package br.com.samuelzvir.meuabc.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.nfc.Tag;
 import android.os.Handler;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.raizlabs.android.dbflow.sql.language.Select;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 import br.com.samuelzvir.meuabc.R;
+import br.com.samuelzvir.meuabc.entities.SimpleChallenge;
 import br.com.samuelzvir.meuabc.services.Speaker;
 
 public class ScrabbleActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
 
+    private static final String TAG = "ScrabbleActivity";
     private final int CHECK_CODE = 0x1;
     private String word = new String();
-    private String wordList[] = new String[1];
+    private List<SimpleChallenge> wordList;
     private Random generator = new Random();
     private String answerString = new String();
     private EditText answerText;
@@ -70,30 +81,18 @@ public class ScrabbleActivity extends Activity implements View.OnClickListener, 
         answerText = (EditText) findViewById(R.id.answer);
         correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
         wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
-
-        //TODO replace by database
-        //Populating the list of Words
-        Scanner scan = new Scanner(getResources().openRawResource(R.raw.words));
-        try {
-            int i = 0;
-            while(scan.hasNext()){
-                wordList[i++] = scan.next();
-            }
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-        finally {
-            scan.close();
-        }
+        this.wordList = listSimpleChallenges();
         initialize();
     }
 
 
     public void initialize(){
         clearButton.setEnabled(Boolean.FALSE);
-        word = getNewWord();
+        SimpleChallenge simpleChallenge = getNewWordByRandon();
+        word = simpleChallenge.getWord();
         String scrambledWord = scramble(word);
         scrambledLayout = (LinearLayout) findViewById(R.id.scrambled);
+        setImageView(simpleChallenge.getImagePath());
         info = (TextView) findViewById(R.id.information);
 
         for(int i = 0; i < scrambledWord.length(); i++) {
@@ -221,12 +220,10 @@ public class ScrabbleActivity extends Activity implements View.OnClickListener, 
         return true;
     }
 
-    /**
-     * Returns a random word from the Populated WordList Array of Strings
-     */
-    public String getNewWord(){
-        int randomWord = generator.nextInt(wordList.length);
-        String temp = wordList[randomWord];
+
+    public SimpleChallenge getNewWordByRandon(){
+        int randomWord = generator.nextInt(wordList.size());
+        SimpleChallenge temp = wordList.get(randomWord);
         return temp;
     }
 
@@ -238,7 +235,9 @@ public class ScrabbleActivity extends Activity implements View.OnClickListener, 
         int randomNumber;
 
         boolean letter[] = new boolean[wordToScramble.length()];
-
+        if(letter.length == 1){
+            return wordToScramble;
+        }
         do {
             randomNumber = generator.nextInt(wordToScramble.length());
             if(letter[randomNumber] == false){
@@ -283,6 +282,20 @@ public class ScrabbleActivity extends Activity implements View.OnClickListener, 
                 install.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
                 startActivity(install);
             }
+        }
+    }
+
+    private List<SimpleChallenge> listSimpleChallenges(){
+        return new Select().from(SimpleChallenge.class).queryList();
+    }
+
+    private void setImageView(String path) {
+        Log.d(TAG, "Adding image " + path);
+        File imgFile = new File(path);
+        if (imgFile.exists()) {
+            Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            ImageView imageView = (ImageView) findViewById(R.id.scrambbleImage);
+            imageView.setImageBitmap(bitmap);
         }
     }
 
