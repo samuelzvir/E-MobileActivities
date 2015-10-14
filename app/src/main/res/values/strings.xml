@@ -14,7 +14,7 @@
     <!-- Menu -->
     <string name="messages">Palavras</string>
     <string name="title_activity_photo_intent">PhotoIntentActivity</string>
-
+    <string name="menu">Menu</string>
     <!-- Camera -->
     <string name="takeBigPicture">Foto</string>
     <string name="takeSmallPicture">Foto pequena</string>
@@ -45,6 +45,14 @@
     <string name="newUser">Novo Usuário</string>
     <string name="goBack">Voltar</string>
 
+    <string name="level">Dificuldade</string>
+    <string name="levelEasy">Fácil</string>
+    <string name="levelIntermediate">Intermediário</string>
+    <string name="levelHard">Difícil</string>
+
+    <string name="language">Idioma</string>
+    <string name="portuguese">Português</string>
+    <string name="english">Inglês</string>
 
     <!-- Colors -->
     <color name="white">#FFFFFF</color>

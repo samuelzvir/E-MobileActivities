@@ -24,18 +24,22 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.Select;
 
 import br.com.samuelzvir.meuabc.R;
+import br.com.samuelzvir.meuabc.entities.AppConfiguration;
 
 public class MenuActivity extends Activity {
 
     private static final String TAG = "MenuActivity";
+    private AppConfiguration configuration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         FlowManager.init(this);
+        configuration = getConfiguration();
     }
 
     @Override
@@ -93,5 +97,16 @@ public class MenuActivity extends Activity {
     public void onPlayChallenge(View view){
         Intent intent = new Intent(this, ScrabbleActivity.class);
         startActivity(intent);
+    }
+
+    private AppConfiguration getConfiguration(){
+        AppConfiguration config = new Select().from(AppConfiguration.class).querySingle();
+        if( config == null ){
+            config = new AppConfiguration();
+            config.setLanguage("pt-br");
+            config.setLevel("easy");
+            config.insert();
+        }
+        return config;
     }
 }

@@ -80,4 +80,9 @@ public class CreateTextActivity extends Activity {
         }
     }
 
+    public void toMenu(View view){
+        Intent intent = new Intent(this,MenuActivity.class);
+        startActivity(intent);
+    }
+
 }

@@ -1,19 +1,28 @@
 package br.com.samuelzvir.meuabc.activities;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RadioButton;
+
+import com.raizlabs.android.dbflow.sql.language.Select;
 
 import br.com.samuelzvir.meuabc.R;
+import br.com.samuelzvir.meuabc.entities.AppConfiguration;
 
 public class SettingsActivity extends Activity {
+
+    private AppConfiguration configuration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        configuration  = getConfiguration();
+        setRadioButtons();
     }
 
     @Override
@@ -36,5 +45,94 @@ public class SettingsActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onLanguageClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch (view.getId()) {
+            case R.id.portugueseRadioButton:
+                if (checked){
+                    configuration.setLanguage("pt-br");
+                    configuration.update();
+                }
+                    break;
+            case R.id.englishRadioButton:
+                if (checked){
+                    configuration.setLanguage("en-us");
+                    configuration.update();
+                }
+                    break;
+        }
+    }
+
+    public void onLevelClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch (view.getId()) {
+            case R.id.levelEasyRadioButton:
+                if (checked){
+                    configuration.setLevel("easy");
+                    configuration.update();
+                }
+                break;
+            case R.id.levelIntermediateRadioButton:
+                if (checked){
+                    configuration.setLevel("intermediate");
+                    configuration.update();
+                }
+                break;
+            case R.id.levelHardRadioButton:
+                if (checked){
+                    configuration.setLevel("hard");
+                    configuration.update();
+                }
+                break;
+        }
+    }
+
+    private void setRadioButtons() {
+        String language = configuration.getLanguage();
+        if (language.equalsIgnoreCase("pt-br")) {
+            ((RadioButton) findViewById(R.id.portugueseRadioButton)).setChecked(true);
+            ((RadioButton) findViewById(R.id.englishRadioButton)).setChecked(false);
+        } else if (language.equalsIgnoreCase("en-us")) {
+            ((RadioButton) findViewById(R.id.englishRadioButton)).setChecked(true);
+            ((RadioButton) findViewById(R.id.portugueseRadioButton)).setChecked(false);
+        }
+        String level = configuration.getLevel();
+        if (level.equalsIgnoreCase("easy")) {
+            ((RadioButton) findViewById(R.id.levelEasyRadioButton)).setChecked(true);
+            ((RadioButton) findViewById(R.id.levelIntermediateRadioButton)).setChecked(false);
+            ((RadioButton) findViewById(R.id.levelHardRadioButton)).setChecked(false);
+        } else if (level.equalsIgnoreCase("intermediate")) {
+            ((RadioButton) findViewById(R.id.levelEasyRadioButton)).setChecked(false);
+            ((RadioButton) findViewById(R.id.levelIntermediateRadioButton)).setChecked(true);
+            ((RadioButton) findViewById(R.id.levelHardRadioButton)).setChecked(false);
+        } else if (level.equalsIgnoreCase("hard")) {
+            ((RadioButton) findViewById(R.id.levelEasyRadioButton)).setChecked(false);
+            ((RadioButton) findViewById(R.id.levelIntermediateRadioButton)).setChecked(false);
+            ((RadioButton) findViewById(R.id.levelHardRadioButton)).setChecked(true);
+        }
+    }
+
+    public void toMenu(View view){
+        Intent intent = new Intent(this,MenuActivity.class);
+        startActivity(intent);
+    }
+
+    private AppConfiguration getConfiguration(){
+        AppConfiguration config = new Select().from(AppConfiguration.class).querySingle();
+        if( config == null ){
+            config = new AppConfiguration();
+            config.setLanguage("pt-br");
+            config.setLevel("easy");
+            config.insert();
+        }
+        return config;
     }
 }

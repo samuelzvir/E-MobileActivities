@@ -21,8 +21,12 @@ import android.media.AudioManager;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 
+import com.raizlabs.android.dbflow.sql.language.Select;
+
 import java.util.HashMap;
 import java.util.Locale;
+
+import br.com.samuelzvir.meuabc.entities.AppConfiguration;
 
 public class Speaker implements OnInitListener {
 
@@ -47,10 +51,14 @@ public class Speaker implements OnInitListener {
     @Override
     public void onInit(int status) {
         if(status == TextToSpeech.SUCCESS){
-            // Change this to match your
-            // locale
-            Locale locale = new Locale("BR");
-            tts.setLanguage(locale);
+            String language = getLanguage();
+            if(language.equalsIgnoreCase("pt-br")){
+                Locale locale = new Locale("BR");
+                tts.setLanguage(locale);
+            }
+            else if(language.equalsIgnoreCase("en-us")){
+                tts.setLanguage(Locale.US);
+            }
             ready = true;
         }else{
             ready = false;
@@ -78,6 +86,11 @@ public class Speaker implements OnInitListener {
     // Free up resources
     public void destroy(){
         tts.shutdown();
+    }
+
+    private String getLanguage(){
+        AppConfiguration appConfiguration = new Select().from(AppConfiguration.class).querySingle();
+        return appConfiguration.getLanguage();
     }
 
 }

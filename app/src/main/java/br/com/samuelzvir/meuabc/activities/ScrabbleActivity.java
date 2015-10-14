@@ -82,7 +82,9 @@ public class ScrabbleActivity extends Activity implements View.OnClickListener, 
         correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
         wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
         this.wordList = listSimpleChallenges();
-        initialize();
+        if(wordList.size() > 0){
+            initialize();
+        }
     }
 
 
@@ -291,11 +293,13 @@ public class ScrabbleActivity extends Activity implements View.OnClickListener, 
 
     private void setImageView(String path) {
         Log.d(TAG, "Adding image " + path);
-        File imgFile = new File(path);
-        if (imgFile.exists()) {
-            Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            ImageView imageView = (ImageView) findViewById(R.id.scrambbleImage);
-            imageView.setImageBitmap(bitmap);
+        if(path != null && !path.isEmpty()){
+            File imgFile = new File(path);
+            if (imgFile.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                ImageView imageView = (ImageView) findViewById(R.id.scrambbleImage);
+                imageView.setImageBitmap(bitmap);
+            }
         }
     }
 
