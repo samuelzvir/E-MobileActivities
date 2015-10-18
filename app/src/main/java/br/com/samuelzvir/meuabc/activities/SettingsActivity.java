@@ -2,13 +2,18 @@ package br.com.samuelzvir.meuabc.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
 import com.raizlabs.android.dbflow.sql.language.Select;
+
+import java.util.Locale;
 
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.AppConfiguration;
@@ -57,12 +62,14 @@ public class SettingsActivity extends Activity {
                 if (checked){
                     configuration.setLanguage("pt-br");
                     configuration.update();
+                    changeLocale("pt-br");
                 }
                     break;
             case R.id.englishRadioButton:
                 if (checked){
                     configuration.setLanguage("en-us");
                     configuration.update();
+                    changeLocale("en-us");
                 }
                     break;
         }
@@ -120,19 +127,32 @@ public class SettingsActivity extends Activity {
         }
     }
 
-    public void toMenu(View view){
-        Intent intent = new Intent(this,MenuActivity.class);
-        startActivity(intent);
-    }
 
     private AppConfiguration getConfiguration(){
         AppConfiguration config = new Select().from(AppConfiguration.class).querySingle();
         if( config == null ){
             config = new AppConfiguration();
             config.setLanguage("pt-br");
+            changeLocale("pt-br");
             config.setLevel("easy");
             config.insert();
+
         }
         return config;
     }
+
+    private void changeLocale(String language_code){
+        Resources res = getApplicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(language_code.toLowerCase());
+        res.updateConfiguration(conf, dm);
+    }
+
+    public void save(View view){
+        Intent intent = new Intent(this,MenuActivity.class);
+        startActivity(intent);
+    }
+
 }

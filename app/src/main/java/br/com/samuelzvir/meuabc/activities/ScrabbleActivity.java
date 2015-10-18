@@ -22,7 +22,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.nfc.Tag;
 import android.os.Handler;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -41,7 +40,6 @@ import android.widget.ToggleButton;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 

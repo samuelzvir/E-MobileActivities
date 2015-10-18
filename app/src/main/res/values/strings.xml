@@ -37,13 +37,17 @@
     <string name="wrong">Errou</string>
     <string name="build_the_words">Construa a palavra</string>
     <string name="correct">Correto!</string>
+    <string name="play">Jogar</string>
 
+    <string name="image">Imagem</string>
 
     <string name="name">Nome</string>
     <string name="users">Usuários</string>
     <string name="settings">Configurações</string>
     <string name="newUser">Novo Usuário</string>
     <string name="goBack">Voltar</string>
+
+    <string name="dataAnalysis">Análise de dados</string>
 
     <string name="level">Dificuldade</string>
     <string name="levelEasy">Fácil</string>

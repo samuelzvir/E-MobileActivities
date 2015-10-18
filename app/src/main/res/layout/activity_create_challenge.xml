@@ -42,7 +42,7 @@
     <Button
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:text="Imagem"
+        android:text="@string/image"
         android:id="@+id/abc"
         android:onClick="onToCamera"
         android:drawableTop="@drawable/ic_camera_alt_black_48dp"

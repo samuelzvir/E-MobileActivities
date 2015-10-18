@@ -18,13 +18,18 @@ package br.com.samuelzvir.meuabc.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Select;
+
+import java.util.Locale;
 
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.AppConfiguration;
@@ -40,6 +45,7 @@ public class MenuActivity extends Activity {
         setContentView(R.layout.activity_menu);
         FlowManager.init(this);
         configuration = getConfiguration();
+        setSavedLocale(configuration.getLanguage());
     }
 
     @Override
@@ -108,5 +114,16 @@ public class MenuActivity extends Activity {
             config.insert();
         }
         return config;
+    }
+
+    private void setSavedLocale(String language_code){
+        Log.d(TAG,"loading locale properties...");
+        Resources res = getApplicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(language_code.toLowerCase());
+        res.updateConfiguration(conf, dm);
+        Log.d(TAG, "loaded.");
     }
 }

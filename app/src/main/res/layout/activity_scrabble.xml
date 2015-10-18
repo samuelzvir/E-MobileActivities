@@ -103,5 +103,6 @@
             android:textOff="@string/speech_toggle_on"
             android:textOn="@string/speech_toggle_off"
             android:layout_gravity="left" />
+
     </LinearLayout>
 </LinearLayout>

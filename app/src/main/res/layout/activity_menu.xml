@@ -33,7 +33,7 @@
     <Button
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:text="Jogar"
+        android:text="@string/play"
         android:id="@+id/play"
         android:drawableTop="@drawable/ic_puzzle_black_48dp"
         android:layout_below="@+id/imageView"
@@ -57,7 +57,7 @@
     <Button
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:text="Usuários"
+        android:text="@string/users"
         android:id="@+id/users"
         android:drawableTop="@drawable/ic_supervisor_account_black_48dp"
         android:onClick="onToProfiles"
@@ -69,7 +69,7 @@
     <Button
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:text="Análise de dados"
+        android:text="@string/dataAnalysis"
         android:id="@+id/dataAnalysis"
         android:drawableTop="@drawable/ic_trending_up_black_48dp"
         android:onClick="onToDataAnalysis"
@@ -81,7 +81,7 @@
     <Button
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:text="Configurações"
+        android:text="@string/settings"
         android:id="@+id/settings"
         android:drawableTop="@drawable/ic_build_black_48dp"
         android:layout_marginRight="140dp"
