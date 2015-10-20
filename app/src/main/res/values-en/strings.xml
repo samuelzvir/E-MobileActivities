@@ -27,6 +27,7 @@
     <string name="start_speaking">Start</string>
     <string name="stop_speaking"></string>
     <string name="title_activity_drag_and_drop">DragAndDropActivity</string>
+    <string name="newWord">Add word</string>
 
     <string name="hello_world">Hello world!</string>
 
@@ -39,6 +40,8 @@
     <string name="correct">Correct!</string>
     <string name="dataAnalysis">Data Analysis</string>
     <string name="play">Play</string>
+    <string name="words">Words</string>
+    <string name="deleteWord">Delete Word</string>
 
     <string name="image">Image</string>
     <string name="name">Name</string>

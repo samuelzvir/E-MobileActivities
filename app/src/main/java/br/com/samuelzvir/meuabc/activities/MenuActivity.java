@@ -71,7 +71,7 @@ public class MenuActivity extends Activity {
     }
 
     public void onToWords(View view){
-        Intent intent = new Intent(this, CreateTextActivity.class);
+        Intent intent = new Intent(this, BuildChallengesActivity.class);
         startActivity(intent);
     }
 
