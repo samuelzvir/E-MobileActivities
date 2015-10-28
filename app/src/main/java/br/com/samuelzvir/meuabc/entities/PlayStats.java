@@ -21,20 +21,19 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.util.Date;
+
 import br.com.samuelzvir.meuabc.db.MeuABCDatabase;
 
 @Table(databaseName = MeuABCDatabase.NAME)
-public class AppConfiguration extends BaseModel  {
+public class PlayStats extends BaseModel {
 
     @Column
     @PrimaryKey(autoincrement = true)
-    long id;
-    @Column
-    String level;
-    @Column
-    String language;
-
-    //TODO add user to configuration.
+    private long id;
+    private Date start;
+    private Date end;
+    private double totalPoints;
 
     public long getId() {
         return id;
@@ -44,19 +43,27 @@ public class AppConfiguration extends BaseModel  {
         this.id = id;
     }
 
-    public String getLevel() {
-        return level;
+    public Date getStart() {
+        return start;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setStart(Date start) {
+        this.start = start;
     }
 
-    public String getLanguage() {
-        return language;
+    public Date getEnd() {
+        return end;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public double getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(double totalPoints) {
+        this.totalPoints = totalPoints;
     }
 }

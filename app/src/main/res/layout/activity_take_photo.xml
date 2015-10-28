@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         >
-        <Button android:text="@string/takeBigPicture" android:id="@+id/btnIntend"
+        <Button android:text="@string/takeBigPicture" android:id="@+id/btnTakePhoto"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1" />

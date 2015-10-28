@@ -34,7 +34,6 @@ public class Admin extends BaseModel{
     @Column
     private String password;
 
-
     //Getters and Setters
 
     public long getId() {
