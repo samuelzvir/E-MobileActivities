@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,8 +16,10 @@ import com.raizlabs.android.dbflow.sql.language.Select;
 
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.Admin;
+import br.com.samuelzvir.meuabc.util.SecurityUtils;
 
 public class AdminFormActivity extends AppCompatActivity {
+    private static final String TAG = "SecurityUtils";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class AdminFormActivity extends AppCompatActivity {
         admin.setName(username);
         EditText passwordET = (EditText)findViewById(R.id.passwordField);
         String password = passwordET.getText().toString();
+        
         admin.setPassword(password);
         admin.insert();
         if(new Select().from(Admin.class).count() > 0){

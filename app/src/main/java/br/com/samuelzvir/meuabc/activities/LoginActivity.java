@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,8 +20,10 @@ import br.com.samuelzvir.meuabc.entities.Admin;
 import br.com.samuelzvir.meuabc.entities.Admin$Table;
 import br.com.samuelzvir.meuabc.entities.Student;
 import br.com.samuelzvir.meuabc.entities.Student$Table;
+import br.com.samuelzvir.meuabc.util.SecurityUtils;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "SecurityUtils";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         String username = usernameET.getText().toString();
         EditText passwordET = (EditText)findViewById(R.id.passwordField);
         String password = passwordET.getText().toString();
+
         List<Admin> admins =  new Select().from(Admin.class).where(Condition.column(Admin$Table.NAME).eq(username),
                 Condition.column(Admin$Table.PASSWORD).eq(password)).queryList();
         if(admins.size() > 0){

@@ -28,6 +28,7 @@ import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.Student;
 
 public class UserActivity extends AppCompatActivity {
+    private static final String TAG = "UserActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,6 @@ public class UserActivity extends AppCompatActivity {
         EditText passwordET = (EditText) findViewById(R.id.passwordField);
         String userName = nameET.getText().toString();
         String password = passwordET.getText().toString();
-
         Student student = new Student();
         student.setNickname(userName);
         student.setPassword(password);
