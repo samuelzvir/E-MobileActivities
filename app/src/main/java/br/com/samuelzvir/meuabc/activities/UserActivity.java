@@ -58,11 +58,14 @@ public class UserActivity extends AppCompatActivity {
     }
 
     public void save(View view){
-        EditText nameView = (EditText) findViewById(R.id.username);
-        String userName = nameView.getText().toString();
+        EditText nameET = (EditText) findViewById(R.id.username);
+        EditText passwordET = (EditText) findViewById(R.id.passwordField);
+        String userName = nameET.getText().toString();
+        String password = passwordET.getText().toString();
 
         Student student = new Student();
         student.setNickname(userName);
+        student.setPassword(password);
         student.save();
         //redirects to users list
         Intent intent = new Intent(this, ProfilesActivity.class);

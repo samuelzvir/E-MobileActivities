@@ -25,7 +25,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:background="@color/white"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.com.samuelzvir.meuabc.activities.UserActivity">
+    tools:context="br.com.samuelzvir.meuabc.activities.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -64,12 +64,21 @@
         android:layout_gravity="center_horizontal"
         android:id="@+id/passwordField" />
 
+    <TextView
+        android:id="@+id/information"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/activity_horizontal_margin"
+        android:typeface="serif" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:id="@+id/save"
-        android:onClick="save"
+        android:text="@string/login"
+        android:id="@+id/login"
+        android:onClick="login"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
+
+

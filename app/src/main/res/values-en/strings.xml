@@ -55,6 +55,10 @@
     <string name="levelIntermediate">Intermediate</string>
     <string name="levelHard">Hard</string>
 
+    <string name="password">Password</string>
+    <string name="checkDataTyped">Check typed data</string>
+    <string name="Login">Login</string>
+
     <string name="language">Language</string>
     <string name="portuguese">Portuguese</string>
     <string name="english">English</string>

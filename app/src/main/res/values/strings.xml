@@ -61,6 +61,11 @@
     <string name="portuguese">Português</string>
     <string name="english">Inglês</string>
 
+    <string name="password">Senha</string>
+
+    <string name="checkDataTyped">Verifique os dados digitados</string>
+
+    <string name="login">Entrar</string>
     <!-- Colors -->
     <color name="white">#FFFFFF</color>
     <color name="blue">#1887C7</color>
@@ -74,5 +79,7 @@
     <string name="title_activity_profiles">ProfilesActivity</string>
     <string name="title_activity_data_analysis">DataAnalysisActivity</string>
     <string name="title_activity_user">UserActivity</string>
+    <string name="title_activity_initial_loading">InitialLoadingActivity</string>
+    <string name="title_activity_admin_form">AdminFormActivity</string>
 
 </resources>

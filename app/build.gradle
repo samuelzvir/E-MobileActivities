@@ -22,8 +22,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.1'
     apt 'com.raizlabs.android:DBFlow-Compiler:2.2.1'
-    compile "com.raizlabs.android:DBFlow-Core:2.2.1"
-    compile "com.raizlabs.android:DBFlow:2.2.1"
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.raizlabs.android:DBFlow-Core:2.2.1'
+    compile 'com.raizlabs.android:DBFlow:2.2.1'
+    compile 'com.android.support:design:23.1.0'
 }
