@@ -25,6 +25,7 @@ import com.raizlabs.android.dbflow.sql.builder.Condition;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,7 +33,7 @@ import br.com.samuelzvir.meuabc.db.MeuABCDatabase;
 
 @ModelContainer
 @Table(databaseName = MeuABCDatabase.NAME)
-public class Student extends BaseModel{
+public class Student extends BaseModel implements Serializable{
 
     @Column
     @PrimaryKey(autoincrement = true)
@@ -41,8 +42,6 @@ public class Student extends BaseModel{
     private String nickname;
     @Column
     private String password;
-
-    List notes; // list of strings
     List<Challenge> challenges;
 
     public String getNickname() {
@@ -61,14 +60,6 @@ public class Student extends BaseModel{
         this.password = password;
     }
 
-    public List<String> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(List<String> notes) {
-        this.notes = notes;
-    }
-
     public void setChallenges(List<Challenge> challenges) {
 
         this.challenges = challenges;
@@ -82,7 +73,7 @@ public class Student extends BaseModel{
         this.id = id;
     }
 
-    @OneToMany(methods = {OneToMany.Method.ALL, OneToMany.Method.DELETE}, variableName = "challenges")
+    @OneToMany(methods = {OneToMany.Method.ALL}, variableName = "challenges")
     public List<Challenge> getMyChallenges() {
         if(challenges == null) {
             challenges = new Select()
@@ -97,7 +88,7 @@ public class Student extends BaseModel{
         super.save();
         if(challenges != null) {
             for (Challenge challenge : challenges) {
-                challenge.associateQueen(this);
+                challenge.associateStudent(this);
                 challenge.save();
             }
         }

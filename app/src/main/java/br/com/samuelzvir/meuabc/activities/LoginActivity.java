@@ -48,6 +48,9 @@ public class LoginActivity extends AppCompatActivity {
             if(student != null){
                 //TODO send student to start content
                 Intent intent = new Intent(this,StudentMenuActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("student", student);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }else{
                 TextView info = (TextView) findViewById(R.id.information);

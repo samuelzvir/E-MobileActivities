@@ -31,6 +31,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 
 import com.raizlabs.android.dbflow.sql.builder.Condition;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.ArrayList;
@@ -190,13 +191,17 @@ public class ABCActivity extends AppCompatActivity {
                 challenge.setName(tempChallenge.getWord());
                 challenge.setImagePath(tempChallenge.getImagePath());
                 challenge.setText(tempChallenge.getWord());
+                challenge.save();
+                challenge.setStudentRef(student.getId()); //TODO provisory until resolve foreign keys
                 challenges.add(challenge);
             }
         }
-        Log.d(TAG,"storing student "+student.getNickname());
-        Log.d(TAG,"with "+challenges.size() + " challenges.");
+        Log.d(TAG, "storing student " + student.getNickname());
+        Log.d(TAG, "to save " + challenges.size() + " challenges.");
         student.setChallenges(challenges);
-        student.insert();
+        student.update();
+        long i =new Select().from(Student.class).where(Condition.column(Student$Table.NICKNAME).eq(student.getNickname())).querySingle().getMyChallenges().size();
+        Log.d(TAG, "with " + i + " challenges saved.");
     }
 
     private void fillCheckedWords(){

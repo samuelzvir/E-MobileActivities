@@ -86,5 +86,6 @@
     <string name="title_activity_user">UserActivity</string>
     <string name="title_activity_initial_loading">InitialLoadingActivity</string>
     <string name="title_activity_admin_form">AdminFormActivity</string>
+    <string name="title_activity_stats">StatsActivity</string>
 
 </resources>

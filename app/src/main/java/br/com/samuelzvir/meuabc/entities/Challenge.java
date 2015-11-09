@@ -24,10 +24,12 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.raizlabs.android.dbflow.structure.container.ForeignKeyContainer;
 
+import java.io.Serializable;
+
 import br.com.samuelzvir.meuabc.db.MeuABCDatabase;
 
 @Table(databaseName = MeuABCDatabase.NAME)
-public class Challenge extends BaseModel{
+public class Challenge extends BaseModel implements Serializable{
 
     @Column
     @PrimaryKey(autoincrement = true)
@@ -38,6 +40,9 @@ public class Challenge extends BaseModel{
     private String text;
     @Column(name = "path")
     private String imagePath;
+
+    @Column(name = "student_ref")
+    private long studentRef;
 
     @Column
     @ForeignKey(
@@ -50,7 +55,7 @@ public class Challenge extends BaseModel{
     /**
      * setting the model for the student.
      */
-    public void associateQueen(Student student) {
+    public void associateStudent(Student student) {
         studentModelContainer = new ForeignKeyContainer<>(Student.class);
         studentModelContainer.setModel(student);
     }
@@ -85,5 +90,13 @@ public class Challenge extends BaseModel{
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public long getStudentRef() {
+        return studentRef;
+    }
+
+    public void setStudentRef(long studentRef) {
+        this.studentRef = studentRef;
     }
 }

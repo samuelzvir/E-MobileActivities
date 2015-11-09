@@ -15,8 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activities.CreateTextActivity"
-            android:label="@string/title_activity_create_text"
             android:configChanges="orientation"
+            android:label="@string/title_activity_create_text"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -25,62 +25,62 @@
         </activity>
         <activity
             android:name=".activities.MenuActivity"
-            android:label="@string/title_activity_menu"
             android:configChanges="orientation"
+            android:label="@string/title_activity_menu"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.TakePhotoActivity"
-            android:label="@string/title_activity_take_photo"
             android:configChanges="orientation"
+            android:label="@string/title_activity_take_photo"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.BuildChallengesActivity"
-            android:label="@string/title_activity_build_challenges"
             android:configChanges="orientation"
+            android:label="@string/title_activity_build_challenges"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.PlayChallengesActivity"
-            android:label="@string/title_activity_play_challenges"
             android:configChanges="orientation"
+            android:label="@string/title_activity_play_challenges"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.ScrabbleActivity"
-            android:label="@string/title_activity_scrabble"
             android:configChanges="orientation"
+            android:label="@string/title_activity_scrabble"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.ABCActivity"
-            android:label="@string/title_activity_abc"
             android:configChanges="orientation"
+            android:label="@string/title_activity_abc"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.ProfilesActivity"
-            android:label="@string/title_activity_profiles"
             android:configChanges="orientation"
+            android:label="@string/title_activity_profiles"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.DataAnalysisActivity"
-            android:label="@string/title_activity_data_analysis"
             android:configChanges="orientation"
+            android:label="@string/title_activity_data_analysis"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.UserActivity"
-            android:label="@string/title_activity_user"
             android:configChanges="orientation"
+            android:label="@string/title_activity_user"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.SettingsActivity"
-            android:label="@string/settings"
             android:configChanges="orientation"
+            android:label="@string/settings"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -89,6 +89,7 @@
             android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -97,10 +98,19 @@
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme" >
         </activity>
-
         <activity android:name=".activities.LoginActivity" >
         </activity>
-        <activity android:name=".activities.StudentMenuActivity" >
+        <activity
+            android:name=".activities.StudentMenuActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name=".activities.StudentGameActivity" >
+        </activity>
+        <activity
+            android:name=".activities.StatsActivity"
+            android:label="@string/title_activity_stats"
+            android:theme="@style/AppTheme" >
         </activity>
     </application>
 
