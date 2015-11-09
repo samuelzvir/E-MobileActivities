@@ -15,7 +15,9 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activities.CreateTextActivity"
-            android:label="@string/title_activity_create_text" >
+            android:label="@string/title_activity_create_text"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.ReceiveTextActivity"
@@ -29,39 +31,57 @@
         </activity>
         <activity
             android:name=".activities.TakePhotoActivity"
-            android:label="@string/title_activity_take_photo" >
+            android:label="@string/title_activity_take_photo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.BuildChallengesActivity"
-            android:label="@string/title_activity_build_challenges" >
+            android:label="@string/title_activity_build_challenges"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.PlayChallengesActivity"
-            android:label="@string/title_activity_play_challenges" >
+            android:label="@string/title_activity_play_challenges"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.ScrabbleActivity"
-            android:label="@string/title_activity_scrabble" >
+            android:label="@string/title_activity_scrabble"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.ABCActivity"
-            android:label="@string/title_activity_abc" >
+            android:label="@string/title_activity_abc"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.ProfilesActivity"
-            android:label="@string/title_activity_profiles" >
+            android:label="@string/title_activity_profiles"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.DataAnalysisActivity"
-            android:label="@string/title_activity_data_analysis" >
+            android:label="@string/title_activity_data_analysis"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.UserActivity"
-            android:label="@string/title_activity_user" >
+            android:label="@string/title_activity_user"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.SettingsActivity"
-            android:label="@string/settings" >
+            android:label="@string/settings"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.InitialLoadingActivity"
