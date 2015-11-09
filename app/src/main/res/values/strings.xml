@@ -68,6 +68,7 @@
     <string name="checkDataTyped">Verifique os dados digitados</string>
 
     <string name="login">Entrar</string>
+    <string name="logout">Sair</string>
 
     <string name="stats">Estatísticas</string>
     <!-- Colors -->

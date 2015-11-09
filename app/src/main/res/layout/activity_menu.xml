@@ -108,4 +108,16 @@
         android:layout_alignRight="@+id/imageView"
         android:layout_alignEnd="@+id/imageView" />
 
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:text="@string/logout"
+        android:id="@+id/button"
+        android:drawableTop="@drawable/ic_directions_run_black_48dp"
+        android:onClick="logout"
+        android:textSize="10dp"
+        android:layout_below="@+id/dataAnalysis"
+        android:layout_alignRight="@+id/settings"
+        android:layout_alignEnd="@+id/settings" />
+
 </RelativeLayout>

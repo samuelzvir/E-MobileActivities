@@ -124,4 +124,9 @@ public class MenuActivity extends Activity {
         res.updateConfiguration(conf, dm);
         Log.d(TAG, "loaded.");
     }
+
+    public void logout(View view){
+        Intent intent = new Intent(this,LoginActivity.class);
+        startActivity(intent);
+    }
 }

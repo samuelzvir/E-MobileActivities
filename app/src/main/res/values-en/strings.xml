@@ -65,6 +65,7 @@
 
     <string name="stats">Stats</string>
     <string name="activities">Activities</string>
+    <string name="logout">Logout</string>
 
     <!-- Colors -->
     <color name="white">#FFFFFF</color>
