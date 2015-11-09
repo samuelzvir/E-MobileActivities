@@ -61,7 +61,7 @@
     <Button
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:text="abc"
+        android:text="@string/activities"
         android:id="@+id/abc"
         android:onClick="onToABC"
         android:drawableTop="@drawable/abc_48p"

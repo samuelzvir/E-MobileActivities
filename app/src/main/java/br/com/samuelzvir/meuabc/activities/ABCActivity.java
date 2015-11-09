@@ -16,19 +16,72 @@
 
 package br.com.samuelzvir.meuabc.activities;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ListView;
+
+import com.raizlabs.android.dbflow.sql.language.Select;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import br.com.samuelzvir.meuabc.R;
+import br.com.samuelzvir.meuabc.entities.SimpleChallenge;
+import br.com.samuelzvir.meuabc.entities.Student;
 
 public class ABCActivity extends AppCompatActivity {
+    private static final String TAG = "ABCActivity";
+    final ArrayList<View> mCheckedViews = new ArrayList<View>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abc);
+        List<Student> studentsList = new Select().from(Student.class).queryList();
+        final ListView users = (ListView) findViewById(R.id.studentslistView);
+        final Button deleteButton = (Button) findViewById(R.id.deleteButton);
+        final CheckBox usePositionsCB = new CheckBox(getApplicationContext());
+
+        List<String> studentsNamesList = new ArrayList<>();
+        for (Student s : studentsList){ // populates the words
+            studentsNamesList.add(s.getNickname());
+        }
+
+        final StableArrayAdapter adapter = new StableArrayAdapter(this,
+                android.R.layout.simple_list_item_single_choice,
+                studentsNamesList);
+
+        users.setAdapter(adapter);
+        users.setItemsCanFocus(false);
+        users.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        users.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                boolean checked = users.isItemChecked(position);
+                if (checked) {
+                    Log.i(TAG, "mCheckedViews.add(view);");
+                    mCheckedViews.add(view);
+                    //TODO list challenges.
+                } else {
+                    Log.i(TAG, "mCheckedViews.remove(view);");
+                    mCheckedViews.remove(view);
+                }
+            }
+        });
+        mCheckedViews.clear();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -52,4 +105,39 @@ public class ABCActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private class StableArrayAdapter extends ArrayAdapter<String> {
+        HashMap<String, Integer> mIdMap = new HashMap<>();
+
+        public StableArrayAdapter(Context context,
+                                  int textViewResourceId,
+                                  List<String> objects)
+        {
+            super(context, textViewResourceId, objects);
+            for (int i = 0; i < objects.size(); ++i) {
+                mIdMap.put(objects.get(i), i);
+            }
+        }
+
+        public Integer getId(String word){
+            return mIdMap.get(word);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            try{
+                String item = getItem(position);
+                return mIdMap.get(item);
+            }catch(Exception e){
+                return 0l;
+            }
+
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+    }
+
 }

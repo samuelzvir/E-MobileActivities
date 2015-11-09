@@ -55,7 +55,7 @@ public class BuildChallengesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_build_challenges);
         List<SimpleChallenge> simpleChallenges = new Select().from(SimpleChallenge.class).queryList();
-        final ListView challenges = (ListView) findViewById(R.id.challenges);
+        final ListView challenges = (ListView) findViewById(R.id.users);
         final Button deleteButton = (Button) findViewById(R.id.deleteButton);
         final CheckBox usePositionsCB = new CheckBox(getApplicationContext());
 
@@ -75,7 +75,7 @@ public class BuildChallengesActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ListView challengesChange = (ListView) findViewById(R.id.challenges);
+                final ListView challengesChange = (ListView) findViewById(R.id.users);
                 SparseBooleanArray checkedItems = challengesChange.getCheckedItemPositions();
                 int numCheckedItems = checkedItems.size();
                 Log.i(TAG, numCheckedItems + "checked items.");

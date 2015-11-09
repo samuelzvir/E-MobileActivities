@@ -63,6 +63,9 @@
     <string name="portuguese">Portuguese</string>
     <string name="english">English</string>
 
+    <string name="stats">Stats</string>
+    <string name="activities">Activities</string>
+
     <!-- Colors -->
     <color name="white">#FFFFFF</color>
     <color name="blue">#1887C7</color>

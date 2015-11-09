@@ -34,7 +34,7 @@ public class AdminFormActivity extends AppCompatActivity {
         admin.setName(username);
         EditText passwordET = (EditText)findViewById(R.id.passwordField);
         String password = passwordET.getText().toString();
-        
+
         admin.setPassword(password);
         admin.insert();
         if(new Select().from(Admin.class).count() > 0){
