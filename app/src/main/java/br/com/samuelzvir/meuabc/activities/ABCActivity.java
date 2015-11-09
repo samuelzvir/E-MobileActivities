@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
+import com.raizlabs.android.dbflow.sql.builder.Condition;
 import com.raizlabs.android.dbflow.sql.language.Select;
 
 import java.util.ArrayList;
@@ -37,25 +38,37 @@ import java.util.HashMap;
 import java.util.List;
 
 import br.com.samuelzvir.meuabc.R;
+import br.com.samuelzvir.meuabc.entities.Challenge;
+import br.com.samuelzvir.meuabc.entities.Challenge$Table;
 import br.com.samuelzvir.meuabc.entities.SimpleChallenge;
+import br.com.samuelzvir.meuabc.entities.SimpleChallenge$Table;
 import br.com.samuelzvir.meuabc.entities.Student;
+import br.com.samuelzvir.meuabc.entities.Student$Table;
 
 public class ABCActivity extends AppCompatActivity {
     private static final String TAG = "ABCActivity";
     final ArrayList<View> mCheckedViews = new ArrayList<View>();
+    List<String> wordsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abc);
         List<Student> studentsList = new Select().from(Student.class).queryList();
+        List<SimpleChallenge> simpleChallenges =  new Select().from(SimpleChallenge.class).queryList();
         final ListView users = (ListView) findViewById(R.id.studentslistView);
-        final Button deleteButton = (Button) findViewById(R.id.deleteButton);
+        final ListView words = (ListView) findViewById(R.id.wordsListView);
+
+        @SuppressWarnings( "unused" )
         final CheckBox usePositionsCB = new CheckBox(getApplicationContext());
 
         List<String> studentsNamesList = new ArrayList<>();
-        for (Student s : studentsList){ // populates the words
+        for (Student s : studentsList){ // populate the words
             studentsNamesList.add(s.getNickname());
+        }
+
+        for (SimpleChallenge s : simpleChallenges){
+            wordsList.add(s.getWord());
         }
 
         final StableArrayAdapter adapter = new StableArrayAdapter(this,
@@ -65,6 +78,7 @@ public class ABCActivity extends AppCompatActivity {
         users.setAdapter(adapter);
         users.setItemsCanFocus(false);
         users.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
         users.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -73,7 +87,22 @@ public class ABCActivity extends AppCompatActivity {
                 if (checked) {
                     Log.i(TAG, "mCheckedViews.add(view);");
                     mCheckedViews.add(view);
-                    //TODO list challenges.
+                    fillCheckedWords();
+                    words.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                            boolean checked = users.isItemChecked(position);
+                            if (checked) {
+                                Log.i(TAG, "mCheckedViews.add(view);");
+                                mCheckedViews.add(view);
+                            } else {
+                                Log.i(TAG, "mCheckedViews.remove(view);");
+                                mCheckedViews.remove(view);
+                            }
+                        }
+                    });
+
                 } else {
                     Log.i(TAG, "mCheckedViews.remove(view);");
                     mCheckedViews.remove(view);
@@ -140,4 +169,50 @@ public class ABCActivity extends AppCompatActivity {
         }
     }
 
+    public void saveGame(View view){
+        Log.d(TAG,"Saving game");
+        final ListView users = (ListView) findViewById(R.id.studentslistView);
+        final ListView words = (ListView) findViewById(R.id.wordsListView);
+        Object user = users.getAdapter().getItem(users.getCheckedItemPosition());
+        Log.d(TAG, "For user " + user.toString());
+
+        Student student = new Select().from(Student.class).where(Condition.column(Student$Table.NICKNAME).eq(user.toString())).querySingle();
+        Log.d(TAG, "Words: " + user.toString());
+        List<Challenge>  challenges = new ArrayList<>();
+        int length = words.getCount();
+        SparseBooleanArray checked = words.getCheckedItemPositions();
+        for (int i = 0; i < length; i++) {
+            if (checked.get(i)) {
+                String word = wordsList.get(i);
+                Log.d(TAG, word);
+                SimpleChallenge tempChallenge = new Select().from(SimpleChallenge.class).where(Condition.column(SimpleChallenge$Table.WORD).eq(word)).querySingle();
+                Challenge challenge = new Challenge();
+                challenge.setName(tempChallenge.getWord());
+                challenge.setImagePath(tempChallenge.getImagePath());
+                challenge.setText(tempChallenge.getWord());
+                challenges.add(challenge);
+            }
+        }
+        Log.d(TAG,"storing student "+student.getNickname());
+        Log.d(TAG,"with "+challenges.size() + " challenges.");
+        student.setChallenges(challenges);
+        student.insert();
+    }
+
+    private void fillCheckedWords(){
+        final ListView users = (ListView) findViewById(R.id.studentslistView);
+        Object user = users.getAdapter().getItem(users.getCheckedItemPosition());
+        Log.d(TAG, "For user " + user.toString());
+        Student student = new Select().from(Student.class).where(Condition.column(Student$Table.NICKNAME).eq(user.toString())).querySingle();
+
+        final ListView words = (ListView) findViewById(R.id.wordsListView);
+        //TODO check saved items.
+        final StableArrayAdapter adapter3 = new StableArrayAdapter(this,
+                android.R.layout.simple_list_item_multiple_choice,
+                wordsList);
+        words.setAdapter(adapter3);
+        words.setItemsCanFocus(false);
+        words.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+    }
 }

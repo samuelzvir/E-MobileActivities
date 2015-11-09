@@ -38,7 +38,7 @@
 
     <ListView
         android:layout_width="399dp"
-        android:layout_height="399dp"
+        android:layout_height="250dp"
         android:id="@+id/studentslistView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -67,8 +67,8 @@
         <!--android:layout_height="wrap_content" />-->
         <ListView
             android:layout_width="399dp"
-            android:layout_height="1044dp"
-            android:id="@+id/users"
+            android:layout_height="300dp"
+            android:id="@+id/wordsListView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_weight="0.77"
@@ -86,16 +86,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/deleteWord"
-            android:id="@+id/deleteButton"
-            android:layout_gravity="center_horizontal" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/newWord"
+            android:text="@string/save"
             android:id="@+id/newWord"
-            android:onClick="addWord"
+            android:onClick="saveGame"
             android:layout_below="@+id/users"
             android:layout_alignRight="@+id/users"
             android:layout_alignEnd="@+id/users"
