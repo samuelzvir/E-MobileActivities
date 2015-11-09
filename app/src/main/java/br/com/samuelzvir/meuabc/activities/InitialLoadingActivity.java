@@ -37,6 +37,7 @@ public class InitialLoadingActivity extends Activity {
     protected void onResume() {
         super.onResume();
         setContentView(R.layout.activity_initial_loading);
+        startLogic();
     }
 
     private String checkStatus(){
