@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2015 Samuel Yuri Zvir
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/white"
+    tools:context="br.com.samuelzvir.meuabc.activities.MenuActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/logo3"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/messages"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:text="@string/messages"
+        android:onClick="onToWords"
+        android:drawableTop="@drawable/ic_font_download_black_48dp"
+        android:layout_below="@+id/imageView"
+        android:layout_toLeftOf="@+id/play"
+        android:layout_toStartOf="@+id/play"
+        android:layout_marginRight="58dp"
+        android:layout_marginEnd="58dp"
+        android:textSize="10dp" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:text="@string/play"
+        android:id="@+id/play"
+        android:drawableTop="@drawable/ic_puzzle_black_48dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignLeft="@+id/abc"
+        android:layout_alignStart="@+id/abc"
+        android:onClick="onPlayChallenge"
+        android:textSize="10dp" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:text="@string/activities"
+        android:id="@+id/abc"
+        android:onClick="onToABC"
+        android:drawableTop="@drawable/abc_48p"
+        android:layout_below="@+id/play"
+        android:layout_alignRight="@+id/settings"
+        android:layout_alignEnd="@+id/settings"
+        android:textSize="10dp" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:text="@string/users"
+        android:id="@+id/users"
+        android:drawableTop="@drawable/ic_supervisor_account_black_48dp"
+        android:onClick="onToProfiles"
+        android:layout_below="@+id/messages"
+        android:layout_alignLeft="@+id/messages"
+        android:layout_alignRight="@+id/messages"
+        android:textSize="10dp" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:text="@string/dataAnalysis"
+        android:id="@+id/dataAnalysis"
+        android:drawableTop="@drawable/ic_trending_up_black_48dp"
+        android:onClick="onToDataAnalysis"
+        android:layout_below="@+id/users"
+        android:layout_alignLeft="@+id/users"
+        android:layout_alignStart="@+id/users"
+        android:textSize="10dp" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:text="@string/settings"
+        android:id="@+id/settings"
+        android:drawableTop="@drawable/ic_build_black_48dp"
+        android:layout_marginRight="140dp"
+        android:layout_marginEnd="140dp"
+        android:onClick="onToSettings"
+        android:textSize="10dp"
+        android:layout_below="@+id/abc"
+        android:layout_alignRight="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:text="@string/logout"
+        android:id="@+id/button"
+        android:drawableTop="@drawable/ic_directions_run_black_48dp"
+        android:onClick="logout"
+        android:textSize="10dp"
+        android:layout_below="@+id/dataAnalysis"
+        android:layout_alignRight="@+id/settings"
+        android:layout_alignEnd="@+id/settings" />
+
+</RelativeLayout>

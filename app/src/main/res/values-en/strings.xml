@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">My ABC</string>
+    <string name="title_activity_take_photo">TakePhotoActivity</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_create_text">CreateTextActivity</string>
+    
+    <string name="save">Save</string>
+    <string name="saved">Saved</string>
+    <string name="title_activity_receive_text">ReceivTextActivity</string>
+
+    <string name="title_activity_menu">My ABC</string>
+
+    <!-- Menu -->
+    <string name="messages">Words</string>
+    <string name="title_activity_photo_intent">PhotoIntentActivity</string>
+    <string name="menu">Menu</string>
+    <!-- Camera -->
+    <string name="takeBigPicture">Photo</string>
+    <string name="takeSmallPicture">Small photo</string>
+    <string name="cannot">Cannot</string>
+    <string name="album_name">MeuABCAlbum</string>
+
+    <string name="speech_toggle_on">Speak</string>
+    <string name="speech_toggle_off">Stop</string>
+
+    <string name="start_speaking">Start</string>
+    <string name="stop_speaking"></string>
+    <string name="title_activity_drag_and_drop">DragAndDropActivity</string>
+    <string name="newWord">Add word</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <string name="next">next</string>
+    <string name="information">information</string>
+    <string name="clear">&lt;</string>
+    <string name="try_again">Try again...</string>
+    <string name="wrong">Wrong</string>
+    <string name="build_the_words">Build the word</string>
+    <string name="correct">Correct!</string>
+    <string name="dataAnalysis">Data Analysis</string>
+    <string name="play">Play</string>
+    <string name="words">Words</string>
+    <string name="deleteWord">Delete Word</string>
+
+    <string name="image">Image</string>
+    <string name="name">Name</string>
+    <string name="users">Users</string>
+    <string name="settings">Settings</string>
+    <string name="newUser">New User</string>
+    <string name="goBack">Back</string>
+
+    <string name="level">Level</string>
+    <string name="levelEasy">Easy</string>
+    <string name="levelIntermediate">Intermediate</string>
+    <string name="levelHard">Hard</string>
+
+    <string name="password">Password</string>
+    <string name="checkDataTyped">Check typed data</string>
+    <string name="Login">Login</string>
+
+    <string name="language">Language</string>
+    <string name="portuguese">Portuguese</string>
+    <string name="english">English</string>
+
+    <string name="stats">Stats</string>
+    <string name="activities">Activities</string>
+    <string name="logout">Logout</string>
+
+    <!-- Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#1887C7</color>
+    <color name="red">#E60E0E</color>
+    <color name="green">#83BF25</color>
+
+    <string name="title_activity_build_challenges">BuildChallengesActivity</string>
+    <string name="title_activity_play_challenges">PlayChallengesActivity</string>
+    <string name="title_activity_scrabble">ScrabbleActivity</string>
+    <string name="title_activity_abc">ABCActivity</string>
+    <string name="title_activity_profiles">ProfilesActivity</string>
+    <string name="title_activity_data_analysis">DataAnalysisActivity</string>
+    <string name="title_activity_user">UserActivity</string>
+
+</resources>
