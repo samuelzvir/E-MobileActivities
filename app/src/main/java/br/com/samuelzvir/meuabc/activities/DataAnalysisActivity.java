@@ -17,6 +17,7 @@
 package br.com.samuelzvir.meuabc.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -139,6 +140,8 @@ public class DataAnalysisActivity extends AppCompatActivity {
 
     public void toStats(View view){
         Log.i(TAG,"stats about the user");
+        Intent intent = new Intent(this,StatsActivity.class);
+        startActivity(intent);
     }
 
 }
