@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My ABC</string>
+    <string name="app_name">EMA</string>
     <string name="title_activity_take_photo">TakePhotoActivity</string>
 
     <string name="action_settings">Settings</string>
