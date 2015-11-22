@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My ABC</string>
+    <string name="app_name">EMA</string>
     <string name="title_activity_take_photo">TakePhotoActivity</string>
 
     <string name="action_settings">Settings</string>
@@ -9,7 +9,7 @@
     <string name="saved">Saved</string>
     <string name="title_activity_receive_text">ReceivTextActivity</string>
 
-    <string name="title_activity_menu">My ABC</string>
+    <string name="title_activity_menu">EMA</string>
 
     <!-- Menu -->
     <string name="messages">Words</string>
