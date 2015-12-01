@@ -71,8 +71,6 @@
         android:layout_below="@+id/studentslistView"
         android:layout_alignRight="@+id/studentslistView"
         android:layout_alignEnd="@+id/studentslistView"
-        android:layout_marginRight="112dp"
-        android:layout_marginEnd="112dp"
         android:layout_gravity="right" />
 
 

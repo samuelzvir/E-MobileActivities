@@ -10,4 +10,10 @@
     tools:showIn="@layout/activity_stats"
     tools:context="br.com.samuelzvir.meuabc.activities.StatsActivity">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/noData"
+        android:id="@+id/textView2"/>
 </RelativeLayout>

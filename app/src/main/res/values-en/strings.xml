@@ -42,6 +42,9 @@
     <string name="play">Play</string>
     <string name="words">Words</string>
     <string name="deleteWord">Delete Word</string>
+    <string name="deleteUsers">Delete User(s)</string>
+
+    <string name="noData">Without data</string>
 
     <string name="image">Image</string>
     <string name="name">Name</string>

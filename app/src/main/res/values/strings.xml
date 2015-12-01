@@ -47,10 +47,13 @@
     <string name="users">Usuários</string>
     <string name="settings">Configurações</string>
     <string name="newUser">Novo Usuário</string>
+    <string name="deleteUsers">Deletar Usuáio(s)</string>
     <string name="goBack">Voltar</string>
     <string name="words">Palavras</string>
 
     <string name="dataAnalysis">Análise de dados</string>
+
+    <string name="noData">Sem dados.</string>
 
     <string name="level">Dificuldade</string>
     <string name="levelEasy">Fácil</string>
