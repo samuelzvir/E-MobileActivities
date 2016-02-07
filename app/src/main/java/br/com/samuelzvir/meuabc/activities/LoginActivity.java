@@ -1,29 +1,23 @@
 package br.com.samuelzvir.meuabc.activities;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.raizlabs.android.dbflow.sql.builder.Condition;
-import com.raizlabs.android.dbflow.sql.language.Select;
+import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.Admin;
-import br.com.samuelzvir.meuabc.entities.Admin$Table;
 import br.com.samuelzvir.meuabc.entities.Student;
-import br.com.samuelzvir.meuabc.entities.Student$Table;
-import br.com.samuelzvir.meuabc.util.SecurityUtils;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = "SecurityUtils";
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +31,17 @@ public class LoginActivity extends AppCompatActivity {
         EditText passwordET = (EditText)findViewById(R.id.passwordField);
         String password = passwordET.getText().toString();
 
-        List<Admin> admins =  new Select().from(Admin.class).where(Condition.column(Admin$Table.NAME).eq(username),
-                Condition.column(Admin$Table.PASSWORD).eq(password)).queryList();
+        List<Admin> admins = DataSupport.where("name = ?",username).where("password = ?", password).find(Admin.class);
         if(admins.size() > 0){
             Intent intent = new Intent(this,MenuActivity.class);
             startActivity(intent);
         }else{
-            Student student = new Select().from(Student.class).where(Condition.column(Student$Table.NICKNAME).eq(username),
-                    Condition.column(Student$Table.PASSWORD).eq(password)).querySingle();
-            if(student != null){
+           List<Student> students = DataSupport.where("nickname = ?",username).where("password = ?", password).find(Student.class, true);
+            if(students.size() > 0 &&  students.get(0) != null){
                 //TODO send student to start content
                 Intent intent = new Intent(this,StudentMenuActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("student", student);
+                bundle.putSerializable("student", students.get(0));
                 intent.putExtras(bundle);
                 startActivity(intent);
             }else{

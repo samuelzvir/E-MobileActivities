@@ -59,12 +59,14 @@ public class CreateTextActivity extends Activity {
     public void saveWord(View view){
         EditText messageView = (EditText) findViewById(R.id.word);
         String word = messageView.getText().toString();
-        Log.d(TAG,"adding word "+word);
+        Log.d(TAG, "adding word " + word);
         SimpleChallenge simpleChallenge = new SimpleChallenge();
         simpleChallenge.setWord(word);
         simpleChallenge.setImagePath(this.imagePath);
-        simpleChallenge.insert();
-        Log.d(TAG,"created with id: "+simpleChallenge.getId());
+        simpleChallenge.save();
+        if(simpleChallenge.isSaved()) {
+            Log.d(TAG, "created.");
+        }
         TextView info = (TextView) findViewById(R.id.status);
         info.setTextColor(Color.GREEN);
         info.setText(R.string.saved);

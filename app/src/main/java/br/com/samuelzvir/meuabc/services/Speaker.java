@@ -21,7 +21,7 @@ import android.media.AudioManager;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 
-import com.raizlabs.android.dbflow.sql.language.Select;
+import org.litepal.crud.DataSupport;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -89,7 +89,7 @@ public class Speaker implements OnInitListener {
     }
 
     private String getLanguage(){
-        AppConfiguration appConfiguration = new Select().from(AppConfiguration.class).querySingle();
+        AppConfiguration appConfiguration = DataSupport.findFirst(AppConfiguration.class);
         return appConfiguration.getLanguage();
     }
 

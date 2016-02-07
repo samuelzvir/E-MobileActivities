@@ -25,7 +25,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.raizlabs.android.dbflow.sql.language.Select;
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,7 @@ public class ProfilesActivity extends AppCompatActivity {
 
 
     private void listStudents(){
-        List<Student> s = new Select().from(Student.class).queryList();
+        List<Student> s = DataSupport.findAll(Student.class);
         ListView  students = (ListView) findViewById(R.id.studentslistView);
 
         List<String> studentNames = new ArrayList<>();

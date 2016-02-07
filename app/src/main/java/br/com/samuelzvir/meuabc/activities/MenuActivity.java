@@ -26,7 +26,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.raizlabs.android.dbflow.sql.language.Select;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.Locale;
 
@@ -104,12 +105,12 @@ public class MenuActivity extends Activity {
     }
 
     private AppConfiguration getConfiguration(){
-        AppConfiguration config = new Select().from(AppConfiguration.class).querySingle();
+        AppConfiguration config = DataSupport.findFirst(AppConfiguration.class); //new Select().from(AppConfiguration.class).querySingle();
         if( config == null ){
             config = new AppConfiguration();
             config.setLanguage("pt-br");
             config.setLevel("easy");
-            config.insert();
+            config.save();
         }
         return config;
     }

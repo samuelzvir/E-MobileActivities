@@ -16,31 +16,24 @@
 
 package br.com.samuelzvir.meuabc.entities;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
 
-import br.com.samuelzvir.meuabc.db.MeuABCDatabase;
+import org.litepal.annotation.Column;
+import org.litepal.crud.DataSupport;
 
-@Table(databaseName = MeuABCDatabase.NAME)
-public class Admin extends BaseModel{
+public class Admin extends DataSupport{
 
-    @Column
-    @PrimaryKey(autoincrement = true)
-    private long id;
-    @Column
+    private int id;
+    @Column(unique = true, defaultValue = "unknown")
     private String name;
     @Column
     private String password;
 
     //Getters and Setters
 
-    public long getId() {
+    public int getId() {
         return id;
     }
-
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

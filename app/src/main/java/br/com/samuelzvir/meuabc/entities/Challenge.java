@@ -16,55 +16,30 @@
 
 package br.com.samuelzvir.meuabc.entities;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.ForeignKeyReference;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
-import com.raizlabs.android.dbflow.structure.container.ForeignKeyContainer;
+
+import org.litepal.annotation.Column;
+import org.litepal.crud.DataSupport;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import br.com.samuelzvir.meuabc.db.MeuABCDatabase;
+public class Challenge  extends DataSupport implements Serializable{
 
-@Table(databaseName = MeuABCDatabase.NAME)
-public class Challenge extends BaseModel implements Serializable{
-
+    private int id;
     @Column
-    @PrimaryKey(autoincrement = true)
-    private long id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "text")
-    private String text;
-    @Column(name = "path")
-    private String imagePath;
-
-    @Column(name = "student_ref")
-    private long studentRef;
-
     @Column
-    @ForeignKey(
-            references = {@ForeignKeyReference(columnName = "student_id",
-                    columnType = Long.class,
-                    foreignColumnName = "id")},
-            saveForeignKeyModel = false)
-    ForeignKeyContainer<Student> studentModelContainer;
+    private String text;
+    @Column
+    private String imagePath;
+    private List<Student> students = new ArrayList<>();
 
-    /**
-     * setting the model for the student.
-     */
-    public void associateStudent(Student student) {
-        studentModelContainer = new ForeignKeyContainer<>(Student.class);
-        studentModelContainer.setModel(student);
-    }
-
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -92,11 +67,11 @@ public class Challenge extends BaseModel implements Serializable{
         this.imagePath = imagePath;
     }
 
-    public long getStudentRef() {
-        return studentRef;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setStudentRef(long studentRef) {
-        this.studentRef = studentRef;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

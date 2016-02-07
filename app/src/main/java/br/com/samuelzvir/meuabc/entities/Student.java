@@ -16,36 +16,37 @@
 
 package br.com.samuelzvir.meuabc.entities;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ModelContainer;
-import com.raizlabs.android.dbflow.annotation.OneToMany;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.sql.builder.Condition;
-import com.raizlabs.android.dbflow.sql.language.Select;
-import com.raizlabs.android.dbflow.structure.BaseModel;
+import org.litepal.annotation.Column;
+import org.litepal.crud.DataSupport;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
-import br.com.samuelzvir.meuabc.db.MeuABCDatabase;
+public class Student  extends DataSupport implements Serializable{
 
-@ModelContainer
-@Table(databaseName = MeuABCDatabase.NAME)
-public class Student extends BaseModel implements Serializable{
-
-    @Column
-    @PrimaryKey(autoincrement = true)
-    private long id;
-    @Column
+    private int id;
+    @Column(unique = true)
     private String nickname;
     @Column
     private String password;
-    List<Challenge> challenges;
+
+    List<Challenge> challenges = new ArrayList<>();
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNickname() {
         return nickname;
+    }
+
+    public List<Challenge> getChallenges() {
+        return challenges;
     }
 
     public void setNickname(String nickname) {
@@ -63,34 +64,5 @@ public class Student extends BaseModel implements Serializable{
     public void setChallenges(List<Challenge> challenges) {
 
         this.challenges = challenges;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    @OneToMany(methods = {OneToMany.Method.ALL}, variableName = "challenges")
-    public List<Challenge> getMyChallenges() {
-        if(challenges == null) {
-            challenges = new Select()
-                    .from(Challenge.class)
-                    .where(Condition.column(Challenge$Table.STUDENTMODELCONTAINER_STUDENT_ID).is(id))
-                    .queryList();
-        }
-        return challenges;
-    }
-    @Override
-    public void save(){
-        super.save();
-        if(challenges != null) {
-            for (Challenge challenge : challenges) {
-                challenge.associateStudent(this);
-                challenge.save();
-            }
-        }
     }
 }

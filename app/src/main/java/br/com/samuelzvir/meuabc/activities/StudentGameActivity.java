@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,8 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.raizlabs.android.dbflow.sql.builder.Condition;
-import com.raizlabs.android.dbflow.sql.language.Select;
+
+import org.litepal.crud.DataSupport;
 
 import java.io.File;
 import java.util.List;
@@ -31,10 +30,8 @@ import java.util.Random;
 
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.Challenge;
-import br.com.samuelzvir.meuabc.entities.Challenge$Table;
-import br.com.samuelzvir.meuabc.entities.SimpleChallenge;
 import br.com.samuelzvir.meuabc.entities.Student;
-import br.com.samuelzvir.meuabc.entities.Student$Table;
+import br.com.samuelzvir.meuabc.entities.relations.StudentChallenge;
 import br.com.samuelzvir.meuabc.services.Speaker;
 
 public class StudentGameActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
@@ -65,12 +62,15 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             Intent intent = getIntent();
             Bundle bundle=intent.getExtras();
             student = (Student) bundle.getSerializable("student");
-            Log.i(TAG,"Student "+ student.getNickname());
-            Log.i(TAG,"With "+student.getMyChallenges().size()+" challenges.");
-            if(student.getMyChallenges().size() == 0){
-                List<Challenge> challenges = new Select().from(Challenge.class).where(Condition.column(Challenge$Table.STUDENT_REF).eq(student.getId())).queryList();
-                Log.i(TAG,challenges.size()+" challenges");
-                student.setChallenges(challenges);
+            Log.i(TAG,"Student "+ student.getNickname()+", ID = "+student.getId() );
+            student = DataSupport.find(Student.class, student.getId());
+            Log.i(TAG,"With "+student.getChallenges().size()+" challenges.");
+            if(student.getChallenges().size() == 0){ //workaround for many2many queries
+                List<StudentChallenge> relation = DataSupport.where("studentId = ?",student.getId()+"").find(StudentChallenge.class);
+                for(StudentChallenge studentChallenge : relation) {
+                    Challenge c = DataSupport.find(Challenge.class, studentChallenge.getChallengeId());
+                    student.getChallenges().add(c);
+                }
             }
             nextButton = (Button) findViewById(R.id.nextButton);
             nextButton.setOnClickListener(this);
@@ -79,7 +79,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             answerText = (EditText) findViewById(R.id.answer);
             correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
             wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
-            this.wordList = student.getMyChallenges();
+            this.wordList = student.getChallenges();
             if(wordList.size() > 0){
                 initialize();
             }
@@ -275,6 +275,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == CHECK_CODE){
             if(resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS){
+                //TODO check bug
                 speaker = new Speaker(this);
             }else {
                 Intent install = new Intent();

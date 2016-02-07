@@ -3,23 +3,19 @@ package br.com.samuelzvir.meuabc.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.raizlabs.android.dbflow.sql.language.Select;
+
+import org.litepal.crud.DataSupport;
 
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.Admin;
-import br.com.samuelzvir.meuabc.util.SecurityUtils;
 
 public class AdminFormActivity extends AppCompatActivity {
-    private static final String TAG = "SecurityUtils";
+    private static final String TAG = "AdminFormActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +32,8 @@ public class AdminFormActivity extends AppCompatActivity {
         String password = passwordET.getText().toString();
 
         admin.setPassword(password);
-        admin.insert();
-        if(new Select().from(Admin.class).count() > 0){
+        admin.save();
+        if(DataSupport.findAll(Admin.class).size() > 0){
             Intent intent =  new Intent(this,MenuActivity.class);
             startActivity(intent);
         }else{

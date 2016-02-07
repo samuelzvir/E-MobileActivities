@@ -27,7 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
-import com.raizlabs.android.dbflow.sql.language.Select;
+import org.litepal.crud.DataSupport;
 
 import java.util.Locale;
 
@@ -77,14 +77,14 @@ public class SettingsActivity extends Activity {
             case R.id.portugueseRadioButton:
                 if (checked){
                     configuration.setLanguage("pt-br");
-                    configuration.update();
+                    configuration.save();
                     changeLocale("pt-br");
                 }
                     break;
             case R.id.englishRadioButton:
                 if (checked){
                     configuration.setLanguage("en-us");
-                    configuration.update();
+                    configuration.save();
                     changeLocale("en-us");
                 }
                     break;
@@ -100,19 +100,19 @@ public class SettingsActivity extends Activity {
             case R.id.levelEasyRadioButton:
                 if (checked){
                     configuration.setLevel("easy");
-                    configuration.update();
+                    configuration.save();
                 }
                 break;
             case R.id.levelIntermediateRadioButton:
                 if (checked){
                     configuration.setLevel("intermediate");
-                    configuration.update();
+                    configuration.save();
                 }
                 break;
             case R.id.levelHardRadioButton:
                 if (checked){
                     configuration.setLevel("hard");
-                    configuration.update();
+                    configuration.save();
                 }
                 break;
         }
@@ -145,14 +145,13 @@ public class SettingsActivity extends Activity {
 
 
     private AppConfiguration getConfiguration(){
-        AppConfiguration config = new Select().from(AppConfiguration.class).querySingle();
+        AppConfiguration config = DataSupport.findFirst(AppConfiguration.class);
         if( config == null ){
             config = new AppConfiguration();
             config.setLanguage("pt-br");
             changeLocale("pt-br");
             config.setLevel("easy");
-            config.insert();
-
+            config.save();
         }
         return config;
     }

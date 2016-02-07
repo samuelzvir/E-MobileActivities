@@ -16,19 +16,12 @@
 
 package br.com.samuelzvir.meuabc.entities;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
+import org.litepal.annotation.Column;
+import org.litepal.crud.DataSupport;
 
-import br.com.samuelzvir.meuabc.db.MeuABCDatabase;
+public class SimpleChallenge  extends DataSupport {
 
-@Table(databaseName = MeuABCDatabase.NAME)
-public class SimpleChallenge extends BaseModel {
-
-    @Column
-    @PrimaryKey(autoincrement = true)
-    long id;
+    private int id;
     @Column
     String word;
     @Column
@@ -39,11 +32,11 @@ public class SimpleChallenge extends BaseModel {
     double points;
 
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

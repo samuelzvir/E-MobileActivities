@@ -26,13 +26,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
-import com.raizlabs.android.dbflow.sql.builder.Condition;
-import com.raizlabs.android.dbflow.sql.language.Delete;
-import com.raizlabs.android.dbflow.sql.language.Select;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,11 +38,9 @@ import java.util.List;
 
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.Challenge;
-import br.com.samuelzvir.meuabc.entities.Challenge$Table;
 import br.com.samuelzvir.meuabc.entities.SimpleChallenge;
-import br.com.samuelzvir.meuabc.entities.SimpleChallenge$Table;
 import br.com.samuelzvir.meuabc.entities.Student;
-import br.com.samuelzvir.meuabc.entities.Student$Table;
+import br.com.samuelzvir.meuabc.entities.relations.StudentChallenge;
 
 public class ABCActivity extends AppCompatActivity {
     private static final String TAG = "ABCActivity";
@@ -55,8 +51,8 @@ public class ABCActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abc);
-        List<Student> studentsList = new Select().from(Student.class).queryList();
-        List<SimpleChallenge> simpleChallenges =  new Select().from(SimpleChallenge.class).queryList();
+        List<Student> studentsList = DataSupport.findAll(Student.class,true);  //new Select().from(Student.class).queryList();
+        List<SimpleChallenge> simpleChallenges = DataSupport.findAll(SimpleChallenge.class, true); //  new Select().from(SimpleChallenge.class).queryList();
         final ListView users = (ListView) findViewById(R.id.studentslistView);
         final ListView words = (ListView) findViewById(R.id.wordsListView);
 
@@ -177,39 +173,43 @@ public class ABCActivity extends AppCompatActivity {
         Object user = users.getAdapter().getItem(users.getCheckedItemPosition());
         Log.d(TAG, "For user " + user.toString());
 
-        Student student = new Select().from(Student.class).where(Condition.column(Student$Table.NICKNAME).eq(user.toString())).querySingle();
+        //Student student = new Select().from(Student.class).where(Condition.column(Student$Table.NICKNAME).eq(user.toString())).querySingle();
+        Student student = DataSupport.where("nickname = ?", user.toString()).find(Student.class).get(0); //TODO improve
         Log.d(TAG, "Words: " + user.toString());
-        List<Challenge>  challenges = new ArrayList<>();
         int length = words.getCount();
         SparseBooleanArray checked = words.getCheckedItemPositions();
         for (int i = 0; i < length; i++) {
             if (checked.get(i)) {
                 String word = wordsList.get(i);
                 Log.d(TAG, word);
-                SimpleChallenge tempChallenge = new Select().from(SimpleChallenge.class).where(Condition.column(SimpleChallenge$Table.WORD).eq(word)).querySingle();
+                SimpleChallenge tempChallenge = DataSupport.where("word = ?", word).find(SimpleChallenge.class).get(0);
                 Challenge challenge = new Challenge();
                 challenge.setName(tempChallenge.getWord());
                 challenge.setImagePath(tempChallenge.getImagePath());
                 challenge.setText(tempChallenge.getWord());
+                boolean sChallenge = challenge.save();
+                challenge.getStudents().add(student);
+                if(!sChallenge){
+                    Log.w(TAG, "Challenge not updated!");
+                }
+                student.getChallenges().add(challenge);
+                boolean sSaved = student.save();
+                if(!sSaved){
+                    Log.w(TAG, "Student not updated!");
+                }
                 challenge.save();
-                challenge.setStudentRef(student.getId()); //TODO provisory until resolve foreign keys
-                challenges.add(challenge);
+                // workaround to solve the many2many queries.
+                StudentChallenge r = new StudentChallenge(student.getId(), challenge.getId());
+                r.save();
             }
         }
-        Log.d(TAG, "storing student " + student.getNickname());
-        Log.d(TAG, "to save " + challenges.size() + " challenges.");
-        student.setChallenges(challenges);
-        student.update();
-        long i =new Select().from(Student.class).where(Condition.column(Student$Table.NICKNAME).eq(student.getNickname())).querySingle().getMyChallenges().size();
-        Log.d(TAG, "with " + i + " challenges saved.");
     }
 
     private void fillCheckedWords(){
         final ListView users = (ListView) findViewById(R.id.studentslistView);
         Object user = users.getAdapter().getItem(users.getCheckedItemPosition());
         Log.d(TAG, "For user " + user.toString());
-        Student student = new Select().from(Student.class).where(Condition.column(Student$Table.NICKNAME).eq(user.toString())).querySingle();
-
+        Student student = DataSupport.where("nickname = ?", user.toString() ).find(Student.class).get(0);
         final ListView words = (ListView) findViewById(R.id.wordsListView);
         //TODO check saved items.
         final StableArrayAdapter adapter3 = new StableArrayAdapter(this,

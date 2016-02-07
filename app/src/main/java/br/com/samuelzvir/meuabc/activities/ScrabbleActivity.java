@@ -37,7 +37,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.raizlabs.android.dbflow.sql.language.Select;
+import org.litepal.crud.DataSupport;
 
 import java.io.File;
 import java.util.List;
@@ -286,7 +286,7 @@ public class ScrabbleActivity extends Activity implements View.OnClickListener, 
     }
 
     private List<SimpleChallenge> listSimpleChallenges(){
-        return new Select().from(SimpleChallenge.class).queryList();
+        return DataSupport.findAll(SimpleChallenge.class);
     }
 
     private void setImageView(String path) {

@@ -4,16 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.View;
 
-import com.raizlabs.android.dbflow.config.FlowManager;
-import com.raizlabs.android.dbflow.sql.language.Select;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.Locale;
 
@@ -41,7 +36,7 @@ public class InitialLoadingActivity extends Activity {
     }
 
     private String checkStatus(){
-        long admins = new Select().from(Admin.class).queryList().size();
+        long admins = DataSupport.findAll(Admin.class).size();
         Log.i(TAG, "admins = " + admins );
         if(admins == 0){
             return "form";
@@ -50,12 +45,12 @@ public class InitialLoadingActivity extends Activity {
     }
 
     private AppConfiguration getConfiguration(){
-        AppConfiguration config = new Select().from(AppConfiguration.class).querySingle();
+        AppConfiguration config = DataSupport.findFirst(AppConfiguration.class);
         if( config == null ){
             config = new AppConfiguration();
             config.setLanguage("pt-br");
             config.setLevel("easy");
-            config.insert();
+            config.save();
         }
         return config;
     }
@@ -72,7 +67,6 @@ public class InitialLoadingActivity extends Activity {
     }
 
     private void startLogic(){
-        FlowManager.init(this);
         configuration = getConfiguration();
         setSavedLocale(configuration.getLanguage());
         String action = checkStatus();

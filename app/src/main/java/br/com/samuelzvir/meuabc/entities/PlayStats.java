@@ -16,30 +16,24 @@
 
 package br.com.samuelzvir.meuabc.entities;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
+import org.litepal.crud.DataSupport;
 
 import java.util.Date;
 
-import br.com.samuelzvir.meuabc.db.MeuABCDatabase;
 
-@Table(databaseName = MeuABCDatabase.NAME)
-public class PlayStats extends BaseModel {
+public class PlayStats  extends DataSupport {
 
-    @Column
-    @PrimaryKey(autoincrement = true)
-    private long id;
+    private int id;
     private Date start;
     private Date end;
     private double totalPoints;
 
-    public long getId() {
+
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

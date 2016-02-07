@@ -26,11 +26,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
-import com.raizlabs.android.dbflow.sql.language.Select;
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +46,7 @@ public class DataAnalysisActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_analysis);
-        List<Student> studentsList = new Select().from(Student.class).queryList();
+        List<Student> studentsList = DataSupport.findAll(Student.class);
         final ListView users = (ListView) findViewById(R.id.studentslistView);
         final CheckBox usePositionsCB = new CheckBox(getApplicationContext());
 

@@ -18,7 +18,6 @@ package br.com.samuelzvir.meuabc.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,9 +31,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
-import com.raizlabs.android.dbflow.sql.builder.Condition;
-import com.raizlabs.android.dbflow.sql.language.Delete;
-import com.raizlabs.android.dbflow.sql.language.Select;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,18 +41,17 @@ import java.io.File;
 
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.SimpleChallenge;
-import br.com.samuelzvir.meuabc.entities.SimpleChallenge$Table;
 
 public class BuildChallengesActivity extends AppCompatActivity {
 
     private static final String TAG = "BuildChallengesActivity";
-    final ArrayList<View> mCheckedViews = new ArrayList<View>();
+    final ArrayList<View> mCheckedViews = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_build_challenges);
-        List<SimpleChallenge> simpleChallenges = new Select().from(SimpleChallenge.class).queryList();
+        List<SimpleChallenge> simpleChallenges = DataSupport.findAll(SimpleChallenge.class);
         final ListView challenges = (ListView) findViewById(R.id.users);
         final Button deleteButton = (Button) findViewById(R.id.deleteButton);
         final CheckBox usePositionsCB = new CheckBox(getApplicationContext());
@@ -162,18 +159,15 @@ public class BuildChallengesActivity extends AppCompatActivity {
 
     public void deleteWord(String word){
         Log.i(TAG, "word " + word);
-        Cursor cursor = new Select().from(SimpleChallenge.class).where(Condition.column(SimpleChallenge$Table.WORD).eq(word)).query();
-        if (cursor.moveToFirst()) {
-            do{
-                long id = cursor.getLong(cursor.getColumnIndex("id"));
-                String path = cursor.getString(cursor.getColumnIndex("imagePath"));
-                if(path != null){
-                    deleteFromDisk(path);
-                }
-                new Delete().from(SimpleChallenge.class)
-                        .where(Condition.column(SimpleChallenge$Table.ID).eq(id)).query();
-            }while (cursor.moveToNext());
+        List<SimpleChallenge>  challenges =  DataSupport.where("word = ?", word).find(SimpleChallenge.class);
+
+        for (SimpleChallenge simpleChallenge : challenges){
+            if(simpleChallenge.getImagePath() != null){
+                deleteFromDisk(simpleChallenge.getImagePath());
+            }
+            simpleChallenge.delete();
         }
+        //TODO
     }
 
     public void addWord(View view){

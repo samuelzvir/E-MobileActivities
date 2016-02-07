@@ -5,12 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.raizlabs.android.dbflow.sql.builder.Condition;
-import com.raizlabs.android.dbflow.sql.language.Select;
 
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.Student;
-import br.com.samuelzvir.meuabc.entities.Student$Table;
 
 public class StudentMenuActivity extends AppCompatActivity {
 
