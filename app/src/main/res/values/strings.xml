@@ -7,6 +7,7 @@
     
     <string name="save">Salvar</string>
     <string name="saved">Salvo</string>
+    <string name="cancel">Cancelar</string>
     <string name="title_activity_receive_text">ReceivTextActivity</string>
 
     <string name="title_activity_menu">EMA</string>
@@ -20,7 +21,7 @@
     <string name="takeSmallPicture">Foto pequena</string>
     <string name="cannot">Não pode</string>
     <string name="album_name">MeuABCAlbum</string>
-    
+
     <string name="speech_toggle_on">Falar</string>
     <string name="speech_toggle_off">Parar</string>
 

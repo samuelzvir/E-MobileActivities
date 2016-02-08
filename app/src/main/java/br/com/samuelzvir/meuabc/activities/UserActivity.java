@@ -106,4 +106,10 @@ public class UserActivity extends AppCompatActivity {
         }
     }
 
+    public void toUsersList(View view){
+        this.student = null;
+        Intent intent = new Intent(this,ProfilesActivity.class);
+        startActivity(intent);
+    }
+
 }
