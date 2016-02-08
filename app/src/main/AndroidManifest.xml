@@ -21,10 +21,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activities.ReceiveTextActivity"
-            android:label="@string/title_activity_receive_text" >
-        </activity>
-        <activity
             android:name=".activities.MenuActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_menu"

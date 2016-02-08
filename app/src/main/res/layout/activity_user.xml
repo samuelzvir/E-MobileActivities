@@ -68,7 +68,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save"
-        android:id="@+id/save"
+        android:id="@+id/saveBtn"
+        android:onClick="save"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:id="@+id/cancelBtn"
         android:onClick="save"
         android:layout_gravity="center_horizontal" />
 

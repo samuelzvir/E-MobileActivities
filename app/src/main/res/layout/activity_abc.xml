@@ -58,7 +58,7 @@
         android:id="@+id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="50"
+        android:layout_weight="2.05"
         android:orientation="horizontal"
         android:weightSum="1">
         <!--<CheckBox-->
@@ -79,9 +79,9 @@
         android:id="@+id/buttons"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="50"
         android:orientation="horizontal"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_weight="2.85">
 
         <Button
             android:layout_width="wrap_content"

@@ -17,6 +17,7 @@
 package br.com.samuelzvir.meuabc.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,9 +56,6 @@ public class ABCActivity extends AppCompatActivity {
         List<SimpleChallenge> simpleChallenges = DataSupport.findAll(SimpleChallenge.class, true); //  new Select().from(SimpleChallenge.class).queryList();
         final ListView users = (ListView) findViewById(R.id.studentslistView);
         final ListView words = (ListView) findViewById(R.id.wordsListView);
-
-        @SuppressWarnings( "unused" )
-        final CheckBox usePositionsCB = new CheckBox(getApplicationContext());
 
         List<String> studentsNamesList = new ArrayList<>();
         for (Student s : studentsList){ // populate the words
@@ -219,5 +217,10 @@ public class ABCActivity extends AppCompatActivity {
         words.setItemsCanFocus(false);
         words.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
+    }
+
+    public void toMenu(View view){
+        Intent intent = new Intent(this,MenuActivity.class);
+        startActivity(intent);
     }
 }

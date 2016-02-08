@@ -19,21 +19,40 @@ package br.com.samuelzvir.meuabc.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import org.litepal.crud.DataSupport;
+
+import java.util.List;
 
 import br.com.samuelzvir.meuabc.R;
 import br.com.samuelzvir.meuabc.entities.Student;
 
 public class UserActivity extends AppCompatActivity {
     private static final String TAG = "UserActivity";
+    private Student student;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        Intent intent = getIntent();
+        String studentName = intent.getStringExtra("studentName");
+        if(studentName != null){
+            List<Student> students = DataSupport.where("nickname = ?",studentName).find(Student.class);
+            if(students.size() == 1){
+                this.student = students.get(0);
+                EditText nameET = (EditText) findViewById(R.id.username);
+                nameET.setText(this.student.getNickname());
+            }else{
+                Log.w(TAG,"Found "+students.size()+" with name "+studentName);
+                Log.w(TAG,"unable to edit");
+            }
+        }
     }
 
     @Override
@@ -59,16 +78,32 @@ public class UserActivity extends AppCompatActivity {
     }
 
     public void save(View view){
-        EditText nameET = (EditText) findViewById(R.id.username);
-        EditText passwordET = (EditText) findViewById(R.id.passwordField);
-        String userName = nameET.getText().toString();
-        String password = passwordET.getText().toString();
-        Student student = new Student();
-        student.setNickname(userName);
-        student.setPassword(password);
-        student.save();
-        //redirects to users list
-        Intent intent = new Intent(this, ProfilesActivity.class);
-        startActivity(intent);
+        if(student == null){
+            EditText nameET = (EditText) findViewById(R.id.username);
+            EditText passwordET = (EditText) findViewById(R.id.passwordField);
+            String userName = nameET.getText().toString();
+            String password = passwordET.getText().toString();
+            Student student = new Student();
+            student.setNickname(userName);
+            student.setPassword(password);
+            student.save();
+            //redirects to users list
+            Intent intent = new Intent(this, ProfilesActivity.class);
+            intent.putExtra("created", student.getNickname());
+            startActivity(intent);
+        }else{
+            EditText nameET = (EditText) findViewById(R.id.username);
+            EditText passwordET = (EditText) findViewById(R.id.passwordField);
+            String userName = nameET.getText().toString();
+            String password = passwordET.getText().toString();
+            this.student.setNickname(userName);
+            this.student.setPassword(password);
+            this.student.save();
+            //redirects to users list
+            Intent intent = new Intent(this, ProfilesActivity.class);
+            intent.putExtra("updated",student.getNickname());
+            startActivity(intent);
+        }
     }
+
 }
