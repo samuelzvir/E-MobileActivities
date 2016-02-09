@@ -4,8 +4,8 @@ import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
-import br.com.samuelzvir.meuabc.entities.Challenge;
-import br.com.samuelzvir.meuabc.entities.Student;
+import br.com.ema.entities.Challenge;
+import br.com.ema.entities.Student;
 
 public class QueryChallengeTest extends EMATestCase {
 
