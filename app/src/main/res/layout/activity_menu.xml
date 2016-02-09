@@ -14,14 +14,19 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="wrap_content" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
     android:background="@color/white"
-    tools:context="br.com.ema.activities.MenuActivity">
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="br.com.ema.activities.MenuActivity"
+    android:weightSum="1">
 
     <ImageView
         android:id="@+id/imageView"
@@ -32,92 +37,105 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:id="@+id/messages"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:text="@string/messages"
-        android:onClick="onToWords"
-        android:drawableTop="@drawable/ic_font_download_black_48dp"
-        android:layout_below="@+id/imageView"
-        android:layout_toLeftOf="@+id/play"
-        android:layout_toStartOf="@+id/play"
-        android:layout_marginRight="58dp"
-        android:layout_marginEnd="58dp"
-        android:textSize="10dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="546dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1"
+        android:layout_weight="0.8">
 
-    <Button
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:text="@string/play"
-        android:id="@+id/play"
-        android:drawableTop="@drawable/ic_puzzle_black_48dp"
-        android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/abc"
-        android:layout_alignStart="@+id/abc"
-        android:onClick="onPlayChallenge"
-        android:textSize="10dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="186dp"
+            android:layout_height="541dp"
+            android:layout_weight="0.40"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal">
 
-    <Button
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:text="@string/activities"
-        android:id="@+id/abc"
-        android:onClick="onToABC"
-        android:drawableTop="@drawable/abc_48p"
-        android:layout_below="@+id/play"
-        android:layout_alignRight="@+id/settings"
-        android:layout_alignEnd="@+id/settings"
-        android:textSize="10dp" />
+            <Button
+                android:id="@+id/messages"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:text="@string/messages"
+                android:onClick="onToWords"
+                android:drawableTop="@drawable/ic_font_download_black_48dp"
+                android:textSize="10dp" />
 
-    <Button
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:text="@string/users"
-        android:id="@+id/users"
-        android:drawableTop="@drawable/ic_supervisor_account_black_48dp"
-        android:onClick="onToProfiles"
-        android:layout_below="@+id/messages"
-        android:layout_alignLeft="@+id/messages"
-        android:layout_alignRight="@+id/messages"
-        android:textSize="10dp" />
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:text="@string/activities"
+                android:id="@+id/abc"
+                android:onClick="onToABC"
+                android:drawableTop="@drawable/abc_48p"
+                android:textSize="10dp"
+                />
 
-    <Button
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:text="@string/dataAnalysis"
-        android:id="@+id/dataAnalysis"
-        android:drawableTop="@drawable/ic_trending_up_black_48dp"
-        android:onClick="onToDataAnalysis"
-        android:layout_below="@+id/users"
-        android:layout_alignLeft="@+id/users"
-        android:layout_alignStart="@+id/users"
-        android:textSize="10dp" />
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:text="@string/users"
+                android:id="@+id/users"
+                android:drawableTop="@drawable/ic_supervisor_account_black_48dp"
+                android:onClick="onToProfiles"
+                android:layout_alignLeft="@+id/messages"
+                android:textSize="10dp" />
 
-    <Button
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:text="@string/settings"
-        android:id="@+id/settings"
-        android:drawableTop="@drawable/ic_build_black_48dp"
-        android:layout_marginRight="140dp"
-        android:layout_marginEnd="140dp"
-        android:onClick="onToSettings"
-        android:textSize="10dp"
-        android:layout_below="@+id/abc"
-        android:layout_alignRight="@+id/imageView"
-        android:layout_alignEnd="@+id/imageView" />
 
-    <Button
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:text="@string/logout"
-        android:id="@+id/button"
-        android:drawableTop="@drawable/ic_directions_run_black_48dp"
-        android:onClick="logout"
-        android:textSize="10dp"
-        android:layout_below="@+id/dataAnalysis"
-        android:layout_alignRight="@+id/settings"
-        android:layout_alignEnd="@+id/settings" />
+        </LinearLayout>
 
-</RelativeLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="186dp"
+            android:layout_height="541dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.40"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:text="@string/dataAnalysis"
+                android:id="@+id/dataAnalysis"
+                android:drawableTop="@drawable/ic_trending_up_black_48dp"
+                android:onClick="onToDataAnalysis"
+                android:layout_alignLeft="@+id/users"
+                android:layout_alignStart="@+id/users"
+                android:textSize="10dp" />
+
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:text="@string/settings"
+                android:id="@+id/settings"
+                android:drawableTop="@drawable/ic_build_black_48dp"
+                android:onClick="onToSettings"
+                android:textSize="10dp"
+                />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></FrameLayout>
+
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:text="@string/logout"
+                android:id="@+id/button"
+                android:drawableTop="@drawable/ic_directions_run_black_48dp"
+                android:onClick="logout"
+                android:textSize="10dp"
+                android:layout_alignLeft="@+id/settings"
+                android:layout_alignStart="@+id/settings" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
