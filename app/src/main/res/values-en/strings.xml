@@ -25,7 +25,7 @@
     <string name="speech_toggle_off">Stop</string>
 
     <string name="start_speaking">Start</string>
-    <string name="stop_speaking"></string>
+    <string name="stop_speaking">Stop speaking</string>
     <string name="title_activity_drag_and_drop">DragAndDropActivity</string>
     <string name="newWord">Add word</string>
 
@@ -43,6 +43,9 @@
     <string name="words">Words</string>
     <string name="deleteWord">Delete Word</string>
     <string name="deleteUsers">Delete User(s)</string>
+    <string name="updateUser">Update User</string>
+    <string name="wasCreated">was created.</string>
+    <string name="wasUpdated">was updated.</string>
 
     <string name="noData">Without data</string>
 
@@ -51,7 +54,12 @@
     <string name="users">Users</string>
     <string name="settings">Settings</string>
     <string name="newUser">New User</string>
+    <string name="deleteUser">Delete User</string>
     <string name="goBack">Back</string>
+    <string name="cancel">Cancel</string>
+    <string name="onlyOneToEdit">Check only one user to edit</string>
+    <string name="checkOneToEdit">Choose one user to edit</string>
+
 
     <string name="level">Level</string>
     <string name="levelEasy">Easy</string>
@@ -60,7 +68,7 @@
 
     <string name="password">Password</string>
     <string name="checkDataTyped">Check typed data</string>
-    <string name="Login">Login</string>
+    <string name="login">Login</string>
 
     <string name="language">Language</string>
     <string name="portuguese">Portuguese</string>
@@ -83,5 +91,9 @@
     <string name="title_activity_profiles">ProfilesActivity</string>
     <string name="title_activity_data_analysis">DataAnalysisActivity</string>
     <string name="title_activity_user">UserActivity</string>
+    <string name="title_activity_admin_form">AdminFormActivity</string>
+    <string name="title_activity_initial_loading">InitialLoadingActivity</string>
+    <string name="title_activity_stats">StatsActivity</string>
+    <string name="updateData">Edit data</string>
 
 </resources>

@@ -7,6 +7,7 @@
     
     <string name="save">Salvar</string>
     <string name="saved">Salvo</string>
+    <string name="cancel">Cancelar</string>
     <string name="title_activity_receive_text">ReceivTextActivity</string>
 
     <string name="title_activity_menu">EMA</string>
@@ -25,7 +26,7 @@
     <string name="speech_toggle_off">Parar</string>
 
     <string name="start_speaking">Start</string>
-    <string name="stop_speaking"></string>
+    <string name="stop_speaking">Parar fala</string>
     <string name="title_activity_drag_and_drop">DragAndDropActivity</string>
 
     <string name="hello_world">Hello world!</string>
@@ -47,11 +48,15 @@
     <string name="users">Usuários</string>
     <string name="settings">Configurações</string>
     <string name="newUser">Novo Usuário</string>
-    <string name="deleteUsers">Deletar Usuáio(s)</string>
+    <string name="deleteUsers">Remover Usuário(s)</string>
+    <string name="updateData">Editar dados</string>
     <string name="goBack">Voltar</string>
     <string name="words">Palavras</string>
-
+    <string name="onlyOneToEdit">Marque somente um usuário para editar</string>
+    <string name="checkOneToEdit">Escolha um usuário para editar</string>
     <string name="dataAnalysis">Análise de dados</string>
+    <string name="wasCreated">foi criado.</string>
+    <string name="wasUpdated">foi atualizado.</string>
 
     <string name="noData">Sem dados.</string>
 
@@ -90,5 +95,7 @@
     <string name="title_activity_initial_loading">InitialLoadingActivity</string>
     <string name="title_activity_admin_form">AdminFormActivity</string>
     <string name="title_activity_stats">StatsActivity</string>
+    <string name="deleteUser">Remover Usuário</string>
+    <string name="updateUser">Atualizar Usuário</string>
 
 </resources>
