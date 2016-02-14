@@ -1,4 +1,4 @@
-package br.com.samuelzvir.meuabc;
+package br.com.ema;
 
 import org.litepal.crud.DataSupport;
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.samuelzvir.meuabc;
+package br.com.ema;
 
 import android.content.Intent;
 import android.test.ActivityUnitTestCase;
