@@ -25,30 +25,56 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="br.com.ema.activities.BuildChallengesActivity">
+        tools:context="br.com.ema.activities.WordsManagementActivity">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/logo3"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <TextView
-            android:id="@+id/information"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/words"
-            android:textSize="25dp"
-            android:typeface="normal"
-            android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="0.1">
+
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+            android:gravity="left">
+
+            <TextView
+                android:id="@+id/information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/words"
+                android:textSize="25dp"
+                android:typeface="normal"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:gravity="right">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/logo3"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="right"
+                android:layout_gravity="right" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
 
         <LinearLayout
             android:id="@+id/list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="50"
+            android:layout_weight="0.6"
             android:orientation="horizontal"
             android:weightSum="1">
             <!--<CheckBox-->
@@ -57,8 +83,8 @@
                 <!--android:layout_height="wrap_content" />-->
             <ListView
                 android:layout_width="399dp"
-                android:layout_height="589dp"
-                android:id="@+id/users"
+                android:layout_height="697dp"
+                android:id="@+id/wordsListView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_weight="0.77"
@@ -69,21 +95,29 @@
         android:id="@+id/buttons"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="50"
+        android:layout_weight="0.3"
         android:orientation="horizontal"
         android:weightSum="1">
 
         <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/deleteWord"
+        android:text="@string/delete"
         android:id="@+id/deleteButton"
         android:layout_gravity="center_horizontal" />
 
         <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit"
+            android:id="@+id/editButton"
+            android:onClick="updateWord"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/newWord"
+                android:text="@string/add"
                 android:id="@+id/newWord"
                 android:onClick="addWord"
                 android:layout_below="@+id/users"
@@ -92,4 +126,5 @@
                 android:layout_marginRight="112dp"
                 android:layout_marginEnd="112dp" />
     </LinearLayout>
+
 </LinearLayout>

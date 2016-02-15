@@ -42,17 +42,18 @@ import java.io.File;
 import br.com.ema.entities.SimpleChallenge;
 import br.com.ema.R;
 
-public class BuildChallengesActivity extends AppCompatActivity {
+public class WordsManagementActivity extends AppCompatActivity {
 
-    private static final String TAG = "BuildChallengesActivity";
+    private static final String TAG = "WordsManagementActivity";
     final ArrayList<View> mCheckedViews = new ArrayList<>();
+    final List<String> words = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_build_challenges);
+        setContentView(R.layout.activity_manage_words);
         List<SimpleChallenge> simpleChallenges = DataSupport.findAll(SimpleChallenge.class);
-        final ListView challenges = (ListView) findViewById(R.id.users);
+        final ListView challenges = (ListView) findViewById(R.id.wordsListView);
         final Button deleteButton = (Button) findViewById(R.id.deleteButton);
         final CheckBox usePositionsCB = new CheckBox(getApplicationContext());
 
@@ -72,7 +73,7 @@ public class BuildChallengesActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ListView challengesChange = (ListView) findViewById(R.id.users);
+                final ListView challengesChange = (ListView) findViewById(R.id.wordsListView);
                 SparseBooleanArray checkedItems = challengesChange.getCheckedItemPositions();
                 int numCheckedItems = checkedItems.size();
                 Log.i(TAG, numCheckedItems + "checked items.");
@@ -139,6 +140,7 @@ public class BuildChallengesActivity extends AppCompatActivity {
         });
         mCheckedViews.clear();
         adapter.notifyDataSetChanged();
+        listWords();
     }
 
     @Override
@@ -214,5 +216,53 @@ public class BuildChallengesActivity extends AppCompatActivity {
         if(deleted){
             Log.i(TAG,"file "+path+" deleted.");
         }
+    }
+
+    public void updateWord(View view){
+        ListView  wordsListView = (ListView) findViewById(R.id.wordsListView);
+        SparseBooleanArray checked = wordsListView.getCheckedItemPositions();
+        int checkedItems =  checked.size();
+        if(checkedItems == 1){
+            int length = wordsListView.getCount();
+            int i = 0;
+            do{
+                if(checked.get(i)) { //checked ?
+                    Intent intent = new Intent(this,CreateTextActivity.class);
+                    intent.putExtra("text", words.get(i));
+                    startActivity(intent);
+                }
+                i++;
+            }while(i < length);
+        }else if(checkedItems == 0){
+            //TODO dialog in the future
+//            TextView info = (TextView) findViewById(R.id.);
+//            info.setTextColor(Color.YELLOW);
+//            info.setText(R.string.);
+//            info.setBackgroundColor(Color.TRANSPARENT);
+        }else{
+            //message
+            //TODO dialog in the future
+//            TextView info = (TextView) findViewById(R.id.);
+//            info.setTextColor(Color.YELLOW);
+//            info.setText(R.string.);
+//            info.setBackgroundColor(Color.TRANSPARENT);
+        }
+        listWords();
+    }
+
+
+    private void listWords(){
+        List<SimpleChallenge> s = DataSupport.findAll(SimpleChallenge.class);
+        ListView  wordsListView = (ListView) findViewById(R.id.wordsListView);
+        words.clear();
+        for (SimpleChallenge simpleChallenge : s){ // populates the words
+            words.add(simpleChallenge.getWord());
+        }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_multiple_choice,
+                words );
+        wordsListView.setAdapter(arrayAdapter);
+        arrayAdapter.notifyDataSetChanged();
     }
 }

@@ -28,7 +28,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.litepal.crud.DataSupport;
+
 import java.io.File;
+import java.util.List;
 
 import br.com.ema.entities.SimpleChallenge;
 import br.com.ema.R;
@@ -36,8 +39,9 @@ import br.com.ema.R;
 public class CreateTextActivity extends Activity {
 
     private static final String TAG = "CreateTextActivity";
-    private ImageView image;
     private String imagePath;
+    private String text;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,9 @@ public class CreateTextActivity extends Activity {
         if(imagePath != null){
             setImageView(imagePath);
         }
+        this.text = intent.getStringExtra("text");
+        EditText t = (EditText) findViewById(R.id.word);
+        t.setText(this.text);
     }
 
     public void onToCamera(View view){
@@ -59,17 +66,35 @@ public class CreateTextActivity extends Activity {
     public void saveWord(View view){
         EditText messageView = (EditText) findViewById(R.id.word);
         String word = messageView.getText().toString();
-        Log.d(TAG, "adding word " + word);
-        SimpleChallenge simpleChallenge = new SimpleChallenge();
-        simpleChallenge.setWord(word);
-        simpleChallenge.setImagePath(this.imagePath);
-        simpleChallenge.save();
-        if(simpleChallenge.isSaved()) {
-            Log.d(TAG, "created.");
+        if(this.text != null){
+           List<SimpleChallenge> sc = DataSupport.where("word = ?", text).find(SimpleChallenge.class);
+            if(sc != null && sc.size() > 0){
+                SimpleChallenge c = sc.get(0);
+                Log.d(TAG, "updating word " + c.getWord() +" to "+word);
+                c.setWord(word);
+                c.setImagePath(this.imagePath);
+                c.save();
+                if(c.isSaved()) {
+                    Log.d(TAG, "created.");
+                }
+                TextView info = (TextView) findViewById(R.id.status);
+                info.setTextColor(Color.GREEN);
+                info.setText(R.string.saved);
+            }
+        }else{
+            Log.d(TAG, "adding new word " + word);
+            SimpleChallenge simpleChallenge = new SimpleChallenge();
+            simpleChallenge.setWord(word);
+            simpleChallenge.setImagePath(this.imagePath);
+            simpleChallenge.save();
+            if(simpleChallenge.isSaved()) {
+                Log.d(TAG, "created.");
+            }
+            TextView info = (TextView) findViewById(R.id.status);
+            info.setTextColor(Color.GREEN);
+            info.setText(R.string.saved);
         }
-        TextView info = (TextView) findViewById(R.id.status);
-        info.setTextColor(Color.GREEN);
-        info.setText(R.string.saved);
+
     }
 
     private void setImageView(String path) {
