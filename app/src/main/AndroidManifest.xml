@@ -33,7 +33,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="br.com.ema.activities.BuildChallengesActivity"
+            android:name=".activities.WordsManagementActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_build_challenges"
             android:screenOrientation="portrait" >

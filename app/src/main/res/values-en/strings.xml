@@ -28,6 +28,9 @@
     <string name="stop_speaking">Stop speaking</string>
     <string name="title_activity_drag_and_drop">DragAndDropActivity</string>
     <string name="newWord">Add word</string>
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 
     <string name="hello_world">Hello world!</string>
 
