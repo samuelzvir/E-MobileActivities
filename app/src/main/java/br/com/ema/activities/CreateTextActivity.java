@@ -56,6 +56,17 @@ public class CreateTextActivity extends Activity {
         this.text = intent.getStringExtra("text");
         EditText t = (EditText) findViewById(R.id.word);
         t.setText(this.text);
+        if(this.text != null){
+           List<SimpleChallenge> sc = DataSupport.where("word = ?", text).find(SimpleChallenge.class);
+            if(sc.size() > 0){
+                SimpleChallenge temp = sc.get(0);
+                this.imagePath = temp.getImagePath();
+                if(this.imagePath != null){
+                    setImageView(this.imagePath);
+                }
+
+            }
+        }
     }
 
     public void onToCamera(View view){
