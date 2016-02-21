@@ -23,13 +23,13 @@
     <string name="album_name">MeuABCAlbum</string>
 
     <string name="speech_toggle_on">Falar</string>
-    <string name="speech_toggle_off">Parar</string>
+    <string name="speech_toggle_off">Falar</string>
 
     <string name="add">Adicionar</string>
     <string name="edit">Editar</string>
     <string name="delete">Remover</string>
     <string name="start_speaking">Start</string>
-    <string name="stop_speaking">Parar fala</string>
+    <!--<string name="stop_speaking">Parar fala</string>-->
     <string name="title_activity_drag_and_drop">DragAndDropActivity</string>
 
     <string name="hello_world">Hello world!</string>

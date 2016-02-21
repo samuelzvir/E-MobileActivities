@@ -50,7 +50,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         private Button nextButton;
         private Button clearButton;
 
-        private Speaker speaker;
+        private static Speaker speaker;
         private ToggleButton toggle;
         private CompoundButton.OnCheckedChangeListener toggleListener;
         private Student student;
@@ -85,6 +85,25 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             }
         }
 
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        speaker.destroy();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(speaker != null){
+            speaker.destroy();
+        }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+    }
+
     public void initialize(){
         clearButton.setEnabled(Boolean.FALSE);
         Challenge challenge = getNewWordByRandon();
@@ -112,10 +131,9 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
                 if(isChecked){
                     speaker.allow(true);
-                    //speaker.speak(getString(R.string.start_speaking));
                     speaker.speak(word);
                 }else{
-                    speaker.speak(getString(R.string.stop_speaking));
+                    speaker.speak(word);
                     speaker.allow(false);
                 }
             }
@@ -276,7 +294,12 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         if(requestCode == CHECK_CODE){
             if(resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS){
                 //TODO check bug
-                speaker = new Speaker(this);
+                if(speaker == null){
+                    speaker = new Speaker(this);
+                }else{
+                    speaker.destroy();
+                    speaker = new Speaker(this);
+                }
             }else {
                 Intent install = new Intent();
                 install.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
