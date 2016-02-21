@@ -83,6 +83,7 @@ public class Speaker implements OnInitListener {
     public void pause(int duration){
         tts.playSilence(duration, TextToSpeech.QUEUE_ADD, null);
     }
+
     // Free up resources
     public void destroy(){
         tts.shutdown();

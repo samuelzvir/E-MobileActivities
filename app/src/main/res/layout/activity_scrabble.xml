@@ -117,8 +117,9 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:textOff="@string/speech_toggle_on"
-            android:textOn="@string/speech_toggle_off"
-            android:layout_gravity="left" />
+            android:textOn="@string/speech_toggle_on"
+            android:layout_gravity="left"
+            android:checked="false" />
 
     </LinearLayout>
 </LinearLayout>

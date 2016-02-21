@@ -116,7 +116,7 @@ public class ScrabbleActivity extends Activity implements View.OnClickListener, 
                     //speaker.speak(getString(R.string.start_speaking));
                     speaker.speak(word);
                 }else{
-                    speaker.speak(getString(R.string.stop_speaking));
+                    speaker.speak(word);
                     speaker.allow(false);
                 }
             }
