@@ -23,7 +23,7 @@
 
     <string name="speech_toggle_on">Speak</string>
     <string name="speech_toggle_off">Speak</string>
-
+    <string name="finish">Finish</string>
     <string name="start_speaking">Start</string>
     <!--<string name="stop_speaking">Stop speaking</string>-->
     <string name="title_activity_drag_and_drop">DragAndDropActivity</string>

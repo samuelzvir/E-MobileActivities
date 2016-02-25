@@ -42,6 +42,7 @@
     <string name="build_the_words">Construa a palavra</string>
     <string name="correct">Correto!</string>
     <string name="play">Jogar</string>
+    <string name="finish">Terminar</string>
     <string name="deleteWord">Excluir Palavra</string>
 
     <string name="image">Imagem</string>
@@ -73,7 +74,6 @@
     <string name="english">Inglês</string>
 
     <string name="password">Senha</string>
-
     <string name="activities">Atividades</string>
 
     <string name="checkDataTyped">Verifique os dados digitados</string>
