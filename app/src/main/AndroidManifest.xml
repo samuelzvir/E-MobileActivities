@@ -45,12 +45,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="br.com.ema.activities.PlayChallengesActivity"
-            android:configChanges="orientation"
-            android:label="@string/title_activity_play_challenges"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="br.com.ema.activities.ScrabbleActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_scrabble"

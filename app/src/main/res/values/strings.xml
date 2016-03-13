@@ -8,6 +8,9 @@
     <string name="save">Salvar</string>
     <string name="saved">Salvo</string>
     <string name="cancel">Cancelar</string>
+    <string name="turnOn">Ligar</string>
+    <string name="turnOff">Desligar</string>
+    <string name="sound">Som</string>
     <string name="title_activity_receive_text">ReceivTextActivity</string>
 
     <string name="title_activity_menu">EMA</string>
