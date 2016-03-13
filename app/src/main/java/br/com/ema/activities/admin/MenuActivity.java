@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.ema.activities;
+package br.com.ema.activities.admin;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -32,6 +32,14 @@ import org.litepal.crud.DataSupport;
 import java.util.Locale;
 
 import br.com.ema.R;
+import br.com.ema.activities.LoginActivity;
+import br.com.ema.activities.admin.ABCActivity;
+import br.com.ema.activities.admin.ProfilesActivity;
+import br.com.ema.activities.admin.SettingsActivity;
+import br.com.ema.activities.admin.WordsManagementActivity;
+import br.com.ema.activities.operations.DataAnalysisActivity;
+import br.com.ema.activities.operations.ScrabbleActivity;
+import br.com.ema.activities.operations.TakePhotoActivity;
 import br.com.ema.entities.AppConfiguration;
 
 public class MenuActivity extends Activity {

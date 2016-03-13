@@ -1,4 +1,4 @@
-package br.com.ema.activities;
+package br.com.ema.activities.student;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.View;
 
 
 import br.com.ema.R;
+import br.com.ema.activities.LoginActivity;
+import br.com.ema.activities.student.StudentGameActivity;
 import br.com.ema.entities.Student;
 
 public class StudentMenuActivity extends AppCompatActivity {

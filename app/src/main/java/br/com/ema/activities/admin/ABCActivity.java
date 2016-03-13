@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.ema.activities;
+package br.com.ema.activities.admin;
 
 import android.content.Context;
 import android.content.Intent;

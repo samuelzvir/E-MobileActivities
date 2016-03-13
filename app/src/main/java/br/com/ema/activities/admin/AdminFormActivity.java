@@ -1,4 +1,4 @@
-package br.com.ema.activities;
+package br.com.ema.activities.admin;
 
 import android.content.Intent;
 import android.graphics.Color;

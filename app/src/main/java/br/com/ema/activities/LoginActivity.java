@@ -13,6 +13,8 @@ import org.litepal.crud.DataSupport;
 import java.util.List;
 
 import br.com.ema.R;
+import br.com.ema.activities.admin.MenuActivity;
+import br.com.ema.activities.student.StudentMenuActivity;
 import br.com.ema.entities.Admin;
 import br.com.ema.entities.Student;
 

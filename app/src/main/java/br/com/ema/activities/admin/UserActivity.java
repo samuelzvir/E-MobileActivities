@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.ema.activities;
+package br.com.ema.activities.admin;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +30,7 @@ import org.litepal.crud.DataSupport;
 import java.util.List;
 
 import br.com.ema.R;
+import br.com.ema.activities.admin.ProfilesActivity;
 import br.com.ema.entities.Student;
 
 public class UserActivity extends AppCompatActivity {

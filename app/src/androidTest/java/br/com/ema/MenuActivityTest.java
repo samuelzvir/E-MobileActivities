@@ -20,7 +20,7 @@ import android.content.Intent;
 import android.test.ActivityUnitTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 
-import br.com.ema.activities.MenuActivity;
+import br.com.ema.activities.admin.MenuActivity;
 
 public class MenuActivityTest extends ActivityUnitTestCase<MenuActivity> {
 

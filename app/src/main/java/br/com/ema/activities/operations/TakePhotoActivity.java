@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.ema.activities;
+package br.com.ema.activities.operations;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import br.com.ema.activities.admin.CreateTextActivity;
 import br.com.ema.storage.AlbumStorageDirFactory;
 import br.com.ema.storage.BaseAlbumDirFactory;
 import br.com.ema.storage.FroyoAlbumDirFactory;

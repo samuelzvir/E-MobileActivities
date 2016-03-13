@@ -13,6 +13,7 @@ import org.litepal.crud.DataSupport;
 import java.util.Locale;
 
 import br.com.ema.R;
+import br.com.ema.activities.admin.AdminFormActivity;
 import br.com.ema.entities.Admin;
 import br.com.ema.entities.AppConfiguration;
 

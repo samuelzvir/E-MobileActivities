@@ -21,7 +21,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@color/white"
-    tools:context="br.com.ema.activities.CreateTextActivity">
+    tools:context="br.com.ema.activities.admin.CreateTextActivity">
 
     <Button
         android:id="@+id/send"

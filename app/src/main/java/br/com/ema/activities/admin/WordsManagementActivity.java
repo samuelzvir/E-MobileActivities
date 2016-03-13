@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.ema.activities;
+package br.com.ema.activities.admin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,6 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.io.File;
 
+import br.com.ema.activities.admin.CreateTextActivity;
 import br.com.ema.entities.SimpleChallenge;
 import br.com.ema.R;
 

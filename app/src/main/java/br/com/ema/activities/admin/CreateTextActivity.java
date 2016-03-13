@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.ema.activities;
+package br.com.ema.activities.admin;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,6 +33,7 @@ import org.litepal.crud.DataSupport;
 import java.io.File;
 import java.util.List;
 
+import br.com.ema.activities.operations.TakePhotoActivity;
 import br.com.ema.entities.SimpleChallenge;
 import br.com.ema.R;
 

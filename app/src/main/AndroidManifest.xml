@@ -21,61 +21,61 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="br.com.ema.activities.CreateTextActivity"
+            android:name=".activities.admin.CreateTextActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_create_text"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="br.com.ema.activities.MenuActivity"
+            android:name=".activities.admin.MenuActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_menu"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="br.com.ema.activities.TakePhotoActivity"
+            android:name=".activities.operations.TakePhotoActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_take_photo"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activities.WordsManagementActivity"
+            android:name=".activities.admin.WordsManagementActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_build_challenges"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="br.com.ema.activities.ScrabbleActivity"
+            android:name=".activities.operations.ScrabbleActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_scrabble"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="br.com.ema.activities.ABCActivity"
+            android:name=".activities.admin.ABCActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_abc"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="br.com.ema.activities.ProfilesActivity"
+            android:name=".activities.admin.ProfilesActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_profiles"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="br.com.ema.activities.DataAnalysisActivity"
+            android:name=".activities.operations.DataAnalysisActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_data_analysis"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="br.com.ema.activities.UserActivity"
+            android:name=".activities.admin.UserActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_user"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="br.com.ema.activities.SettingsActivity"
+            android:name=".activities.admin.SettingsActivity"
             android:configChanges="orientation"
             android:label="@string/settings"
             android:screenOrientation="portrait" >
@@ -91,21 +91,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="br.com.ema.activities.AdminFormActivity"
+            android:name=".activities.admin.AdminFormActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme" >
         </activity>
         <activity android:name="br.com.ema.activities.LoginActivity" >
         </activity>
         <activity
-            android:name="br.com.ema.activities.StudentMenuActivity"
+            android:name=".activities.student.StudentMenuActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="br.com.ema.activities.StudentGameActivity" >
+        <activity android:name=".activities.student.StudentGameActivity" >
         </activity>
         <activity
-            android:name="br.com.ema.activities.StatsActivity"
+            android:name=".activities.operations.StatsActivity"
             android:label="@string/title_activity_stats"
             android:theme="@style/AppTheme" >
         </activity>

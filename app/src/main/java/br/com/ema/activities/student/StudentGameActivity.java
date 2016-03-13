@@ -1,20 +1,4 @@
-/*
- * Copyright 2015 Samuel Yuri Zvir
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package br.com.ema.activities;
+package br.com.ema.activities.student;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,8 +7,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Handler;
-import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -37,62 +21,96 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+
 import org.litepal.crud.DataSupport;
 
 import java.io.File;
 import java.util.List;
 import java.util.Random;
 
-import br.com.ema.entities.SimpleChallenge;
 import br.com.ema.R;
+import br.com.ema.entities.Challenge;
+import br.com.ema.entities.Student;
+import br.com.ema.entities.relations.StudentChallenge;
 import br.com.ema.services.Speaker;
 
-public class ScrabbleActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
+public class StudentGameActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
 
-    private static final String TAG = "ScrabbleActivity";
-    private final int CHECK_CODE = 0x1;
-    private String word = new String();
-    private List<SimpleChallenge> wordList;
-    private Random generator = new Random();
-    private String answerString = new String();
-    private EditText answerText;
-    private TextView info;
-    private LinearLayout scrambledLayout;
-    private MediaPlayer correctSound;
-    private MediaPlayer wrongSound;
-    private Button nextButton;
-    private Button clearButton;
+        private static final String TAG = "StudentGameActivity";
+        private final int CHECK_CODE = 0x1;
+        private String word = new String();
+        private List<Challenge> wordList;
+        private Random generator = new Random();
+        private String answerString = new String();
+        private EditText answerText;
+        private TextView info;
+        private LinearLayout scrambledLayout;
+        private MediaPlayer correctSound;
+        private MediaPlayer wrongSound;
+        private Button nextButton;
+        private Button clearButton;
 
-    private Speaker speaker;
-    private ToggleButton toggle;
-    private CompoundButton.OnCheckedChangeListener toggleListener;
+        private static Speaker speaker;
+        private ToggleButton toggle;
+        private CompoundButton.OnCheckedChangeListener toggleListener;
+        private Student student;
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_student_game);
+            Intent intent = getIntent();
+            Bundle bundle=intent.getExtras();
+            student = (Student) bundle.getSerializable("student");
+            Log.i(TAG,"Student "+ student.getNickname()+", ID = "+student.getId() );
+            student = DataSupport.find(Student.class, student.getId());
+            Log.i(TAG,"With "+student.getChallenges().size()+" challenges.");
+            if(student.getChallenges().size() == 0){ //workaround for many2many queries
+                List<StudentChallenge> relation = DataSupport.where("studentId = ?",student.getId()+"").find(StudentChallenge.class);
+                for(StudentChallenge studentChallenge : relation) {
+                    Challenge c = DataSupport.find(Challenge.class, studentChallenge.getChallengeId());
+                    student.getChallenges().add(c);
+                }
+            }
+            nextButton = (Button) findViewById(R.id.nextButton);
+            nextButton.setOnClickListener(this);
+            clearButton = (Button) findViewById(R.id.clear);
+            clearButton.setOnClickListener(this);
+            answerText = (EditText) findViewById(R.id.answer);
+            correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
+            wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
+            this.wordList = student.getChallenges();
+            if(wordList.size() > 0){
+                initialize();
+            }
+        }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scrabble);
+    protected void onDestroy(){
+        super.onDestroy();
+        speaker.destroy();
+    }
 
-        nextButton = (Button) findViewById(R.id.nextButton);
-        nextButton.setOnClickListener(this);
-        clearButton = (Button) findViewById(R.id.clear);
-        clearButton.setOnClickListener(this);
-        answerText = (EditText) findViewById(R.id.answer);
-        correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
-        wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
-        this.wordList = listSimpleChallenges();
-        if(wordList.size() > 0){
-            initialize();
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(speaker != null){
+            speaker.destroy();
         }
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+    }
 
     public void initialize(){
         clearButton.setEnabled(Boolean.FALSE);
-        SimpleChallenge simpleChallenge = getNewWordByRandon();
-        word = simpleChallenge.getWord();
+        Challenge challenge = getNewWordByRandon();
+        word = challenge.getText();
         String scrambledWord = scramble(word);
         scrambledLayout = (LinearLayout) findViewById(R.id.scrambled);
-        setImageView(simpleChallenge.getImagePath());
+        setImageView(challenge.getImagePath());
         info = (TextView) findViewById(R.id.information);
 
         for(int i = 0; i < scrambledWord.length(); i++) {
@@ -113,7 +131,6 @@ public class ScrabbleActivity extends Activity implements View.OnClickListener, 
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
                 if(isChecked){
                     speaker.allow(true);
-                    //speaker.speak(getString(R.string.start_speaking));
                     speaker.speak(word);
                 }else{
                     speaker.speak(word);
@@ -221,9 +238,9 @@ public class ScrabbleActivity extends Activity implements View.OnClickListener, 
     }
 
 
-    public SimpleChallenge getNewWordByRandon(){
+    public Challenge getNewWordByRandon(){
         int randomWord = generator.nextInt(wordList.size());
-        SimpleChallenge temp = wordList.get(randomWord);
+        Challenge temp = wordList.get(randomWord);
         return temp;
     }
 
@@ -276,17 +293,19 @@ public class ScrabbleActivity extends Activity implements View.OnClickListener, 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == CHECK_CODE){
             if(resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS){
-                speaker = new Speaker(this);
+                //TODO check bug
+                if(speaker == null){
+                    speaker = new Speaker(this);
+                }else{
+                    speaker.destroy();
+                    speaker = new Speaker(this);
+                }
             }else {
                 Intent install = new Intent();
                 install.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
                 startActivity(install);
             }
         }
-    }
-
-    private List<SimpleChallenge> listSimpleChallenges(){
-        return DataSupport.findAll(SimpleChallenge.class);
     }
 
     private void setImageView(String path) {
