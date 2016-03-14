@@ -31,7 +31,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_weight="7.26">
+        android:layout_weight="1.0">
 
 
 
@@ -63,10 +63,12 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/images"
-        android:layout_width="400dp"
+        android:layout_width="471dp"
         android:layout_height="300dp"
-        android:layout_weight="50"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="3.5">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -80,23 +82,60 @@
         android:id="@+id/information"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:text="@string/information"
         android:textSize="@dimen/activity_horizontal_margin"
-        android:typeface="serif" />
+        android:typeface="serif"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_weight="0.5" />
 
     <LinearLayout
         android:id="@+id/scrambled"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="50"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center|center_vertical|center_horizontal"
+        android:weightSum="1"
+        android:layout_weight="1.5">
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/help"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5">
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/speakers"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="50"
-        android:orientation="horizontal">
+        android:layout_weight="1.5"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/stopBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp"
+            android:onClick="onFinish"
+            android:text="@string/finish" />
+
+        <ToggleButton
+            android:id="@+id/speechToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textOff="@string/speech_toggle_on"
+            android:textOn="@string/speech_toggle_on"
+            android:layout_gravity="left"
+            android:checked="false" />
 
         <Button
             android:id="@+id/nextButton"
@@ -106,16 +145,6 @@
             android:layout_marginRight="15dp"
             android:onClick="onClick"
             android:text="@string/next" />
-
-        <ToggleButton
-            android:id="@+id/speechToggle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:textOff="@string/speech_toggle_on"
-            android:textOn="@string/speech_toggle_off"
-            android:layout_gravity="left" />
 
     </LinearLayout>
 </LinearLayout>

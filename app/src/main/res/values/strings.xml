@@ -80,6 +80,7 @@
     <string name="activities">Atividades</string>
 
     <string name="checkDataTyped">Verifique os dados digitados</string>
+    <string name="areYouSure">Tem certeza?</string>
 
     <string name="login">Entrar</string>
     <string name="logout">Sair</string>
@@ -103,5 +104,8 @@
     <string name="title_activity_stats">StatsActivity</string>
     <string name="deleteUser">Remover Usuário</string>
     <string name="updateUser">Atualizar Usuário</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

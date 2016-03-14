@@ -1,6 +1,7 @@
 package br.com.ema.activities.student;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,6 +30,7 @@ import java.util.List;
 import java.util.Random;
 
 import br.com.ema.R;
+import br.com.ema.dialogs.FinishGameDialogFragment;
 import br.com.ema.entities.Challenge;
 import br.com.ema.entities.Student;
 import br.com.ema.entities.relations.StudentChallenge;
@@ -318,6 +320,12 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                 imageView.setImageBitmap(bitmap);
             }
         }
+    }
+
+    public void onFinish(View view){
+        FinishGameDialogFragment dialog = new FinishGameDialogFragment();
+        FragmentManager fm = getFragmentManager();
+        dialog.show(fm,"finish the game");
     }
 
 }
