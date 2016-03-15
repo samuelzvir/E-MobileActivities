@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Random;
 
 import br.com.ema.R;
+import br.com.ema.dialogs.EndGameDialog;
 import br.com.ema.dialogs.FinishGameDialog;
 import br.com.ema.dialogs.NoWordsRegisteredDialog;
 import br.com.ema.entities.Challenge;
@@ -59,6 +60,8 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         private ToggleButton toggle;
         private CompoundButton.OnCheckedChangeListener toggleListener;
         private Student student;
+        private int counter = 0;
+        private static int points = 0;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
             this.wordList = student.getChallenges();
             if(wordList.size() > 0){
-                initialize();
+                startWord();
             }else{
                 //alert informing that the student does not have any words registered for him.
                 NoWordsRegisteredDialog wordsRegisteredDialog = new NoWordsRegisteredDialog();
@@ -117,42 +120,50 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         super.onResume();
     }
 
-    public void initialize(){
+    public void startWord(){
         clearButton.setEnabled(Boolean.FALSE);
-        Challenge challenge = getNewWordByRandon();
-        word = challenge.getText();
-        String scrambledWord = scramble(word);
-        scrambledLayout = (LinearLayout) findViewById(R.id.scrambled);
-        setImageView(challenge.getImagePath());
-        info = (TextView) findViewById(R.id.information);
+        //TODO
+        Challenge challenge = getNewWord();
+        if(challenge == null){
+            //End of the game.
+            EndGameDialog endGameDialog = new EndGameDialog();
+            FragmentManager fm = getFragmentManager();
+            endGameDialog.show(fm,"end");
+        }else {
+            word = challenge.getText();
+            String scrambledWord = scramble(word);
+            scrambledLayout = (LinearLayout) findViewById(R.id.scrambled);
+            setImageView(challenge.getImagePath());
+            info = (TextView) findViewById(R.id.information);
 
-        for(int i = 0; i < scrambledWord.length(); i++) {
-            TextView letter = new TextView(this);
-            letter.setText("");
-            letter.setText(Character.toString(scrambledWord.charAt(i)));
-            letter.setTextSize(75);
-            letter.setPadding(7, 7, 7, 7);
-            letter.setOnClickListener(this);
-            letter.setId(i);
-            letter.setOnTouchListener(this);
-            scrambledLayout.addView(letter);
-        }
-        toggle = (ToggleButton)findViewById(R.id.speechToggle);
-
-        toggleListener = new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
-                if(isChecked){
-                    speaker.allow(true);
-                    speaker.speak(word);
-                }else{
-                    speaker.speak(word);
-                    speaker.allow(false);
-                }
+            for (int i = 0; i < scrambledWord.length(); i++) {
+                TextView letter = new TextView(this);
+                letter.setText("");
+                letter.setText(Character.toString(scrambledWord.charAt(i)));
+                letter.setTextSize(75);
+                letter.setPadding(7, 7, 7, 7);
+                letter.setOnClickListener(this);
+                letter.setId(i);
+                letter.setOnTouchListener(this);
+                scrambledLayout.addView(letter);
             }
-        };
-        toggle.setOnCheckedChangeListener(toggleListener);
-        checkTTS();
+            toggle = (ToggleButton) findViewById(R.id.speechToggle);
+
+            toggleListener = new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                    if (isChecked) {
+                        speaker.allow(true);
+                        speaker.speak(word);
+                    } else {
+                        speaker.speak(word);
+                        speaker.allow(false);
+                    }
+                }
+            };
+            toggle.setOnCheckedChangeListener(toggleListener);
+            checkTTS();
+        }
     }
 
 
@@ -170,7 +181,6 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             answerText.setText(answerText.getText().toString().substring(0, answerText.getText().toString().length()-1));
             answerString = answerString.substring(0, answerString.length()-1);
         }
-
         else if(nextButton.getId() == v.getId()) {
             clearButton.setEnabled(Boolean.FALSE);
             scrambledLayout.removeAllViews();
@@ -180,7 +190,8 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             info.setTextColor(Color.DKGRAY);
             info.setText(R.string.build_the_words);
             info.setBackgroundColor(Color.TRANSPARENT);
-            initialize();
+            //TODO
+            startWord();
         }
         else {
             clearButton.setEnabled(Boolean.TRUE);
@@ -196,7 +207,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                         info.setText(R.string.correct);
                         answerText.setTextColor(Color.rgb(33, 196, 18));
                         correctSound.start();
-
+                        points++;
                         new Handler().postDelayed(new Runnable()
                         {
                             @Override
@@ -209,7 +220,8 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                                 info.setTextColor(Color.DKGRAY);
                                 info.setText(R.string.build_the_words);
                                 info.setBackgroundColor(Color.TRANSPARENT);
-                                initialize();
+                                //TODO
+                                startWord();
                             }
                         }, 1200);
                     }
@@ -249,10 +261,17 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
     }
 
 
-    public Challenge getNewWordByRandon(){
-        int randomWord = generator.nextInt(wordList.size());
-        Challenge temp = wordList.get(randomWord);
-        return temp;
+    public Challenge getNewWord(){
+        if(wordList.size() > counter){
+            //int randomWord = generator.nextInt(wordList.size());
+            Challenge temp = wordList.get(counter);
+            counter++;
+            return temp;
+        }
+        else{
+            return null;
+        }
+
     }
 
     /**
@@ -335,5 +354,13 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         FinishGameDialog dialog = new FinishGameDialog();
         FragmentManager fm = getFragmentManager();
         dialog.show(fm, "finish the game");
+    }
+
+    public static int getPoints() {
+        return points;
+    }
+
+    public static void setPoints(int points) {
+        StudentGameActivity.points = points;
     }
 }

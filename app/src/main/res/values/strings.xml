@@ -12,6 +12,9 @@
     <string name="turnOff">Desligar</string>
     <string name="sound">Som</string>
     <string name="ok">OK</string>
+    <string name="you">Você</string>
+    <string name="made">fez</string>
+    <string name="points">ponto(s)</string>
     <string name="noWordsMessage">Este usuário não possui atividade cadastrada. Por favor Contate o Administrador</string>
     <string name="title_activity_receive_text">ReceivTextActivity</string>
 

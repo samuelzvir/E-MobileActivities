@@ -103,7 +103,10 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name=".activities.student.StudentGameActivity" >
+        <activity android:name=".activities.student.StudentGameActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".activities.operations.StatsActivity"

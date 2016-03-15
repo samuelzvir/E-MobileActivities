@@ -49,7 +49,7 @@
             android:textStyle="bold"
             android:typeface="serif"
             tools:ignore="NestedWeights"
-            android:focusable="false"></EditText>
+            android:focusable="false"/>
 
         <Button
             android:id="@+id/clear"
