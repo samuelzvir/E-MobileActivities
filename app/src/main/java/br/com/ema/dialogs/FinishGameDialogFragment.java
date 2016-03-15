@@ -9,7 +9,6 @@ import android.util.Log;
 
 import br.com.ema.R;
 
-
 public class FinishGameDialogFragment extends DialogFragment {
     private static final String TAG = "FinishDialogFragment";
 
@@ -19,7 +18,8 @@ public class FinishGameDialogFragment extends DialogFragment {
         builder.setMessage(R.string.areYouSure)
                 .setPositiveButton(R.string.finish, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // Finish the game
+                        Log.i(TAG, "finish the game");
+                        getActivity().finish();
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -27,7 +27,6 @@ public class FinishGameDialogFragment extends DialogFragment {
                         Log.i(TAG, "User cancelled the the end of the game.");
                     }
                 });
-        // Create the AlertDialog object and return it
         return builder.create();
     }
 
