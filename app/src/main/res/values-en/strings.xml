@@ -10,6 +10,8 @@
     <string name="turnOn">Turn on</string>
     <string name="turnOff">Turn off</string>
     <string name="sound">Sound</string>
+    <string name="ok">OK</string>
+    <string name="noWordsMessage">This user does not have registered activity. Please Contact the Administrator</string>
     <string name="title_activity_receive_text">ReceivTextActivity</string>
 
     <string name="title_activity_menu">EMA</string>

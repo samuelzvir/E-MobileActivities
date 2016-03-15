@@ -30,7 +30,8 @@ import java.util.List;
 import java.util.Random;
 
 import br.com.ema.R;
-import br.com.ema.dialogs.FinishGameDialogFragment;
+import br.com.ema.dialogs.FinishGameDialog;
+import br.com.ema.dialogs.NoWordsRegisteredDialog;
 import br.com.ema.entities.Challenge;
 import br.com.ema.entities.Student;
 import br.com.ema.entities.relations.StudentChallenge;
@@ -84,13 +85,20 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             this.wordList = student.getChallenges();
             if(wordList.size() > 0){
                 initialize();
+            }else{
+                //alert informing that the student does not have any words registered for him.
+                NoWordsRegisteredDialog wordsRegisteredDialog = new NoWordsRegisteredDialog();
+                FragmentManager fm = getFragmentManager();
+                wordsRegisteredDialog.show(fm,"no words");
             }
         }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        speaker.destroy();
+        if(speaker != null) {
+            speaker.destroy();
+        }
     }
 
     @Override
@@ -323,9 +331,9 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
     }
 
     public void onFinish(View view){
-        FinishGameDialogFragment dialog = new FinishGameDialogFragment();
+        FinishGameDialog dialog = new FinishGameDialog();
         FragmentManager fm = getFragmentManager();
-        dialog.show(fm,"finish the game");
+        dialog.show(fm, "finish the game");
     }
 
 }

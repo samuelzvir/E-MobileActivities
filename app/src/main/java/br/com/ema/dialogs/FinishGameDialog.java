@@ -9,8 +9,8 @@ import android.util.Log;
 
 import br.com.ema.R;
 
-public class FinishGameDialogFragment extends DialogFragment {
-    private static final String TAG = "FinishDialogFragment";
+public class FinishGameDialog extends DialogFragment {
+    private static final String TAG = "FinishGameDialog";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -33,12 +33,7 @@ import java.util.Locale;
 
 import br.com.ema.R;
 import br.com.ema.activities.LoginActivity;
-import br.com.ema.activities.admin.ABCActivity;
-import br.com.ema.activities.admin.ProfilesActivity;
-import br.com.ema.activities.admin.SettingsActivity;
-import br.com.ema.activities.admin.WordsManagementActivity;
 import br.com.ema.activities.operations.DataAnalysisActivity;
-import br.com.ema.activities.operations.ScrabbleActivity;
 import br.com.ema.activities.operations.TakePhotoActivity;
 import br.com.ema.entities.AppConfiguration;
 
@@ -107,11 +102,6 @@ public class MenuActivity extends Activity {
         startActivity(intent);
     }
 
-    public void onPlayChallenge(View view){
-        Intent intent = new Intent(this, ScrabbleActivity.class);
-        startActivity(intent);
-    }
-
     private AppConfiguration getConfiguration(){
         AppConfiguration config = DataSupport.findFirst(AppConfiguration.class); //new Select().from(AppConfiguration.class).querySingle();
         if( config == null ){
@@ -135,7 +125,8 @@ public class MenuActivity extends Activity {
     }
 
     public void logout(View view){
-        Intent intent = new Intent(this,LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }
