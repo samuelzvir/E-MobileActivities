@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,7 @@ import br.com.ema.services.Speaker;
 public class StudentGameActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
 
         private static final String TAG = "StudentGameActivity";
+        private Vibrator vibrator;
         private final int CHECK_CODE = 0x1;
         private String word = new String();
         private List<Challenge> wordList;
@@ -62,6 +64,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_student_game);
+            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             Intent intent = getIntent();
             Bundle bundle=intent.getExtras();
             student = (Student) bundle.getSerializable("student");
@@ -217,13 +220,11 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                         info.setText(R.string.wrong);
                         answerText.setTextColor(Color.rgb(255, 0, 0));
                         wrongSound.start();
-                        //vibrator.vibrate(400);
+                        vibrator.vibrate(1500);
 
-                        new Handler().postDelayed(new Runnable()
-                        {
+                        new Handler().postDelayed(new Runnable() {
                             @Override
-                            public void run()
-                            {
+                            public void run() {
                                 answerString = "";
                                 answerText.setText("");
                                 answerText.setTextColor(Color.rgb(0, 0, 0));
@@ -335,5 +336,4 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         FragmentManager fm = getFragmentManager();
         dialog.show(fm, "finish the game");
     }
-
 }
