@@ -27,6 +27,7 @@ import android.widget.ToggleButton;
 import org.litepal.crud.DataSupport;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -35,6 +36,7 @@ import br.com.ema.dialogs.EndGameDialog;
 import br.com.ema.dialogs.FinishGameDialog;
 import br.com.ema.dialogs.NoWordsRegisteredDialog;
 import br.com.ema.entities.Challenge;
+import br.com.ema.entities.PlayStats;
 import br.com.ema.entities.Student;
 import br.com.ema.entities.relations.StudentChallenge;
 import br.com.ema.services.Speaker;
@@ -62,6 +64,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         private Student student;
         private int counter = 0;
         private static int points = 0;
+        private PlayStats activityStats;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,10 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             this.wordList = student.getChallenges();
             if(wordList.size() > 0){
                 startWord();
+                Log.d(TAG, "creating activity stats...");
+                this.activityStats = new PlayStats(new Date());
+                this.activityStats.setTotalPoints(0);
+                Log.d(TAG, "created.");
             }else{
                 //alert informing that the student does not have any words registered for him.
                 NoWordsRegisteredDialog wordsRegisteredDialog = new NoWordsRegisteredDialog();
@@ -122,7 +129,6 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
 
     public void startWord(){
         clearButton.setEnabled(Boolean.FALSE);
-        //TODO
         Challenge challenge = getNewWord();
         if(challenge == null){
             //End of the game.
@@ -207,6 +213,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                         info.setText(R.string.correct);
                         answerText.setTextColor(Color.rgb(33, 196, 18));
                         correctSound.start();
+                        activityStats.addPoint(1);
                         points++;
                         new Handler().postDelayed(new Runnable()
                         {
@@ -220,7 +227,6 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                                 info.setTextColor(Color.DKGRAY);
                                 info.setText(R.string.build_the_words);
                                 info.setBackgroundColor(Color.TRANSPARENT);
-                                //TODO
                                 startWord();
                             }
                         }, 1200);
@@ -353,6 +359,8 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
     public void onFinish(View view){
         FinishGameDialog dialog = new FinishGameDialog();
         FragmentManager fm = getFragmentManager();
+        this.activityStats.setEnd(new Date());
+        this.activityStats.save();
         dialog.show(fm, "finish the game");
     }
 
