@@ -41,6 +41,7 @@ import br.com.ema.R;
 public class DataAnalysisActivity extends AppCompatActivity {
     private static final String TAG = "DataAnalysisActivity";
     final ArrayList<View> mCheckedViews = new ArrayList<View>();
+    private Student student;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,9 @@ public class DataAnalysisActivity extends AppCompatActivity {
                 if (checked) {
                     Log.i(TAG, "mCheckedViews.add(view);");
                     mCheckedViews.add(view);
-                    //TODO list challenges.
+                    Object obj = users.getAdapter().getItem(position);
+                    String nickName = obj.toString();
+                    student = DataSupport.where("nickname = ?",nickName).find(Student.class).get(0);
                 } else {
                     Log.i(TAG, "mCheckedViews.remove(view);");
                     mCheckedViews.remove(view);
@@ -140,7 +143,9 @@ public class DataAnalysisActivity extends AppCompatActivity {
     public void toStats(View view){
         Log.i(TAG,"stats about the user");
         Intent intent = new Intent(this,StatsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("student", student);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
-
 }

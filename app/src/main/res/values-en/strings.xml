@@ -16,6 +16,10 @@
     <string name="made">made</string>
     <string name="points">point(s)</string>
     <string name="title_activity_receive_text">ReceivTextActivity</string>
+    <string name="playedActivities">Played Activities</string>
+    <string name="highestPointing">Highest pointing</string>
+    <string name="lowestPointing">Lowest pointing</string>
+    <string name="Points">Point(s)</string>
 
     <string name="title_activity_menu">EMA</string>
 

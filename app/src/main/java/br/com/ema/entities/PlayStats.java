@@ -12,8 +12,9 @@ public class PlayStats  extends DataSupport {
     private double totalPoints;
     private int userId;
 
-    public PlayStats(Date start) {
+    public PlayStats(Date start, int userId) {
         this.start = start;
+        this.userId = userId;
     }
 
     public int getId() {

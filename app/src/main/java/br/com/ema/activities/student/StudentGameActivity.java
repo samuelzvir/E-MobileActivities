@@ -95,7 +95,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             if(wordList.size() > 0){
                 startWord();
                 Log.d(TAG, "creating activity stats...");
-                this.activityStats = new PlayStats(new Date());
+                this.activityStats = new PlayStats(new Date(), student.getId());
                 this.activityStats.setTotalPoints(0);
                 Log.d(TAG, "created.");
             }else{
@@ -134,6 +134,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             //End of the game.
             EndGameDialog endGameDialog = new EndGameDialog();
             FragmentManager fm = getFragmentManager();
+            this.activityStats.save();
             endGameDialog.show(fm,"end");
         }else {
             word = challenge.getText();
