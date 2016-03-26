@@ -169,4 +169,10 @@ public class SettingsActivity extends Activity {
         startActivity(intent);
     }
 
+    public void goBack(View view){
+        Intent intent = new Intent(this, MenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
 }

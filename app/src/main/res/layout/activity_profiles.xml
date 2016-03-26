@@ -77,19 +77,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/newUser"
-            android:id="@+id/newUserBtn"
-            android:onClick="toUserSettings"
-            android:layout_below="@+id/studentslistView"
-            android:layout_alignRight="@+id/studentslistView"
-            android:layout_alignEnd="@+id/studentslistView" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/updateData"
-            android:id="@+id/updateDataBtn"
-            android:onClick="toEditUser"
+            android:text="@string/goBack"
+            android:id="@+id/menuBtn"
+            android:onClick="toMenu"
             android:layout_below="@+id/studentslistView"
             android:layout_alignRight="@+id/studentslistView"
             android:layout_alignEnd="@+id/studentslistView" />
@@ -107,12 +97,23 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/menu"
-            android:id="@+id/menuBtn"
-            android:onClick="toMenu"
+            android:text="@string/updateData"
+            android:id="@+id/updateDataBtn"
+            android:onClick="toEditUser"
             android:layout_below="@+id/studentslistView"
             android:layout_alignRight="@+id/studentslistView"
             android:layout_alignEnd="@+id/studentslistView" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/newUser"
+            android:id="@+id/newUserBtn"
+            android:onClick="toUserSettings"
+            android:layout_below="@+id/studentslistView"
+            android:layout_alignRight="@+id/studentslistView"
+            android:layout_alignEnd="@+id/studentslistView" />
+
     </LinearLayout>
 
 

@@ -222,4 +222,10 @@ public class ABCActivity extends AppCompatActivity {
         Intent intent = new Intent(this,MenuActivity.class);
         startActivity(intent);
     }
+
+    public void goBack(View view){
+        Intent intent = new Intent(this, MenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }
