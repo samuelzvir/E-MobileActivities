@@ -81,7 +81,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:layout_weight="2.85">
+        android:layout_weight="2.85"
+        android:gravity="center_horizontal">
 
         <Button
             android:layout_width="wrap_content"
