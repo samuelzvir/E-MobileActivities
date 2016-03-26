@@ -20,6 +20,7 @@
     <string name="highestPointing">Highest pointing</string>
     <string name="lowestPointing">Lowest pointing</string>
     <string name="Points">Point(s)</string>
+    <string name="Choose_an_user">Choose an user</string>
 
     <string name="title_activity_menu">EMA</string>
 
