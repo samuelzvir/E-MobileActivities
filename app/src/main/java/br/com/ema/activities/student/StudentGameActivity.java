@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -28,18 +29,23 @@ import org.litepal.crud.DataSupport;
 
 import java.io.File;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import br.com.ema.R;
 import br.com.ema.dialogs.EndGameDialog;
 import br.com.ema.dialogs.FinishGameDialog;
 import br.com.ema.dialogs.NoWordsRegisteredDialog;
+import br.com.ema.entities.AppConfiguration;
 import br.com.ema.entities.Challenge;
 import br.com.ema.entities.PlayStats;
 import br.com.ema.entities.Student;
 import br.com.ema.entities.relations.StudentChallenge;
 import br.com.ema.services.Speaker;
+
+import me.grantland.widget.AutofitTextView;
 
 public class StudentGameActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
 
@@ -65,11 +71,14 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         private int counter = 0;
         private static int points = 0;
         private PlayStats activityStats;
+        private Typeface typeFace;
+        private boolean help;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_student_game);
+            typeFace = Typeface.createFromAsset(getAssets(), "fonts/FunSized.ttf");
             vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             Intent intent = getIntent();
             Bundle bundle=intent.getExtras();
@@ -91,6 +100,8 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             answerText = (EditText) findViewById(R.id.answer);
             correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
             wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
+            AppConfiguration config = DataSupport.findFirst(AppConfiguration.class);
+            this.help = config.getShowWord();
             this.wordList = student.getChallenges();
             if(wordList.size() > 0){
                 startWord();
@@ -128,6 +139,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
     }
 
     public void startWord(){
+        //TODO autofit
         clearButton.setEnabled(Boolean.FALSE);
         Challenge challenge = getNewWord();
         if(challenge == null){
@@ -138,21 +150,30 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             endGameDialog.show(fm,"end");
         }else {
             word = challenge.getText();
+            if(help){
+                AutofitTextView helpText = (AutofitTextView) findViewById(R.id.helpText);
+                helpText.setTextSize(75);
+                helpText.setText(word.toUpperCase());
+            }
             String scrambledWord = scramble(word);
             scrambledLayout = (LinearLayout) findViewById(R.id.scrambled);
             setImageView(challenge.getImagePath());
             info = (TextView) findViewById(R.id.information);
+            Set<Character> letters = new HashSet<>();
 
             for (int i = 0; i < scrambledWord.length(); i++) {
                 TextView letter = new TextView(this);
-                letter.setText("");
-                letter.setText(Character.toString(scrambledWord.charAt(i)));
-                letter.setTextSize(75);
-                letter.setPadding(7, 7, 7, 7);
-                letter.setOnClickListener(this);
-                letter.setId(i);
-                letter.setOnTouchListener(this);
-                scrambledLayout.addView(letter);
+                if(!letters.contains(scrambledWord.charAt(i))){
+                    letters.add(scrambledWord.charAt(i));
+                    letter.setText("");
+                    letter.setText(Character.toString(scrambledWord.charAt(i)).toUpperCase());
+                    letter.setTextSize(55);
+                    letter.setPadding(7, 7, 7, 7);
+                    letter.setOnClickListener(this);
+                    letter.setId(i);
+                    letter.setOnTouchListener(this);
+                    scrambledLayout.addView(letter);
+                }
             }
             toggle = (ToggleButton) findViewById(R.id.speechToggle);
 

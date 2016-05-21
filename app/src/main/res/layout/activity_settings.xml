@@ -55,10 +55,10 @@
             android:layout_gravity="center_horizontal" />
         <!-- Difficult Level -->
         <TextView
-            android:id="@+id/levelText"
+            android:id="@+id/showWordId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/level"
+            android:text="@string/showWord"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_gravity="left" />
 
@@ -68,28 +68,21 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/levelEasyRadioButton"
+                android:id="@+id/yesForShowWordRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/levelEasy"
+                android:text="@string/Yes"
                 android:onClick="onLevelClicked"/>
 
             <RadioButton
-                android:id="@+id/levelIntermediateRadioButton"
+                android:id="@+id/dontShowWordRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/levelIntermediate"
+                android:text="@string/No"
                 android:onClick="onLevelClicked"/>
 
-            <RadioButton
-                android:id="@+id/levelHardRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/levelHard"
-                android:onClick="onLevelClicked"/>
         </RadioGroup>
         <!-- language -->
         <TextView

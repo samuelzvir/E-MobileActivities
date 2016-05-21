@@ -111,5 +111,8 @@
     <string name="title_activity_initial_loading">InitialLoadingActivity</string>
     <string name="title_activity_stats">StatsActivity</string>
     <string name="updateData">Edit data</string>
+    <string name="showWord">Show word</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
 
 </resources>

@@ -107,7 +107,7 @@ public class MenuActivity extends Activity {
         if( config == null ){
             config = new AppConfiguration();
             config.setLanguage("pt-br");
-            config.setLevel("easy");
+            config.setShowWord(true);
             config.save();
         }
         return config;

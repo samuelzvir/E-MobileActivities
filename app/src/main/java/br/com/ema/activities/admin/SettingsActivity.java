@@ -96,21 +96,15 @@ public class SettingsActivity extends Activity {
 
         // Check which radio button was clicked
         switch (view.getId()) {
-            case R.id.levelEasyRadioButton:
+            case R.id.yesForShowWordRadioButton:
                 if (checked){
-                    configuration.setLevel("easy");
+                    configuration.setShowWord(true);
                     configuration.save();
                 }
                 break;
-            case R.id.levelIntermediateRadioButton:
+            case R.id.dontShowWordRadioButton:
                 if (checked){
-                    configuration.setLevel("intermediate");
-                    configuration.save();
-                }
-                break;
-            case R.id.levelHardRadioButton:
-                if (checked){
-                    configuration.setLevel("hard");
+                    configuration.setShowWord(false);
                     configuration.save();
                 }
                 break;
@@ -126,19 +120,13 @@ public class SettingsActivity extends Activity {
             ((RadioButton) findViewById(R.id.englishRadioButton)).setChecked(true);
             ((RadioButton) findViewById(R.id.portugueseRadioButton)).setChecked(false);
         }
-        String level = configuration.getLevel();
-        if (level.equalsIgnoreCase("easy")) {
-            ((RadioButton) findViewById(R.id.levelEasyRadioButton)).setChecked(true);
-            ((RadioButton) findViewById(R.id.levelIntermediateRadioButton)).setChecked(false);
-            ((RadioButton) findViewById(R.id.levelHardRadioButton)).setChecked(false);
-        } else if (level.equalsIgnoreCase("intermediate")) {
-            ((RadioButton) findViewById(R.id.levelEasyRadioButton)).setChecked(false);
-            ((RadioButton) findViewById(R.id.levelIntermediateRadioButton)).setChecked(true);
-            ((RadioButton) findViewById(R.id.levelHardRadioButton)).setChecked(false);
-        } else if (level.equalsIgnoreCase("hard")) {
-            ((RadioButton) findViewById(R.id.levelEasyRadioButton)).setChecked(false);
-            ((RadioButton) findViewById(R.id.levelIntermediateRadioButton)).setChecked(false);
-            ((RadioButton) findViewById(R.id.levelHardRadioButton)).setChecked(true);
+        Boolean showWord = configuration.getShowWord();
+        if (showWord) {
+            ((RadioButton) findViewById(R.id.yesForShowWordRadioButton)).setChecked(true);
+            ((RadioButton) findViewById(R.id.dontShowWordRadioButton)).setChecked(false);
+        } else  {
+            ((RadioButton) findViewById(R.id.yesForShowWordRadioButton)).setChecked(false);
+            ((RadioButton) findViewById(R.id.dontShowWordRadioButton)).setChecked(true);
         }
     }
 
@@ -149,7 +137,7 @@ public class SettingsActivity extends Activity {
             config = new AppConfiguration();
             config.setLanguage("pt-br");
             changeLocale("pt-br");
-            config.setLevel("easy");
+            config.setShowWord(true);
             config.save();
         }
         return config;

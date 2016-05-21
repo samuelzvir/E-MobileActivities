@@ -114,7 +114,9 @@
     <string name="title_activity_stats">StatsActivity</string>
     <string name="deleteUser">Remover Usuário</string>
     <string name="updateUser">Atualizar Usuário</string>
-
+    <string name="showWord">Mostrar palavra</string>
+    <string name="Yes">Sim</string>
+    <string name="No">Não</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
