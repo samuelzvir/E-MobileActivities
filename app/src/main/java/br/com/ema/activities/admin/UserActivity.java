@@ -16,6 +16,7 @@
 
 package br.com.ema.activities.admin;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,16 +32,23 @@ import java.util.List;
 
 import br.com.ema.R;
 import br.com.ema.activities.admin.ProfilesActivity;
+import br.com.ema.dialogs.CannotCreateUserAlreadyExists;
+import br.com.ema.dialogs.CannotCreateUserWithAdminName;
+import br.com.ema.entities.Admin;
+import br.com.ema.entities.AppConfiguration;
 import br.com.ema.entities.Student;
 
 public class UserActivity extends AppCompatActivity {
     private static final String TAG = "UserActivity";
     private Student student;
 
+    Admin admin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        admin = DataSupport.findFirst(Admin.class);
         Intent intent = getIntent();
         String studentName = intent.getStringExtra("studentName");
         if(studentName != null){
@@ -84,14 +92,28 @@ public class UserActivity extends AppCompatActivity {
             EditText passwordET = (EditText) findViewById(R.id.passwordField);
             String userName = nameET.getText().toString();
             String password = passwordET.getText().toString();
-            Student student = new Student();
-            student.setNickname(userName);
-            student.setPassword(password);
-            student.save();
-            //redirects to users list
-            Intent intent = new Intent(this, ProfilesActivity.class);
-            intent.putExtra("created", student.getNickname());
-            startActivity(intent);
+            if(admin.getName().equalsIgnoreCase(userName)){
+                CannotCreateUserWithAdminName cannotCreateUserWithAdminName = new CannotCreateUserWithAdminName();
+                FragmentManager fm = getFragmentManager();
+                cannotCreateUserWithAdminName.show(fm,"Choose another name");
+            }else {
+
+                List<Student> students = DataSupport.where("nickname like ?", userName).find(Student.class);
+                if(students.size() > 0){
+                    CannotCreateUserAlreadyExists cannotCreateUserAlreadyExists = new CannotCreateUserAlreadyExists();
+                    FragmentManager fm = getFragmentManager();
+                    cannotCreateUserAlreadyExists.show(fm,"Choose another name");
+                }else{
+                    Student student = new Student();
+                    student.setNickname(userName);
+                    student.setPassword(password);
+                    student.save();
+                    //redirects to users list
+                    Intent intent = new Intent(this, ProfilesActivity.class);
+                    intent.putExtra("created", student.getNickname());
+                    startActivity(intent);
+                }
+            }
         }else{
             EditText nameET = (EditText) findViewById(R.id.username);
             EditText passwordET = (EditText) findViewById(R.id.passwordField);

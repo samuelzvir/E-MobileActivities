@@ -114,5 +114,6 @@
     <string name="showWord">Show word</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
-
+    <string name="ChooseAnotherNameAdm">Choose another name, this is the administrator name.</string>
+    <string name="ChooseAnotherName">Choose another name.</string>
 </resources>
