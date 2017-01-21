@@ -29,19 +29,18 @@
 
     <LinearLayout
         android:id="@+id/unscrambled"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
         android:layout_marginTop="20dp"
-        android:layout_weight="0.5">
+        android:layout_weight="0.10">
 
 
 
         <EditText
             android:id="@+id/answer"
-            android:layout_width="250dp"
-            android:layout_height="70dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:layout_weight="2"
             android:ems="10"
             android:enabled="false"
             android:inputType="text"
@@ -50,34 +49,35 @@
             android:textStyle="bold"
             android:typeface="serif"
             tools:ignore="NestedWeights"
-            android:focusable="false"/>
+            android:focusable="false"
+            android:layout_weight="1.05" />
 
         <Button
             android:id="@+id/clear"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="48dp"
+            android:layout_height="38dp"
             android:layout_marginTop="20dp"
-            android:layout_weight="1"
             android:enabled="false"
             android:background="@color/white"
             android:onClick="onClick"
             android:drawableTop="@drawable/ic_backspace_black_24dp" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/images"
-        android:layout_width="471dp"
-        android:layout_height="300dp"
+        android:layout_width="312dp"
+        android:layout_height="153dp"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="3">
+        android:layout_weight="0.34">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/scrambbleImage"
             android:layout_gravity="center_vertical"
-            />
+            android:contentDescription="@string/imageOf" />
     </LinearLayout>
 
     <TextView
@@ -88,20 +88,19 @@
         android:textSize="@dimen/activity_horizontal_margin"
         android:typeface="serif"
         android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:layout_weight="0.3" />
+        android:gravity="center_horizontal" />
 
-    <LinearLayout
+    <GridLayout
         android:id="@+id/scrambled"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
         android:gravity="center|center_vertical|center_horizontal"
         android:weightSum="1"
-        android:layout_weight="4"
-        android:background="@color/blue">
-    </LinearLayout>
+        android:columnCount="7">
+
+    </GridLayout>
 
     <me.grantland.widget.AutofitLayout
         android:id="@+id/help"
@@ -110,15 +109,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
-        android:layout_weight="1">
+        android:layout_weight="0.55">
         <me.grantland.widget.AutofitTextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
+            android:layout_height="28dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:id="@+id/helpText"
-            />
+            android:maxLines="1" />
     </me.grantland.widget.AutofitLayout>
 
 
@@ -126,7 +124,6 @@
         android:id="@+id/speakers"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="horizontal"
         android:gravity="center_horizontal">
 
@@ -136,6 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
             android:onClick="onFinish"
             android:text="@string/finish" />
 
@@ -143,11 +141,9 @@
             android:id="@+id/speechToggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:textOff="@string/speech_toggle_on"
             android:textOn="@string/speech_toggle_on"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
             android:checked="false" />
 
         <Button
@@ -156,6 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
             android:onClick="onClick"
             android:text="@string/next" />
 

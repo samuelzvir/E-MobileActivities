@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -58,7 +59,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         private String answerString = new String();
         private EditText answerText;
         private TextView info;
-        private LinearLayout scrambledLayout;
+        private GridLayout scrambledLayout;
         private MediaPlayer correctSound;
         private MediaPlayer wrongSound;
         private Button nextButton;
@@ -71,14 +72,12 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         private int counter = 0;
         private static int points = 0;
         private PlayStats activityStats;
-        private Typeface typeFace;
         private boolean help;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_student_game);
-            typeFace = Typeface.createFromAsset(getAssets(), "fonts/FunSized.ttf");
             vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             Intent intent = getIntent();
             Bundle bundle=intent.getExtras();
@@ -138,8 +137,10 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         super.onResume();
     }
 
+    /**
+     * Method to setup the screen to type the word
+     */
     public void startWord(){
-        //TODO autofit
         clearButton.setEnabled(Boolean.FALSE);
         Challenge challenge = getNewWord();
         if(challenge == null){
@@ -156,23 +157,24 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                 helpText.setText(word.toUpperCase());
             }
             String scrambledWord = scramble(word);
-            scrambledLayout = (LinearLayout) findViewById(R.id.scrambled);
-            setImageView(challenge.getImagePath());
+            scrambledLayout = (GridLayout) findViewById(R.id.scrambled);
+            setImageView(challenge.getImagePath(), word);
+
             info = (TextView) findViewById(R.id.information);
             Set<Character> letters = new HashSet<>();
 
             for (int i = 0; i < scrambledWord.length(); i++) {
-                TextView letter = new TextView(this);
                 if(!letters.contains(scrambledWord.charAt(i))){
                     letters.add(scrambledWord.charAt(i));
-                    letter.setText("");
-                    letter.setText(Character.toString(scrambledWord.charAt(i)).toUpperCase());
-                    letter.setTextSize(55);
-                    letter.setPadding(7, 7, 7, 7);
-                    letter.setOnClickListener(this);
-                    letter.setId(i);
-                    letter.setOnTouchListener(this);
-                    scrambledLayout.addView(letter);
+                    //TODO add button
+                    Button  button = new Button(this);
+                    button.setId(i);
+                    button.setText(Character.toString(scrambledWord.charAt(i)).toUpperCase());
+                    button.setTextSize(55);
+                    button.setOnTouchListener(this);
+                    button.setOnClickListener(this);
+                    //button.setBackgroundColor(Color.RED);
+                    scrambledLayout.addView(button);
                 }
             }
             toggle = (ToggleButton) findViewById(R.id.speechToggle);
@@ -366,13 +368,20 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         }
     }
 
-    private void setImageView(String path) {
+    /**
+     * Sets the image path and the content description
+     * @param path
+     * @param contentDescription
+     */
+    private void setImageView(String path, String contentDescription) {
         Log.d(TAG, "Adding image " + path);
         if(path != null && !path.isEmpty()){
             File imgFile = new File(path);
             if (imgFile.exists()) {
                 Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 ImageView imageView = (ImageView) findViewById(R.id.scrambbleImage);
+                String prefix = getString(R.string.imageOf);
+                imageView.setContentDescription(prefix+contentDescription);
                 imageView.setImageBitmap(bitmap);
             }
         }
