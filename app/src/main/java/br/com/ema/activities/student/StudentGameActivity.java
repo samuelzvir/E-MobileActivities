@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,18 +30,23 @@ import org.litepal.crud.DataSupport;
 
 import java.io.File;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import br.com.ema.R;
 import br.com.ema.dialogs.EndGameDialog;
 import br.com.ema.dialogs.FinishGameDialog;
 import br.com.ema.dialogs.NoWordsRegisteredDialog;
+import br.com.ema.entities.AppConfiguration;
 import br.com.ema.entities.Challenge;
 import br.com.ema.entities.PlayStats;
 import br.com.ema.entities.Student;
 import br.com.ema.entities.relations.StudentChallenge;
 import br.com.ema.services.Speaker;
+
+import me.grantland.widget.AutofitTextView;
 
 public class StudentGameActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
 
@@ -52,7 +59,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         private String answerString = new String();
         private EditText answerText;
         private TextView info;
-        private LinearLayout scrambledLayout;
+        private GridLayout scrambledLayout;
         private MediaPlayer correctSound;
         private MediaPlayer wrongSound;
         private Button nextButton;
@@ -65,6 +72,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         private int counter = 0;
         private static int points = 0;
         private PlayStats activityStats;
+        private boolean help;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +99,8 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             answerText = (EditText) findViewById(R.id.answer);
             correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
             wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
+            AppConfiguration config = DataSupport.findFirst(AppConfiguration.class);
+            this.help = config.getShowWord();
             this.wordList = student.getChallenges();
             if(wordList.size() > 0){
                 startWord();
@@ -127,6 +137,9 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         super.onResume();
     }
 
+    /**
+     * Method to setup the screen to type the word
+     */
     public void startWord(){
         clearButton.setEnabled(Boolean.FALSE);
         Challenge challenge = getNewWord();
@@ -138,21 +151,31 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             endGameDialog.show(fm,"end");
         }else {
             word = challenge.getText();
+            if(help){
+                AutofitTextView helpText = (AutofitTextView) findViewById(R.id.helpText);
+                helpText.setTextSize(75);
+                helpText.setText(word.toUpperCase());
+            }
             String scrambledWord = scramble(word);
-            scrambledLayout = (LinearLayout) findViewById(R.id.scrambled);
-            setImageView(challenge.getImagePath());
+            scrambledLayout = (GridLayout) findViewById(R.id.scrambled);
+            setImageView(challenge.getImagePath(), word);
+
             info = (TextView) findViewById(R.id.information);
+            Set<Character> letters = new HashSet<>();
 
             for (int i = 0; i < scrambledWord.length(); i++) {
-                TextView letter = new TextView(this);
-                letter.setText("");
-                letter.setText(Character.toString(scrambledWord.charAt(i)));
-                letter.setTextSize(75);
-                letter.setPadding(7, 7, 7, 7);
-                letter.setOnClickListener(this);
-                letter.setId(i);
-                letter.setOnTouchListener(this);
-                scrambledLayout.addView(letter);
+                if(!letters.contains(scrambledWord.charAt(i))){
+                    letters.add(scrambledWord.charAt(i));
+                    //TODO add button
+                    Button  button = new Button(this);
+                    button.setId(i);
+                    button.setText(Character.toString(scrambledWord.charAt(i)).toUpperCase());
+                    button.setTextSize(55);
+                    button.setOnTouchListener(this);
+                    button.setOnClickListener(this);
+                    //button.setBackgroundColor(Color.RED);
+                    scrambledLayout.addView(button);
+                }
             }
             toggle = (ToggleButton) findViewById(R.id.speechToggle);
 
@@ -345,13 +368,20 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         }
     }
 
-    private void setImageView(String path) {
+    /**
+     * Sets the image path and the content description
+     * @param path
+     * @param contentDescription
+     */
+    private void setImageView(String path, String contentDescription) {
         Log.d(TAG, "Adding image " + path);
         if(path != null && !path.isEmpty()){
             File imgFile = new File(path);
             if (imgFile.exists()) {
                 Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 ImageView imageView = (ImageView) findViewById(R.id.scrambbleImage);
+                String prefix = getString(R.string.imageOf);
+                imageView.setContentDescription(prefix+contentDescription);
                 imageView.setImageBitmap(bitmap);
             }
         }

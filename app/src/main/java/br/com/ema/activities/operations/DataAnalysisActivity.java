@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import br.com.ema.activities.admin.MenuActivity;
 import br.com.ema.entities.Student;
 import br.com.ema.R;
 
@@ -146,6 +147,12 @@ public class DataAnalysisActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("student", student);
         intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    public void goBack(View view){
+        Intent intent = new Intent(this, MenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

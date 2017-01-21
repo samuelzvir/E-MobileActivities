@@ -36,112 +36,142 @@
         android:layout_alignParentTop="true"
         android:src="@mipmap/logo3" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/settings"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    <!-- Difficult Level -->
-    <TextView
-        android:id="@+id/levelText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/level"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/levelEasyRadioButton"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/levelEasy"
-            android:onClick="onLevelClicked"/>
-
-        <RadioButton
-            android:id="@+id/levelIntermediateRadioButton"
+            android:text="@string/settings"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_gravity="center_horizontal" />
+        <!-- Difficult Level -->
+        <TextView
+            android:id="@+id/showWordId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/levelIntermediate"
-            android:onClick="onLevelClicked"/>
+            android:text="@string/showWord"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="left" />
 
-        <RadioButton
-            android:id="@+id/levelHardRadioButton"
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/yesForShowWordRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/Yes"
+                android:onClick="onLevelClicked"/>
+
+            <RadioButton
+                android:id="@+id/dontShowWordRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/No"
+                android:onClick="onLevelClicked"/>
+
+        </RadioGroup>
+        <!-- language -->
+        <TextView
+            android:id="@+id/language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/levelHard"
-            android:onClick="onLevelClicked"/>
-    </RadioGroup>
-    <!-- language -->
-    <TextView
-        android:id="@+id/language"
-        android:layout_width="wrap_content"
+            android:text="@string/language"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="left" />
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/portugueseRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/portuguese"
+                android:onClick="onLanguageClicked" />
+
+            <RadioButton
+                android:id="@+id/englishRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/english"
+                android:onClick="onLanguageClicked"/>
+        </RadioGroup>
+
+        <!-- Sound -->
+        <TextView
+            android:id="@+id/sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sound"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="left" />
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/onRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/turnOn" />
+
+            <RadioButton
+                android:id="@+id/offRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/turnOff" />
+        </RadioGroup>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/language"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:background="@color/white"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:gravity="center_horizontal">
 
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/portugueseRadioButton"
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/portuguese"
-            android:onClick="onLanguageClicked" />
+            android:text="@string/goBack"
+            android:id="@+id/goBackBtn"
+            android:onClick="goBack"/>
 
-        <RadioButton
-            android:id="@+id/englishRadioButton"
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/english"
-            android:onClick="onLanguageClicked"/>
-    </RadioGroup>
+            android:text="@string/save"
+            android:id="@+id/menuButton"
+            android:layout_gravity="center_horizontal"
+            android:onClick="save"/>
 
-    <!-- Sound -->
-    <TextView
-        android:id="@+id/sound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sound"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/onRadioButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/turnOn" />
-
-        <RadioButton
-            android:id="@+id/offRadioButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/turnOff" />
-    </RadioGroup>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:id="@+id/menuButton"
-        android:layout_gravity="center_horizontal"
-        android:onClick="save"/>
+    </LinearLayout>
 </LinearLayout>

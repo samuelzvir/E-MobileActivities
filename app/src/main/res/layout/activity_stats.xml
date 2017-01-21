@@ -201,6 +201,7 @@
             android:text="@string/goBack"
             android:id="@+id/backBtn"
             android:layout_gravity="center_horizontal"
+            android:onClick="goBack"
             android:gravity="center_horizontal" />
     </LinearLayout>
 

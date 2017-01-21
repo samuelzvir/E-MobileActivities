@@ -8,7 +8,7 @@ public class AppConfiguration extends DataSupport {
 
     private int id;
     @Column
-    String level;
+    Boolean showWord;
     @Column
     String language;
 
@@ -22,14 +22,13 @@ public class AppConfiguration extends DataSupport {
         this.id = id;
     }
 
-    public String getLevel() {
-        return level;
+    public Boolean getShowWord() {
+        return showWord;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setShowWord(Boolean showWord) {
+        this.showWord = showWord;
     }
-
     public String getLanguage() {
         return language;
     }

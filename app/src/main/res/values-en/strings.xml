@@ -20,6 +20,7 @@
     <string name="highestPointing">Highest pointing</string>
     <string name="lowestPointing">Lowest pointing</string>
     <string name="Points">Point(s)</string>
+    <string name="Choose_an_user">Choose an user</string>
 
     <string name="title_activity_menu">EMA</string>
 
@@ -110,5 +111,10 @@
     <string name="title_activity_initial_loading">InitialLoadingActivity</string>
     <string name="title_activity_stats">StatsActivity</string>
     <string name="updateData">Edit data</string>
-
+    <string name="showWord">Show word</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="ChooseAnotherNameAdm">Choose another name, this is the administrator name.</string>
+    <string name="ChooseAnotherName">Choose another name.</string>
+    <string name="imageOf">Image of </string>
 </resources>
