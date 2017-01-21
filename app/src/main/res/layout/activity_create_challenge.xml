@@ -29,21 +29,22 @@
         android:layout_height="110dp"
         android:drawableTop="@drawable/ic_add_circle_black_48dp"
         android:layout_alignParentLeft="true"
-        android:textSize="10dp"
+        android:textSize="12sp"
         android:layout_alignParentTop="true"
         android:onClick="saveWord"
-        android:text="@string/save" />
+        android:text="@string/save"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/word"
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:ems="10"
-        android:layout_weight="2"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_alignBottom="@+id/abc"
         android:layout_alignRight="@+id/image"
-        android:layout_alignEnd="@+id/image" />
+        android:layout_alignEnd="@+id/image"
+        android:inputType="" />
 
     <TextView
         android:id="@+id/status"
@@ -62,7 +63,7 @@
         android:id="@+id/abc"
         android:onClick="onToCamera"
         android:drawableTop="@drawable/ic_camera_alt_black_48dp"
-        android:textSize="10dp"
+        android:textSize="12sp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/send"
         android:layout_toEndOf="@+id/send"
@@ -73,7 +74,6 @@
         android:id="@+id/image"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="50"
         android:orientation="horizontal">
 
 
@@ -89,7 +89,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="39dp"
-        android:layout_marginStart="39dp" />
+        android:layout_marginStart="39dp"
+        android:contentDescription="@string/image" />
 
     <Button
         android:layout_width="wrap_content"

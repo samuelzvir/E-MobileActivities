@@ -27,92 +27,80 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="br.com.ema.activities.admin.WordsManagementActivity">
 
-    <LinearLayout
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="0.1">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:weightSum="1">
 
-        <LinearLayout
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:layout_gravity="left"
-            android:gravity="left">
 
             <TextView
                 android:id="@+id/information"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/words"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:typeface="normal"
                 android:textStyle="bold" />
 
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:layout_gravity="right"
-            android:gravity="right">
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="end"
+                android:gravity="end"
                 android:src="@mipmap/logo3"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:gravity="right"
-                android:layout_gravity="right" />
-        </LinearLayout>
-    </LinearLayout>
+                android:contentDescription="@string/logo"
+                android:adjustViewBounds="true" />
+    </GridLayout>
 
 
 
 
         <LinearLayout
             android:id="@+id/list"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.6"
+            android:layout_width="match_parent"
+            android:layout_height="253dp"
             android:orientation="horizontal"
-            android:weightSum="1">
+            android:layout_weight="0.6"
+            android:weightSum="1"
+            android:baselineAligned="false">
             <!--<CheckBox-->
                 <!--android:id="@+id/usePositionsCB"-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content" />-->
             <ListView
-                android:layout_width="399dp"
-                android:layout_height="697dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/wordsListView"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_weight="0.77"
+                android:layout_weight="1.67"
                 android:choiceMode="multipleChoice"
-                android:clickable="true" />
+                android:clickable="true"
+                tools:ignore="InefficientWeight,NestedWeights" />
         </LinearLayout>
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.3"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:gravity="center_horizontal">
+        android:layout_weight="0.3"
+        android:layout_height="0dp">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/goBack"
             android:id="@+id/goBackBtn"
-            android:onClick="goBack"/>
+            android:onClick="goBack"
+            tools:ignore="ButtonStyle" />
 
         <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/delete"
         android:id="@+id/deleteButton"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:layout_width="wrap_content"
@@ -120,7 +108,8 @@
             android:text="@string/edit"
             android:id="@+id/editButton"
             android:onClick="updateWord"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            tools:ignore="ButtonStyle" />
 
         <Button
                 android:layout_width="wrap_content"
@@ -128,11 +117,9 @@
                 android:text="@string/add"
                 android:id="@+id/newWord"
                 android:onClick="addWord"
-                android:layout_below="@+id/users"
-                android:layout_alignRight="@+id/users"
-                android:layout_alignEnd="@+id/users"
-                android:layout_marginRight="112dp"
-                android:layout_marginEnd="112dp" />
+            android:layout_marginRight="112dp"
+                android:layout_marginEnd="112dp"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
 </LinearLayout>

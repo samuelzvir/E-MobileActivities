@@ -18,9 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@mipmap/logo3"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:contentDescription="@string/logo" />
 
     <Button
         android:layout_width="match_parent"
@@ -29,9 +27,8 @@
         android:id="@+id/play"
         android:layout_gravity="center_vertical|center_horizontal"
         android:drawableTop="@drawable/ic_puzzle_black_48dp"
-        android:layout_below="@+id/imageView"
         android:onClick="toPlay"
-        android:textSize="10dp" />
+        android:textSize="12sp" />
 
     <Button
         android:layout_width="match_parent"
@@ -41,7 +38,7 @@
         android:id="@+id/button"
         android:drawableTop="@drawable/ic_directions_run_black_48dp"
         android:onClick="logout"
-        android:textSize="10dp" />
+        android:textSize="12sp" />
 
 
 </LinearLayout>

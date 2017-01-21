@@ -26,39 +26,43 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.com.ema.activities.operations.DataAnalysisActivity">
-
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
+        android:id="@+id/head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/logo3"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_weight="0.2"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="118dp"
+            android:src="@mipmap/logo3"
+            android:contentDescription="@string/users" />
+
+    </LinearLayout>
     <TextView
         android:id="@+id/information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/users"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:typeface="normal"
         android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="50"
+        android:layout_width="309dp"
+        android:layout_height="239dp"
+        android:layout_weight="0.4"
         android:orientation="horizontal"
         android:weightSum="1">
 
         <ListView
-            android:layout_width="399dp"
-            android:layout_height="589dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/studentslistView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="0.77"
             android:choiceMode="singleChoice"
             android:clickable="true" />
     </LinearLayout>
@@ -66,9 +70,9 @@
         android:id="@+id/buttons"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="50"
+        android:layout_weight="0.3"
+        android:background="@color/white"
         android:orientation="horizontal"
-        android:weightSum="1"
         android:gravity="center_horizontal">
 
         <Button
@@ -76,7 +80,8 @@
             android:layout_height="wrap_content"
             android:text="@string/goBack"
             android:id="@+id/goBackBtn"
-            android:onClick="goBack"/>
+            android:onClick="goBack"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:layout_width="wrap_content"
@@ -84,10 +89,8 @@
             android:text="@string/stats"
             android:id="@+id/stats"
             android:onClick="toStats"
-            android:layout_below="@+id/users"
-            android:layout_alignRight="@+id/users"
-            android:layout_alignEnd="@+id/users"
             android:layout_marginRight="112dp"
-            android:layout_marginEnd="112dp" />
+            android:layout_marginEnd="112dp"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 </LinearLayout>

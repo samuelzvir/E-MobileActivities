@@ -25,6 +25,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_weight="0.3"
     tools:context="br.com.ema.activities.admin.ABCActivity">
 
     <TextView
@@ -32,56 +33,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/users"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:typeface="normal"
         android:textStyle="bold" />
 
     <ListView
-        android:layout_width="399dp"
-        android:layout_height="250dp"
+        android:layout_width="match_parent"
+        android:layout_height="172dp"
         android:id="@+id/studentslistView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_weight="0.77"
         android:choiceMode="singleChoice"
         android:clickable="true" />
+
     <TextView
         android:id="@+id/information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/words"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:typeface="normal"
         android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2.05"
+        android:layout_width="match_parent"
+        android:layout_height="206dp"
+        android:layout_weight="0.4"
         android:orientation="horizontal"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:baselineAligned="false">
         <!--<CheckBox-->
         <!--android:id="@+id/usePositionsCB"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content" />-->
         <ListView
-            android:layout_width="399dp"
-            android:layout_height="300dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/wordsListView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="0.77"
             android:choiceMode="multipleChoice"
-            android:clickable="true" />
+            android:clickable="true"
+            tools:ignore="InefficientWeight,NestedWeights"
+            android:layout_weight="0.11" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:layout_weight="2.85"
+        android:layout_weight="0.3"
         android:gravity="center_horizontal">
 
         <Button
@@ -89,17 +88,16 @@
             android:layout_height="wrap_content"
             android:text="@string/goBack"
             android:id="@+id/goBackBtn"
-            android:onClick="goBack"/>
+            android:onClick="goBack"
+            tools:ignore="ButtonStyle" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save"
             android:id="@+id/newWord"
             android:onClick="saveGame"
-            android:layout_below="@+id/users"
-            android:layout_alignRight="@+id/users"
-            android:layout_alignEnd="@+id/users"
             android:layout_marginRight="112dp"
-            android:layout_marginEnd="112dp" />
+            android:layout_marginEnd="112dp"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 </LinearLayout>

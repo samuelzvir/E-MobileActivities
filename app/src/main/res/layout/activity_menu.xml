@@ -42,13 +42,11 @@
         android:layout_weight="0.2">
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="298dp"
+            android:layout_height="124dp"
             android:src="@mipmap/logo3"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/menu" />
         </LinearLayout>
 
     <LinearLayout
@@ -62,7 +60,8 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_gravity="center_horizontal"
         android:weightSum="1"
-        android:layout_weight="0.8">
+        android:layout_weight="0.8"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:orientation="vertical"
@@ -70,7 +69,8 @@
             android:layout_height="541dp"
             android:layout_weight="0.40"
             android:layout_gravity="center_vertical"
-            android:gravity="center_vertical|center_horizontal">
+            android:gravity="center_vertical|center_horizontal"
+            tools:ignore="NestedWeights">
 
             <Button
                 android:id="@+id/messages"
@@ -79,7 +79,7 @@
                 android:text="@string/messages"
                 android:onClick="onToWords"
                 android:drawableTop="@drawable/ic_font_download_black_48dp"
-                android:textSize="10dp" />
+                android:textSize="12sp" />
 
             <Button
                 android:layout_width="110dp"
@@ -88,7 +88,7 @@
                 android:id="@+id/abc"
                 android:onClick="onToABC"
                 android:drawableTop="@drawable/abc_48p"
-                android:textSize="10dp"
+                android:textSize="12sp"
                 />
 
             <Button
@@ -98,8 +98,7 @@
                 android:id="@+id/users"
                 android:drawableTop="@drawable/ic_supervisor_account_black_48dp"
                 android:onClick="onToProfiles"
-                android:layout_alignLeft="@+id/messages"
-                android:textSize="10dp" />
+                android:textSize="12sp" />
 
 
         </LinearLayout>
@@ -119,9 +118,7 @@
                 android:id="@+id/dataAnalysis"
                 android:drawableTop="@drawable/ic_trending_up_black_48dp"
                 android:onClick="onToDataAnalysis"
-                android:layout_alignLeft="@+id/users"
-                android:layout_alignStart="@+id/users"
-                android:textSize="10dp" />
+                android:textSize="12sp" />
 
             <Button
                 android:layout_width="110dp"
@@ -130,12 +127,8 @@
                 android:id="@+id/settings"
                 android:drawableTop="@drawable/ic_build_black_48dp"
                 android:onClick="onToSettings"
-                android:textSize="10dp"
+                android:textSize="12sp"
                 />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></FrameLayout>
 
             <Button
                 android:layout_width="110dp"
@@ -144,9 +137,7 @@
                 android:id="@+id/button"
                 android:drawableTop="@drawable/ic_directions_run_black_48dp"
                 android:onClick="logout"
-                android:textSize="10dp"
-                android:layout_alignLeft="@+id/settings"
-                android:layout_alignStart="@+id/settings" />
+                android:textSize="12sp" />
 
         </LinearLayout>
     </LinearLayout>

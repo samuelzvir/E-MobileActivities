@@ -31,10 +31,8 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:src="@mipmap/logo3" />
+        android:src="@mipmap/logo3"
+        android:contentDescription="@string/logo" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -60,7 +58,7 @@
             android:layout_height="wrap_content"
             android:text="@string/showWord"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_gravity="left" />
+            android:layout_gravity="start" />
 
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -91,7 +89,7 @@
             android:layout_height="wrap_content"
             android:text="@string/language"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_gravity="left" />
+            android:layout_gravity="start" />
 
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -122,7 +120,7 @@
             android:layout_height="wrap_content"
             android:text="@string/sound"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_gravity="left" />
+            android:layout_gravity="start" />
 
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -163,7 +161,8 @@
             android:layout_height="wrap_content"
             android:text="@string/goBack"
             android:id="@+id/goBackBtn"
-            android:onClick="goBack"/>
+            android:onClick="goBack"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:layout_width="wrap_content"
@@ -171,7 +170,8 @@
             android:text="@string/save"
             android:id="@+id/menuButton"
             android:layout_gravity="center_horizontal"
-            android:onClick="save"/>
+            android:onClick="save"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 </LinearLayout>
