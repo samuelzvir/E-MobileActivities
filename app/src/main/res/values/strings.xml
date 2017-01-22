@@ -2,7 +2,7 @@
     <string name="app_name">EMA</string>
     <string name="title_activity_take_photo">TakePhotoActivity</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
     <string name="title_activity_create_text">CreateTextActivity</string>
     
     <string name="save">Salvar</string>
@@ -93,9 +93,9 @@
     <string name="areYouSure">Tem certeza?</string>
 
     <string name="login">Entrar</string>
-    <string name="logout">Sair</string>
+    <string name="logout">   Sair   </string>
 
-    <string name="stats">Estatísticas</string>
+    <string name="stats">  Estatísticas  </string>
     <!-- Colors -->
     <color name="white">#FFFFFF</color>
     <color name="blue">#1887C7</color>
