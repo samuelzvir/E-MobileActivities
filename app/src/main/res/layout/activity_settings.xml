@@ -48,6 +48,8 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:text="@string/settings"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_gravity="center_horizontal" />
@@ -157,21 +159,20 @@
         android:gravity="center_horizontal">
 
         <Button
+            android:theme="@style/GoBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/goBack"
             android:id="@+id/goBackBtn"
-            android:onClick="goBack"
-            tools:ignore="ButtonStyle" />
+            android:onClick="goBack"/>
 
         <Button
+            android:theme="@style/AddButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save"
             android:id="@+id/menuButton"
-            android:layout_gravity="center_horizontal"
-            android:onClick="save"
-            tools:ignore="ButtonStyle" />
+            android:onClick="save" />
 
     </LinearLayout>
 </LinearLayout>

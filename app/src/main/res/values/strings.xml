@@ -101,6 +101,7 @@
     <color name="blue">#1887C7</color>
     <color name="red">#E60E0E</color>
     <color name="green">#83BF25</color>
+    <color name="black">#000000</color>
 
     <string name="title_activity_build_challenges">BuildChallengesActivity</string>
     <string name="title_activity_play_challenges">PlayChallengesActivity</string>

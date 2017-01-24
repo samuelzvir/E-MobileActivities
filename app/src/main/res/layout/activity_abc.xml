@@ -33,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/users"
+        android:textColor="@color/blue"
         android:textSize="25sp"
         android:typeface="normal"
         android:textStyle="bold" />
@@ -48,6 +49,7 @@
         android:id="@+id/information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/red"
         android:text="@string/words"
         android:textSize="25sp"
         android:typeface="normal"
@@ -84,20 +86,18 @@
         android:gravity="center_horizontal">
 
         <Button
+            android:theme="@style/GoBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/goBack"
             android:id="@+id/goBackBtn"
-            android:onClick="goBack"
-            tools:ignore="ButtonStyle" />
+            android:onClick="goBack"/>
         <Button
+            android:theme="@style/AddButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save"
             android:id="@+id/newWord"
-            android:onClick="saveGame"
-            android:layout_marginRight="112dp"
-            android:layout_marginEnd="112dp"
-            tools:ignore="ButtonStyle" />
+            android:onClick="saveGame" />
     </LinearLayout>
 </LinearLayout>

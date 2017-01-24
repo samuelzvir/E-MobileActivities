@@ -32,6 +32,7 @@
         android:id="@+id/LogoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:weightSum="1"
         android:layout_weight="0.1"
         android:baselineAligned="false">
@@ -41,6 +42,15 @@
             android:src="@mipmap/logo3"
             android:contentDescription="@string/logo"
             android:layout_height="100dp" />
+        <TextView
+            android:id="@+id/information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:text="@string/users"
+            android:textSize="25sp"
+            android:typeface="normal"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -83,6 +93,7 @@
         android:gravity="center_horizontal">
 
         <Button
+            android:theme="@style/EditButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/updateData"
@@ -91,6 +102,7 @@
             tools:ignore="ButtonStyle" />
 
         <Button
+            android:theme="@style/AddButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/newUser"
@@ -99,6 +111,7 @@
             tools:ignore="ButtonStyle" />
 
         <Button
+            android:theme="@style/GoBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/goBack"
@@ -107,6 +120,7 @@
             tools:ignore="ButtonStyle" />
 
         <Button
+            android:theme="@style/DeleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/deleteUsers"
