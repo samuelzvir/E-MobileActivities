@@ -27,94 +27,108 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.com.ema.activities.admin.ProfilesActivity"
     android:weightSum="1">
-    <ImageView
-        android:id="@+id/imageView"
+
+    <LinearLayout
+        android:id="@+id/LogoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/logo3"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_weight="0.1"
+        android:baselineAligned="false">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:src="@mipmap/logo3"
+            android:contentDescription="@string/logo"
+            android:layout_height="100dp" />
+        <TextView
+            android:id="@+id/information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:text="@string/users"
+            android:textSize="25sp"
+            android:typeface="normal"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/list"
-        android:layout_width="547dp"
-        android:layout_height="329dp"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_weight="0.06">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:baselineAligned="false">
 
         <ListView
-            android:layout_width="399dp"
-            android:layout_height="300dp"
+            android:layout_width="match_parent"
             android:id="@+id/studentslistView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:choiceMode="multipleChoice"
             android:clickable="true"
-            android:layout_weight="0.80" />
+            tools:ignore="NestedWeights"
+            android:layout_height="300dp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/profilesInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/activity_horizontal_margin"
-        android:typeface="serif" />
-
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="581dp"
+        android:id="@+id/profilesInfoLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_weight="0.1"
+        android:baselineAligned="false">
+        <TextView
+            android:id="@+id/profilesInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/activity_horizontal_margin"
+            android:typeface="serif" />
+    </LinearLayout>
+    <GridLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:background="@color/white"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:layout_weight="0.07"
+        android:columnCount="2"
+        android:layout_weight="0.1"
         android:gravity="center_horizontal">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/goBack"
-            android:id="@+id/menuBtn"
-            android:onClick="toMenu"
-            android:layout_below="@+id/studentslistView"
-            android:layout_alignRight="@+id/studentslistView"
-            android:layout_alignEnd="@+id/studentslistView" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/deleteUsers"
-            android:id="@+id/deleteUserBtn"
-            android:onClick="deleteUsers"
-            android:layout_below="@+id/studentslistView"
-            android:layout_alignRight="@+id/studentslistView"
-            android:layout_alignEnd="@+id/studentslistView" />
-
-        <Button
+            android:theme="@style/EditButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/updateData"
             android:id="@+id/updateDataBtn"
             android:onClick="toEditUser"
-            android:layout_below="@+id/studentslistView"
-            android:layout_alignRight="@+id/studentslistView"
-            android:layout_alignEnd="@+id/studentslistView" />
+            tools:ignore="ButtonStyle" />
 
         <Button
+            android:theme="@style/AddButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/newUser"
             android:id="@+id/newUserBtn"
             android:onClick="toUserSettings"
-            android:layout_below="@+id/studentslistView"
-            android:layout_alignRight="@+id/studentslistView"
-            android:layout_alignEnd="@+id/studentslistView" />
+            tools:ignore="ButtonStyle" />
 
-    </LinearLayout>
+        <Button
+            android:theme="@style/GoBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goBack"
+            android:id="@+id/menuBtn"
+            android:onClick="toMenu"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:theme="@style/DeleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/deleteUsers"
+            android:id="@+id/deleteUserBtn"
+            android:onClick="deleteUsers"
+            tools:ignore="ButtonStyle" />
+
+    </GridLayout>
 
 
 </LinearLayout>

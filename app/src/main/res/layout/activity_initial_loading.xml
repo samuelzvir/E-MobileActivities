@@ -18,16 +18,11 @@ tools:context="br.com.ema.activities.InitialLoadingActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@mipmap/logo3"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:contentDescription="@string/logo" />
     <ProgressBar
         android:layout_width="258dp"
         android:layout_height="214dp"
-        android:layout_below="@+id/imageView"
         android:indeterminate="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="95dp"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>

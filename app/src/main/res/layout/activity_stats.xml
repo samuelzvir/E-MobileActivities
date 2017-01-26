@@ -26,66 +26,52 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.com.ema.activities.operations.StatsActivity">
 
-    <LinearLayout
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="0.1">
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
-        <LinearLayout
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:layout_gravity="left"
-            android:gravity="left">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/stats"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="normal" />
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:layout_gravity="right"
-            android:gravity="right">
-
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="right"
-                android:gravity="right"
-                android:src="@mipmap/logo3" />
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="end"
+                android:gravity="end"
+                android:src="@mipmap/logo3"
+                android:contentDescription="@string/logo"
+                android:adjustViewBounds="true" />
+
+    </GridLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_weight="0.02"
         android:gravity="center_horizontal">
 
         <LinearLayout
-            android:layout_width="280dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            tools:ignore="UselessParent">
 
             <TextView
                 android:id="@+id/nameForStats"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:typeface="normal" />
         </LinearLayout>
@@ -102,10 +88,11 @@
         <TableLayout
             android:id="@+id/statsTableLayout"
             android:layout_width="match_parent"
-            android:layout_height="197dp"
+            android:layout_height="match_parent"
             android:stretchColumns="0,1"
             android:padding="5dip"
-            android:layout_weight="0.3">
+            android:layout_weight="0.3"
+            tools:ignore="NestedWeights">
 
             <TableRow
                 android:id="@+id/tableRow1"
@@ -177,15 +164,6 @@
             </TableRow>
         </TableLayout>
 
-        <LinearLayout
-            android:id="@+id/chartsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.78"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -196,6 +174,7 @@
         android:gravity="center_horizontal">
 
         <Button
+            style="@style/GoBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/goBack"

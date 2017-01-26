@@ -29,127 +29,74 @@
     android:weightSum="1">
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="546dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_gravity="top"
-        android:weightSum="1"
         android:layout_weight="0.2">
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@mipmap/logo3"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center_horizontal" />
+            android:contentDescription="@string/menu" />
         </LinearLayout>
 
-    <LinearLayout
+
+    <br.com.ema.widget.DashboardLayout
         android:orientation="horizontal"
-        android:layout_width="546dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_gravity="center_horizontal"
         android:weightSum="1"
         android:layout_weight="0.8">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="186dp"
-            android:layout_height="541dp"
-            android:layout_weight="0.40"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical|center_horizontal">
+        <Button
+            style="@style/DashboardButton"
+            android:text="@string/activities"
+            android:id="@+id/abc"
+            android:onClick="onToABC"
+            android:drawableTop="@drawable/abc_48p"/>
 
             <Button
                 android:id="@+id/messages"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
+                style="@style/DashboardButton"
                 android:text="@string/messages"
                 android:onClick="onToWords"
-                android:drawableTop="@drawable/ic_font_download_black_48dp"
-                android:textSize="10dp" />
+                android:drawableTop="@drawable/ic_font_download_black_48dp"/>
 
-            <Button
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:text="@string/activities"
-                android:id="@+id/abc"
-                android:onClick="onToABC"
-                android:drawableTop="@drawable/abc_48p"
-                android:textSize="10dp"
-                />
-
-            <Button
-                android:layout_width="110dp"
-                android:layout_height="110dp"
+        <Button
+                style="@style/DashboardButton"
                 android:text="@string/users"
                 android:id="@+id/users"
                 android:drawableTop="@drawable/ic_supervisor_account_black_48dp"
-                android:onClick="onToProfiles"
-                android:layout_alignLeft="@+id/messages"
-                android:textSize="10dp" />
+                android:onClick="onToProfiles"/>
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="186dp"
-            android:layout_height="541dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.40"
-            android:gravity="center_vertical|center_horizontal">
 
             <Button
-                android:layout_width="110dp"
-                android:layout_height="110dp"
+                style="@style/DashboardButton"
                 android:text="@string/dataAnalysis"
                 android:id="@+id/dataAnalysis"
                 android:drawableTop="@drawable/ic_trending_up_black_48dp"
-                android:onClick="onToDataAnalysis"
-                android:layout_alignLeft="@+id/users"
-                android:layout_alignStart="@+id/users"
-                android:textSize="10dp" />
+                android:onClick="onToDataAnalysis"/>
 
             <Button
-                android:layout_width="110dp"
-                android:layout_height="110dp"
+                style="@style/DashboardButton"
                 android:text="@string/settings"
                 android:id="@+id/settings"
                 android:drawableTop="@drawable/ic_build_black_48dp"
                 android:onClick="onToSettings"
-                android:textSize="10dp"
                 />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></FrameLayout>
-
             <Button
-                android:layout_width="110dp"
-                android:layout_height="110dp"
+                style="@style/DashboardButton"
                 android:text="@string/logout"
                 android:id="@+id/button"
                 android:drawableTop="@drawable/ic_directions_run_black_48dp"
-                android:onClick="logout"
-                android:textSize="10dp"
-                android:layout_alignLeft="@+id/settings"
-                android:layout_alignStart="@+id/settings" />
-
-        </LinearLayout>
-    </LinearLayout>
+                android:onClick="logout"/>
+    </br.com.ema.widget.DashboardLayout>
 
 
 </LinearLayout>

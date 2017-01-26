@@ -117,4 +117,5 @@
     <string name="ChooseAnotherNameAdm">Choose another name, this is the administrator name.</string>
     <string name="ChooseAnotherName">Choose another name.</string>
     <string name="imageOf">Image of </string>
+    <string name="logo">Logo</string>
 </resources>
