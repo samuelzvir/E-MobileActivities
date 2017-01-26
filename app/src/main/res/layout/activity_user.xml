@@ -79,6 +79,7 @@
         android:layout_weight="0.04">
 
         <Button
+            style="@style/RedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
@@ -87,6 +88,7 @@
             tools:ignore="ButtonStyle" />
 
         <Button
+            style="@style/BlueButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save"

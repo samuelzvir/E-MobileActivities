@@ -73,6 +73,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:theme="@style/BlueButton"
         android:text="@string/save"
         android:id="@+id/save"
         android:onClick="save"
