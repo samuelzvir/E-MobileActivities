@@ -45,7 +45,6 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorLink="@color/blue"
         android:id="@+id/username"
         android:inputType="" />
 
@@ -62,11 +61,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:textColorLink="@color/blue"
         android:ems="10"
         android:layout_gravity="center_horizontal"
-        android:id="@+id/passwordField"
-        android:textIsSelectable="true" />
+        android:id="@+id/passwordField" />
 
     <TextView
         android:id="@+id/information"
