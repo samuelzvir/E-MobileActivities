@@ -36,6 +36,7 @@
 
     <TextView
         android:layout_width="wrap_content"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/name"
@@ -44,11 +45,13 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorLink="@color/blue"
         android:id="@+id/username"
         android:inputType="" />
 
     <TextView
         android:layout_width="wrap_content"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/password"
@@ -59,12 +62,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
+        android:textColorLink="@color/blue"
         android:ems="10"
         android:layout_gravity="center_horizontal"
-        android:id="@+id/passwordField" />
+        android:id="@+id/passwordField"
+        android:textIsSelectable="true" />
 
     <TextView
         android:id="@+id/information"
+        android:textStyle="bold"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/activity_horizontal_margin"
