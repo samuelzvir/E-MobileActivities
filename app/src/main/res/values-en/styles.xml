@@ -85,5 +85,11 @@
         <item name="android:textStyle">bold</item>
         <item name="colorControlHighlight">@color/white</item>
     </style>
+    <style name="CancelButton" parent="Theme.AppCompat">
+        <item name="colorButtonNormal">@color/red</item>
+        <item name="android:textStyle">bold</item>
+        <item name="colorControlHighlight">@color/white</item>
+    </style>
+
 
 </resources>

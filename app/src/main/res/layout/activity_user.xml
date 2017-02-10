@@ -44,6 +44,7 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/name"
@@ -53,10 +54,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/username"
+
             android:inputType="" />
 
         <TextView
             android:layout_width="wrap_content"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/password"
@@ -79,18 +82,18 @@
         android:layout_weight="0.04">
 
         <Button
-            style="@style/RedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/CancelButton"
             android:text="@string/cancel"
             android:id="@+id/cancelBtn"
             android:onClick="toUsersList"
             tools:ignore="ButtonStyle" />
 
         <Button
-            style="@style/BlueButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/BlueButton"
             android:text="@string/save"
             android:id="@+id/saveBtn"
             android:onClick="save"
