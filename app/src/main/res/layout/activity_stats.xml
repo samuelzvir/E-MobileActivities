@@ -174,7 +174,7 @@
         android:gravity="center_horizontal">
 
         <Button
-            style="@style/GoBackButton"
+            android:theme="@style/GoBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/goBack"
