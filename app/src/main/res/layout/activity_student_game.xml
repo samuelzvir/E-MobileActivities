@@ -131,9 +131,7 @@
             android:id="@+id/stopBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginEnd="15dp"
+            android:theme="@style/RedButton"
             android:onClick="onFinish"
             android:text="@string/finish" />
 
@@ -143,16 +141,15 @@
             android:layout_height="wrap_content"
             android:textOff="@string/speech_toggle_on"
             android:textOn="@string/speech_toggle_on"
+            android:theme="@style/BlueButton"
             android:layout_gravity="start"
             android:checked="false" />
 
         <Button
             android:id="@+id/nextButton"
+            android:theme="@style/GreenButton"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginEnd="15dp"
             android:onClick="onClick"
             android:text="@string/next" />
 

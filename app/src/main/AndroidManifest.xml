@@ -47,12 +47,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activities.operations.ScrabbleActivity"
-            android:configChanges="orientation"
-            android:label="@string/title_activity_scrabble"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".activities.admin.ABCActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_abc"
