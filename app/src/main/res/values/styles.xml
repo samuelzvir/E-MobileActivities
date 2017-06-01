@@ -71,9 +71,9 @@
     </style>
     <style name="RedButton">
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Borderless.Colored</item>
+        <item name="colorButtonNormal">@color/red</item>
         <item name="android:textStyle">bold</item>
-        <item name="colorControlHighlight">@color/red</item>
-        <item name="colorAccent">@color/red</item>
+        <item name="colorControlHighlight">@color/white</item>
     </style>
     <style name="PhotoButton" parent="Theme.AppCompat">
         <item name="colorButtonNormal">@color/green</item>
