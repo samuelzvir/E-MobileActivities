@@ -29,8 +29,8 @@
     <string name="title_activity_photo_intent">PhotoIntentActivity</string>
     <string name="menu">Menu</string>
     <!-- Camera -->
-    <string name="takeBigPicture">Photo</string>
-    <string name="takeSmallPicture">Small photo</string>
+    <string name="newPhoto">New Photo</string>
+    <string name="Photo">Photo</string>
     <string name="cannot">Cannot</string>
     <string name="album_name">MeuABCAlbum</string>
 
@@ -57,6 +57,7 @@
     <string name="dataAnalysis">Data Analysis</string>
     <string name="play">Play</string>
     <string name="words">Words</string>
+    <string name="Word">Word</string>
     <string name="deleteWord">Delete Word</string>
     <string name="deleteUsers">Delete User(s)</string>
     <string name="updateUser">Update User</string>

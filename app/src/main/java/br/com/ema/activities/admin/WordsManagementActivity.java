@@ -39,7 +39,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.io.File;
 
-import br.com.ema.activities.admin.CreateTextActivity;
 import br.com.ema.entities.SimpleChallenge;
 import br.com.ema.R;
 
@@ -48,29 +47,17 @@ public class WordsManagementActivity extends AppCompatActivity {
     private static final String TAG = "WordsManagementActivity";
     final ArrayList<View> mCheckedViews = new ArrayList<>();
     final List<String> words = new ArrayList<>();
+    private List<String> challengesList = new ArrayList<>();
+    private ListView challenges;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_words);
-        List<SimpleChallenge> simpleChallenges = DataSupport.findAll(SimpleChallenge.class);
-        final ListView challenges = (ListView) findViewById(R.id.wordsListView);
         final Button deleteButton = (Button) findViewById(R.id.deleteButton);
         final CheckBox usePositionsCB = new CheckBox(getApplicationContext());
-
-        List<String> challengesList = new ArrayList<>();
-        for (SimpleChallenge challenge : simpleChallenges){ // populates the words
-            challengesList.add(challenge.getWord());
-        }
-
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,
-                android.R.layout.simple_list_item_multiple_choice,
-                challengesList);
-
-        challenges.setAdapter(adapter);
-        challenges.setItemsCanFocus(false);
-        challenges.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
+        final StableArrayAdapter adapter = getAdapter();
+        this.challenges = (ListView) findViewById(R.id.wordsListView);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,7 +112,29 @@ public class WordsManagementActivity extends AppCompatActivity {
             }
         });
 
-        challenges.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        this.challenges.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                boolean checked = challenges.isItemChecked(position);
+                if (checked) {
+                    Log.i(TAG, "mCheckedViews.add(view);");
+                    mCheckedViews.add(view);
+                } else {
+                    Log.i(TAG, "mCheckedViews.remove(view);");
+                    mCheckedViews.remove(view);
+                }
+            }
+        });
+        mCheckedViews.clear();
+        adapter.notifyDataSetChanged();
+        listWords();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        StableArrayAdapter adapter = getAdapter();
+        this.challenges.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
@@ -272,4 +281,23 @@ public class WordsManagementActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
+    private StableArrayAdapter getAdapter(){
+        this.challenges = (ListView) findViewById(R.id.wordsListView);
+        List<SimpleChallenge> simpleChallenges = DataSupport.findAll(SimpleChallenge.class);
+        for (SimpleChallenge challenge : simpleChallenges){ // populates the words
+            this.challengesList.add(challenge.getWord());
+        }
+
+        final StableArrayAdapter adapter = new StableArrayAdapter(this,
+                android.R.layout.simple_list_item_multiple_choice,
+                this.challengesList);
+
+        this.challenges.setAdapter(adapter);
+        this.challenges.setItemsCanFocus(false);
+        this.challenges.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        return adapter;
+    }
+
+
 }

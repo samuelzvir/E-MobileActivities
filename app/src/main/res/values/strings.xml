@@ -30,8 +30,8 @@
     <string name="title_activity_photo_intent">PhotoIntentActivity</string>
     <string name="menu">Menu</string>
     <!-- Camera -->
-    <string name="takeBigPicture">Foto</string>
-    <string name="takeSmallPicture">Foto pequena</string>
+    <string name="newPhoto">Nova Foto</string>
+    <string name="Photo">Foto</string>
     <string name="cannot">Não pode</string>
     <string name="album_name">MeuABCAlbum</string>
 
@@ -69,6 +69,7 @@
     <string name="updateData">Editar dados</string>
     <string name="goBack">Voltar</string>
     <string name="words">Palavras</string>
+    <string name="Word">Palavra</string>
     <string name="onlyOneToEdit">Marque somente um usuário para editar</string>
     <string name="checkOneToEdit">Escolha um usuário para editar</string>
     <string name="dataAnalysis">Análise de dados</string>
