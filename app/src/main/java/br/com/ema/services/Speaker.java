@@ -21,12 +21,11 @@ import android.media.AudioManager;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 
-import org.litepal.crud.DataSupport;
-
 import java.util.HashMap;
 import java.util.Locale;
 
 import br.com.ema.entities.AppConfiguration;
+import io.realm.Realm;
 
 public class Speaker implements OnInitListener {
 
@@ -90,7 +89,8 @@ public class Speaker implements OnInitListener {
     }
 
     private String getLanguage(){
-        AppConfiguration appConfiguration = DataSupport.findFirst(AppConfiguration.class);
+        Realm realm = Realm.getDefaultInstance();
+        AppConfiguration appConfiguration = realm.where(AppConfiguration.class).findFirst();
         return appConfiguration.getLanguage();
     }
 

@@ -10,15 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import org.litepal.crud.DataSupport;
-
 import java.util.List;
 
 import br.com.ema.R;
-import br.com.ema.activities.LoginActivity;
 import br.com.ema.dialogs.ChooseUser;
 import br.com.ema.entities.PlayStats;
 import br.com.ema.entities.Student;
+import io.realm.Realm;
 
 public class StatsActivity extends Activity {
 
@@ -33,15 +31,17 @@ public class StatsActivity extends Activity {
     private TextView highestPointingTextView;
     private TextView lowestPointingTextView;
     private TextView name;
+    private Realm realm;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        realm = Realm.getDefaultInstance();
         setContentView(R.layout.activity_stats);
         Intent intent = getIntent();
-        Bundle bundle=intent.getExtras();
-        this.student = (Student) bundle.getSerializable("student");
+        int studentId = intent.getIntExtra("studentId",0);
+        this.student = realm.where(Student.class).equalTo("id", studentId).findFirst();
         loadBasicStats(student);
     }
 
@@ -51,9 +51,9 @@ public class StatsActivity extends Activity {
             FragmentManager fm = getFragmentManager();
             chooseUser.show(fm,"Choose an user");
         }else{
-            int id = student.getId();
-            List<PlayStats> statsActivities = DataSupport.where("userId = ?",id+"").find(PlayStats.class);
-            int count = DataSupport.count(PlayStats.class);
+            String id = student.getId();
+            List<PlayStats> statsActivities = realm.where(PlayStats.class).equalTo("userId",id).findAll();
+            long count = realm.where(PlayStats.class).count();
             Log.i(TAG,"Count: "+count);
             for (PlayStats stats : statsActivities){
                 points += stats.getTotalPoints();
@@ -86,5 +86,10 @@ public class StatsActivity extends Activity {
         Intent intent = new Intent(this, DataAnalysisActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 }

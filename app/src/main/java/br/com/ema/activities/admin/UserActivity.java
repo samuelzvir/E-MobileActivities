@@ -26,33 +26,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import org.litepal.crud.DataSupport;
-
 import java.util.List;
 
 import br.com.ema.R;
-import br.com.ema.activities.admin.ProfilesActivity;
 import br.com.ema.dialogs.CannotCreateUserAlreadyExists;
 import br.com.ema.dialogs.CannotCreateUserWithAdminName;
 import br.com.ema.entities.Admin;
-import br.com.ema.entities.AppConfiguration;
 import br.com.ema.entities.Student;
+import io.realm.Realm;
 
 public class UserActivity extends AppCompatActivity {
     private static final String TAG = "UserActivity";
     private Student student;
-
+    private Realm realm;
     Admin admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        realm = Realm.getDefaultInstance();
         setContentView(R.layout.activity_user);
-        admin = DataSupport.findFirst(Admin.class);
+        admin = realm.where(Admin.class).findFirst();
         Intent intent = getIntent();
         String studentName = intent.getStringExtra("studentName");
         if(studentName != null){
-            List<Student> students = DataSupport.where("nickname = ?",studentName).find(Student.class);
+            List<Student> students = realm.where(Student.class).equalTo("nickname",studentName).findAll();
             if(students.size() == 1){
                 this.student = students.get(0);
                 EditText nameET = (EditText) findViewById(R.id.username);
@@ -87,7 +85,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     public void save(View view){
-        if(student == null){
+       if(student == null){
             EditText nameET = (EditText) findViewById(R.id.username);
             EditText passwordET = (EditText) findViewById(R.id.passwordField);
             String userName = nameET.getText().toString();
@@ -98,16 +96,21 @@ public class UserActivity extends AppCompatActivity {
                 cannotCreateUserWithAdminName.show(fm,"Choose another name");
             }else {
 
-                List<Student> students = DataSupport.where("nickname like ?", userName).find(Student.class);
+                List<Student> students = realm.where(Student.class).like("nickname", userName).findAll();
                 if(students.size() > 0){
                     CannotCreateUserAlreadyExists cannotCreateUserAlreadyExists = new CannotCreateUserAlreadyExists();
                     FragmentManager fm = getFragmentManager();
                     cannotCreateUserAlreadyExists.show(fm,"Choose another name");
                 }else{
-                    Student student = new Student();
+                    final Student student = new Student();
                     student.setNickname(userName);
                     student.setPassword(password);
-                    student.save();
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            realm.insertOrUpdate(student);
+                        }
+                    });
                     //redirects to users list
                     Intent intent = new Intent(this, ProfilesActivity.class);
                     intent.putExtra("created", student.getNickname());
@@ -117,11 +120,17 @@ public class UserActivity extends AppCompatActivity {
         }else{
             EditText nameET = (EditText) findViewById(R.id.username);
             EditText passwordET = (EditText) findViewById(R.id.passwordField);
-            String userName = nameET.getText().toString();
-            String password = passwordET.getText().toString();
-            this.student.setNickname(userName);
-            this.student.setPassword(password);
-            this.student.save();
+            final String userName = nameET.getText().toString();
+            final String password = passwordET.getText().toString();
+
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    student.setNickname(userName);
+                    student.setPassword(password);
+                    realm.insertOrUpdate(student);
+                }
+            });
             //redirects to users list
             Intent intent = new Intent(this, ProfilesActivity.class);
             intent.putExtra("updated",student.getNickname());
@@ -133,6 +142,11 @@ public class UserActivity extends AppCompatActivity {
         this.student = null;
         Intent intent = new Intent(this,ProfilesActivity.class);
         startActivity(intent);
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 
 }

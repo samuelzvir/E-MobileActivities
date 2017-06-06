@@ -31,16 +31,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
-
-import org.litepal.crud.DataSupport;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.io.File;
 
 import br.com.ema.entities.SimpleChallenge;
 import br.com.ema.R;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class WordsManagementActivity extends AppCompatActivity {
 
@@ -49,10 +47,12 @@ public class WordsManagementActivity extends AppCompatActivity {
     final List<String> words = new ArrayList<>();
     private List<String> challengesList = new ArrayList<>();
     private ListView challenges;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        realm = Realm.getDefaultInstance();
         setContentView(R.layout.activity_manage_words);
         final Button deleteButton = (Button) findViewById(R.id.deleteButton);
         final CheckBox usePositionsCB = new CheckBox(getApplicationContext());
@@ -75,10 +75,12 @@ public class WordsManagementActivity extends AppCompatActivity {
                         v.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                //TODO
                                 Log.i(TAG, "removing item " + item);
                                 adapter.remove(item);
                                 deleteWord(item);
+                                adapter.notifyDataSetChanged();
+                                ListView  wordsListView = (ListView) findViewById(R.id.wordsListView);
+                                wordsListView.setAdapter(adapter);
                             }
                         }, 300);
                     } else {
@@ -94,6 +96,9 @@ public class WordsManagementActivity extends AppCompatActivity {
                                     Log.i(TAG, "removing item " + item);
                                     adapter.remove(item);
                                     deleteWord(item);
+                                    adapter.notifyDataSetChanged();
+                                    ListView  wordsListView = (ListView) findViewById(R.id.wordsListView);
+                                    wordsListView.setAdapter(adapter);
                                 }
                             });
                         } else {
@@ -103,6 +108,9 @@ public class WordsManagementActivity extends AppCompatActivity {
                                     Log.i(TAG, "removing item " + item);
                                     adapter.remove(item);
                                     deleteWord(item);
+                                    adapter.notifyDataSetChanged();
+                                    ListView  wordsListView = (ListView) findViewById(R.id.wordsListView);
+                                    wordsListView.setAdapter(adapter);
                                 }
                             }, 300);
                         }
@@ -169,17 +177,15 @@ public class WordsManagementActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void deleteWord(String word){
+    public void deleteWord(final String word){
         Log.i(TAG, "word " + word);
-        List<SimpleChallenge>  challenges =  DataSupport.where("word = ?", word).find(SimpleChallenge.class);
-
-        for (SimpleChallenge simpleChallenge : challenges){
-            if(simpleChallenge.getImagePath() != null){
-                deleteFromDisk(simpleChallenge.getImagePath());
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<SimpleChallenge> result = realm.where(SimpleChallenge.class).equalTo("word", word).findAll();
+                result.deleteAllFromRealm();
             }
-            simpleChallenge.delete();
-        }
-        //TODO
+        });
     }
 
     public void addWord(View view){
@@ -221,13 +227,6 @@ public class WordsManagementActivity extends AppCompatActivity {
         }
     }
 
-    private void deleteFromDisk(String path){
-        boolean deleted = new File(path).delete();
-        if(deleted){
-            Log.i(TAG,"file "+path+" deleted.");
-        }
-    }
-
     public void updateWord(View view){
         ListView  wordsListView = (ListView) findViewById(R.id.wordsListView);
         SparseBooleanArray checked = wordsListView.getCheckedItemPositions();
@@ -262,7 +261,7 @@ public class WordsManagementActivity extends AppCompatActivity {
 
 
     private void listWords(){
-        List<SimpleChallenge> s = DataSupport.findAll(SimpleChallenge.class);
+        List<SimpleChallenge> s = realm.where(SimpleChallenge.class).findAll();
         ListView  wordsListView = (ListView) findViewById(R.id.wordsListView);
         words.clear();
         for (SimpleChallenge simpleChallenge : s){ // populates the words
@@ -284,7 +283,7 @@ public class WordsManagementActivity extends AppCompatActivity {
 
     private StableArrayAdapter getAdapter(){
         this.challenges = (ListView) findViewById(R.id.wordsListView);
-        List<SimpleChallenge> simpleChallenges = DataSupport.findAll(SimpleChallenge.class);
+        List<SimpleChallenge> simpleChallenges = realm.where(SimpleChallenge.class).findAll();
         for (SimpleChallenge challenge : simpleChallenges){ // populates the words
             this.challengesList.add(challenge.getWord());
         }
@@ -299,5 +298,10 @@ public class WordsManagementActivity extends AppCompatActivity {
         return adapter;
     }
 
+
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
+    }
 
 }

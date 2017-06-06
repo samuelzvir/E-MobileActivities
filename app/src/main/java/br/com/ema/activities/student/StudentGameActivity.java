@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -21,14 +20,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-
-import org.litepal.crud.DataSupport;
-
-import java.io.File;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -43,9 +37,9 @@ import br.com.ema.entities.AppConfiguration;
 import br.com.ema.entities.Challenge;
 import br.com.ema.entities.PlayStats;
 import br.com.ema.entities.Student;
-import br.com.ema.entities.relations.StudentChallenge;
 import br.com.ema.services.Speaker;
 
+import io.realm.Realm;
 import me.grantland.widget.AutofitTextView;
 
 public class StudentGameActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
@@ -73,25 +67,19 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         private static int points = 0;
         private PlayStats activityStats;
         private boolean help;
+        private Realm realm;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+            realm = Realm.getDefaultInstance();
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_student_game);
             vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             Intent intent = getIntent();
-            Bundle bundle=intent.getExtras();
-            student = (Student) bundle.getSerializable("student");
-            Log.i(TAG,"Student "+ student.getNickname()+", ID = "+student.getId() );
-            student = DataSupport.find(Student.class, student.getId());
+            String studentId = intent.getStringExtra("studentId");
+            student = realm.where(Student.class).equalTo("id", studentId).findFirst();
+            Log.i(TAG,"Student "+ student.getNickname()+", ID = "+studentId );
             Log.i(TAG,"With "+student.getChallenges().size()+" challenges.");
-            if(student.getChallenges().size() == 0){ //workaround for many2many queries
-                List<StudentChallenge> relation = DataSupport.where("studentId = ?",student.getId()+"").find(StudentChallenge.class);
-                for(StudentChallenge studentChallenge : relation) {
-                    Challenge c = DataSupport.find(Challenge.class, studentChallenge.getChallengeId());
-                    student.getChallenges().add(c);
-                }
-            }
             nextButton = (Button) findViewById(R.id.nextButton);
             nextButton.setOnClickListener(this);
             clearButton = (Button) findViewById(R.id.clear);
@@ -99,13 +87,14 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             answerText = (EditText) findViewById(R.id.answer);
             correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
             wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
-            AppConfiguration config = DataSupport.findFirst(AppConfiguration.class);
+            AppConfiguration config = realm.where(AppConfiguration.class).findFirst();
             this.help = config.getShowWord();
             this.wordList = student.getChallenges();
             if(wordList.size() > 0){
                 startWord();
                 Log.d(TAG, "creating activity stats...");
-                this.activityStats = new PlayStats(new Date(), student.getId());
+                this.activityStats = new PlayStats();
+                this.activityStats.setStart(new Date());
                 this.activityStats.setTotalPoints(0);
                 Log.d(TAG, "created.");
             }else{
@@ -122,6 +111,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         if(speaker != null) {
             speaker.destroy();
         }
+        realm.close();
     }
 
     @Override
@@ -145,9 +135,16 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         Challenge challenge = getNewWord();
         if(challenge == null){
             //End of the game.
+            realm = Realm.getDefaultInstance();
             EndGameDialog endGameDialog = new EndGameDialog();
             FragmentManager fm = getFragmentManager();
-            this.activityStats.save();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    activityStats.setEnd(new Date());
+                    realm.insertOrUpdate(activityStats);
+                }
+            });
             endGameDialog.show(fm,"end");
         }else {
             word = challenge.getText();
@@ -158,7 +155,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             }
             String scrambledWord = scramble(word);
             scrambledLayout = (GridLayout) findViewById(R.id.scrambled);
-            setImageView(challenge.getImagePath(), word);
+            setImageView(challenge.getImage(), word);
 
             info = (TextView) findViewById(R.id.information);
             Set<Character> letters = new HashSet<>();
@@ -358,6 +355,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                     speaker = new Speaker(this);
                 }else{
                     speaker.destroy();
+                    //TODO check bound error
                     speaker = new Speaker(this);
                 }
             }else {
@@ -370,28 +368,30 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
 
     /**
      * Sets the image path and the content description
-     * @param path
      * @param contentDescription
      */
-    private void setImageView(String path, String contentDescription) {
-        Log.d(TAG, "Adding image " + path);
-        if(path != null && !path.isEmpty()){
-            File imgFile = new File(path);
-            if (imgFile.exists()) {
-                Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                ImageView imageView = (ImageView) findViewById(R.id.scrambbleImage);
-                String prefix = getString(R.string.imageOf);
-                imageView.setContentDescription(prefix+contentDescription);
-                imageView.setImageBitmap(bitmap);
-            }
+    private void setImageView(byte[] image, String contentDescription) {
+        if (image != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            ImageView imageView = (ImageView) findViewById(R.id.scrambbleImage);
+            String prefix = getString(R.string.imageOf);
+            imageView.setContentDescription(prefix+contentDescription);
+            imageView.setImageBitmap(bitmap);
         }
     }
 
     public void onFinish(View view){
+        realm = Realm.getDefaultInstance();
         FinishGameDialog dialog = new FinishGameDialog();
         FragmentManager fm = getFragmentManager();
-        this.activityStats.setEnd(new Date());
-        this.activityStats.save();
+
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                activityStats.setEnd(new Date());
+                realm.insertOrUpdate(activityStats);
+            }
+        });
         dialog.show(fm, "finish the game");
     }
 
@@ -402,4 +402,5 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
     public static void setPoints(int points) {
         StudentGameActivity.points = points;
     }
+
 }
