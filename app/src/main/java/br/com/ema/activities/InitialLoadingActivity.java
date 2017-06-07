@@ -7,24 +7,30 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-
-import org.litepal.crud.DataSupport;
-
 import java.util.Locale;
 
 import br.com.ema.R;
 import br.com.ema.activities.admin.AdminFormActivity;
 import br.com.ema.entities.Admin;
 import br.com.ema.entities.AppConfiguration;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class InitialLoadingActivity extends Activity {
 
     private static final String TAG = "InitialLoadingActivity";
     private AppConfiguration configuration;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /* Realm initial config */
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder().build();
+        Realm.setDefaultConfiguration(config);
+        /*                      */
+        realm = Realm.getDefaultInstance();
         setContentView(R.layout.activity_initial_loading);
         startLogic();
     }
@@ -37,7 +43,7 @@ public class InitialLoadingActivity extends Activity {
     }
 
     private String checkStatus(){
-        long admins = DataSupport.findAll(Admin.class).size();
+        long admins = realm.where(Admin.class).count();
         Log.i(TAG, "admins = " + admins );
         if(admins == 0){
             return "form";
@@ -46,13 +52,19 @@ public class InitialLoadingActivity extends Activity {
     }
 
     private AppConfiguration getConfiguration(){
-        AppConfiguration config = DataSupport.findFirst(AppConfiguration.class);
+        AppConfiguration config = realm.where(AppConfiguration.class).findFirst();
         if( config == null ){
-            config = new AppConfiguration();
-            config.setLanguage("pt-br");
-            config.setShowWord(true);
-            config.save();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    AppConfiguration config = new AppConfiguration();
+                    config.setLanguage("pt-br");
+                    config.setShowWord(true);
+                    realm.insertOrUpdate(config);
+                }
+            });
         }
+        config = realm.where(AppConfiguration.class).findFirst();
         return config;
     }
 
@@ -74,10 +86,17 @@ public class InitialLoadingActivity extends Activity {
         if(action.equals("form")){
             Intent intent = new Intent(this, AdminFormActivity.class);
             startActivity(intent);
+            finish();
         }else{ // login
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
+            finish();
         }
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 
 }

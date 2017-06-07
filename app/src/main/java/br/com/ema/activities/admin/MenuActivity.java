@@ -26,9 +26,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-
-import org.litepal.crud.DataSupport;
-
 import java.util.Locale;
 
 import br.com.ema.R;
@@ -36,15 +33,18 @@ import br.com.ema.activities.LoginActivity;
 import br.com.ema.activities.operations.DataAnalysisActivity;
 import br.com.ema.activities.operations.TakePhotoActivity;
 import br.com.ema.entities.AppConfiguration;
+import io.realm.Realm;
 
 public class MenuActivity extends Activity {
 
     private static final String TAG = "MenuActivity";
     private AppConfiguration configuration;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        realm = Realm.getDefaultInstance();
         setContentView(R.layout.activity_menu);
         configuration = getConfiguration();
         setSavedLocale(configuration.getLanguage());
@@ -103,13 +103,18 @@ public class MenuActivity extends Activity {
     }
 
     private AppConfiguration getConfiguration(){
-        AppConfiguration config = DataSupport.findFirst(AppConfiguration.class); //new Select().from(AppConfiguration.class).querySingle();
+        AppConfiguration config = realm.where(AppConfiguration.class).findFirst();
         if( config == null ){
-            config = new AppConfiguration();
-            config.setLanguage("pt-br");
-            config.setShowWord(true);
-            config.save();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    AppConfiguration config = realm.createObject(AppConfiguration.class, 1);
+                    config.setLanguage("pt-br");
+                    config.setShowWord(true);
+                }
+            });
         }
+        config = realm.where(AppConfiguration.class).findFirst();
         return config;
     }
 
@@ -128,5 +133,10 @@ public class MenuActivity extends Activity {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 }

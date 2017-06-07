@@ -1,22 +1,24 @@
 package br.com.ema.entities;
 
-import org.litepal.annotation.Column;
-import org.litepal.crud.DataSupport;
+import java.util.UUID;
 
-public class Admin extends DataSupport{
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-    private int id;
-    @Column(unique = true, defaultValue = "unknown")
+public class Admin extends RealmObject{
+
+    @PrimaryKey
+    private String id = UUID.randomUUID().toString();
     private String name;
-    @Column
     private String password;
 
     //Getters and Setters
 
-    public int getId() {
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+
+    public void setId(String id) {
         this.id = id;
     }
 

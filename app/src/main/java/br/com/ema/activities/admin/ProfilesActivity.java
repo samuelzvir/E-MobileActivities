@@ -29,22 +29,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.litepal.crud.DataSupport;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.ema.R;
 import br.com.ema.entities.Student;
-import br.com.ema.entities.relations.StudentChallenge;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class ProfilesActivity extends AppCompatActivity {
     private static final String TAG = "ProfilesActivity";
     List<String> studentNames = new ArrayList<>();
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        realm = Realm.getDefaultInstance();
         setContentView(R.layout.activity_profiles);
         Intent intent = getIntent();
         String userUpdated = intent.getStringExtra("updated");
@@ -86,7 +87,7 @@ public class ProfilesActivity extends AppCompatActivity {
     }
 
     private void listStudents(){
-        List<Student> s = DataSupport.findAll(Student.class);
+        RealmResults<Student> s = realm.where(Student.class).findAll();
         ListView  students = (ListView) findViewById(R.id.studentslistView);
         studentNames.clear();
         for (Student tempStudent : s){ // populates the usernames
@@ -114,17 +115,16 @@ public class ProfilesActivity extends AppCompatActivity {
         int length = students.getCount();
         for (int i = 0;i < length ;i++){
             if(checked.get(i)){ //checked ?
-                String nickname = studentNames.get(i);
+                final String nickname = studentNames.get(i);
                 Log.i(TAG, "Deleting user " + nickname);
-                Student student = DataSupport.where("nickname = ?",nickname).find(Student.class).get(0);
                 //delete all the tasks
-                int deletedRelations = DataSupport.deleteAll(StudentChallenge.class,"studentId = ?",student.getId()+"");
-                Log.d(TAG, "Deleted "+deletedRelations+" word tasks for user" + nickname);
-                //delete user from the base
-                int rowsDeleted = DataSupport.delete(Student.class,student.getId());
-                if(rowsDeleted > 0){
-                    Log.i(TAG, "User " + nickname+" deleted.");
-                }
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        RealmResults< Student > result = realm.where(Student.class).equalTo("nickname", nickname).findAll();
+                        result.deleteAllFromRealm();
+                    }
+                });
             }
         }
         listStudents();
@@ -163,6 +163,11 @@ public class ProfilesActivity extends AppCompatActivity {
     public void toMenu(View view){
         Intent intent = new Intent(this,MenuActivity.class);
         startActivity(intent);
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 
 }
