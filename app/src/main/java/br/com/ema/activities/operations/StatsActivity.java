@@ -40,7 +40,7 @@ public class StatsActivity extends Activity {
         realm = Realm.getDefaultInstance();
         setContentView(R.layout.activity_stats);
         Intent intent = getIntent();
-        int studentId = intent.getIntExtra("studentId",0);
+        String studentId = intent.getStringExtra("studentId");
         this.student = realm.where(Student.class).equalTo("id", studentId).findFirst();
         loadBasicStats(student);
     }
@@ -52,7 +52,7 @@ public class StatsActivity extends Activity {
             chooseUser.show(fm,"Choose an user");
         }else{
             String id = student.getId();
-            List<PlayStats> statsActivities = realm.where(PlayStats.class).equalTo("userId",id).findAll();
+            List<PlayStats> statsActivities = realm.where(PlayStats.class).equalTo("id",id).findAll();
             long count = realm.where(PlayStats.class).count();
             Log.i(TAG,"Count: "+count);
             for (PlayStats stats : statsActivities){

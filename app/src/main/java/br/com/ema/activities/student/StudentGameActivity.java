@@ -93,9 +93,9 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             if(wordList.size() > 0){
                 startWord();
                 Log.d(TAG, "creating activity stats...");
-                this.activityStats = new PlayStats();
-                this.activityStats.setStart(new Date());
-                this.activityStats.setTotalPoints(0);
+                activityStats = new PlayStats();
+                activityStats.setStart(new Date());
+                activityStats.setTotalPoints(0);
                 Log.d(TAG, "created.");
             }else{
                 //alert informing that the student does not have any words registered for him.
@@ -381,7 +381,6 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
     }
 
     public void onFinish(View view){
-        realm = Realm.getDefaultInstance();
         FinishGameDialog dialog = new FinishGameDialog();
         FragmentManager fm = getFragmentManager();
 
