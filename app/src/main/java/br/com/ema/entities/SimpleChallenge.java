@@ -1,25 +1,25 @@
 package br.com.ema.entities;
 
-import org.litepal.annotation.Column;
-import org.litepal.crud.DataSupport;
+import java.io.Serializable;
+import java.util.UUID;
 
-public class SimpleChallenge  extends DataSupport {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-    private int id;
-    @Column
-    String word;
-    @Column
-    String imagePath;
-    @Column
-    String wordType;
-    @Column
-    double points;
+public class SimpleChallenge  extends RealmObject implements Serializable{
 
-    public int getId() {
+    @PrimaryKey
+    public String id = UUID.randomUUID().toString();
+    private String word;
+    private byte[] image;
+    private String wordType;
+    private double points;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -31,13 +31,9 @@ public class SimpleChallenge  extends DataSupport {
         this.word = word;
     }
 
-    public String getImagePath() {
-        return imagePath;
-    }
+    public byte[] getImage() { return image; }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
+    public void setImage(byte[] image) { this.image = image; }
 
     public String getWordType() {
         return wordType;

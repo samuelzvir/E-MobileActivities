@@ -1,27 +1,25 @@
 package br.com.ema.entities;
 
-import org.litepal.crud.DataSupport;
-
 import java.util.Date;
+import java.util.UUID;
 
-public class PlayStats  extends DataSupport {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-    private int id;
+public class PlayStats  extends RealmObject {
+
+    @PrimaryKey
+    private String id = UUID.randomUUID().toString();
     private Date start;
     private Date end;
     private double totalPoints;
     private int userId;
 
-    public PlayStats(Date start, int userId) {
-        this.start = start;
-        this.userId = userId;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

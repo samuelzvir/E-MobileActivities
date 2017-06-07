@@ -78,20 +78,20 @@
             android:text="@string/goBack"
             android:onClick="goBack" />
         <Button
-            android:theme="@style/DeleteButton"
+            android:theme="@style/RedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete"
             android:id="@+id/deleteButton" />
         <Button
-            android:theme="@style/EditButton"
+            android:theme="@style/BlueButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/edit"
             android:id="@+id/editButton"
             android:onClick="updateWord" />
         <Button
-            android:theme="@style/AddButton"
+            android:theme="@style/GreenButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add"

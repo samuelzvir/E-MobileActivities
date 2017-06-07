@@ -83,7 +83,7 @@
             android:textSize="@dimen/activity_horizontal_margin"
             android:typeface="serif" />
     </LinearLayout>
-    <GridLayout
+    <TableLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -91,44 +91,44 @@
         android:columnCount="2"
         android:layout_weight="0.1"
         android:gravity="center_horizontal">
+        <TableRow>
+            <Button
+                android:theme="@style/BlueButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/updateData"
+                android:id="@+id/updateDataBtn"
+                android:onClick="toEditUser"
+                tools:ignore="ButtonStyle" />
 
-        <Button
-            android:theme="@style/EditButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/updateData"
-            android:id="@+id/updateDataBtn"
-            android:onClick="toEditUser"
-            tools:ignore="ButtonStyle" />
+            <Button
+                android:theme="@style/GreenButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/newUser"
+                android:id="@+id/newUserBtn"
+                android:onClick="toUserSettings"
+                tools:ignore="ButtonStyle" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:theme="@style/GoBackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goBack"
+                android:id="@+id/menuBtn"
+                android:onClick="toMenu"
+                tools:ignore="ButtonStyle" />
 
-        <Button
-            android:theme="@style/AddButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/newUser"
-            android:id="@+id/newUserBtn"
-            android:onClick="toUserSettings"
-            tools:ignore="ButtonStyle" />
-
-        <Button
-            android:theme="@style/GoBackButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/goBack"
-            android:id="@+id/menuBtn"
-            android:onClick="toMenu"
-            tools:ignore="ButtonStyle" />
-
-        <Button
-            android:theme="@style/DeleteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/deleteUsers"
-            android:id="@+id/deleteUserBtn"
-            android:onClick="deleteUsers"
-            tools:ignore="ButtonStyle" />
-
-    </GridLayout>
+            <Button
+                android:theme="@style/RedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deleteUsers"
+                android:id="@+id/deleteUserBtn"
+                android:onClick="deleteUsers" />
+        </TableRow>
+    </TableLayout>
 
 
 </LinearLayout>

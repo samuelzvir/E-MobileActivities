@@ -34,6 +34,7 @@ public class TakePhotoActivity extends AppCompatActivity {
     private static final String TAG = "TakePhotoActivity";
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView mImageView;
+    private String text;
 
     /**
      * onCreate method to set all necessary information to this activity.
@@ -42,6 +43,8 @@ public class TakePhotoActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_photo);
+        Intent intent = getIntent();
+        this.text = intent.getStringExtra("text");
         mImageView = (ImageView) findViewById(R.id.photo);
     }
 
@@ -57,6 +60,8 @@ public class TakePhotoActivity extends AppCompatActivity {
             mImageView.setImageBitmap(photo);
             Log.d(TAG,"the image has been set.");
         }
+        Intent intent = getIntent();
+        this.text = intent.getStringExtra("text");
     }
 
     /**
@@ -76,7 +81,12 @@ public class TakePhotoActivity extends AppCompatActivity {
         if(mImageView != null) {
             intent.putExtra("photo", ((BitmapDrawable)mImageView.getDrawable()).getBitmap());
         }
+        intent.putExtra("text", this.text);
         startActivity(intent);
         finish();
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

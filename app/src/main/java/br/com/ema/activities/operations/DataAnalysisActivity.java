@@ -29,8 +29,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
-import org.litepal.crud.DataSupport;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,17 +36,21 @@ import java.util.List;
 import br.com.ema.activities.admin.MenuActivity;
 import br.com.ema.entities.Student;
 import br.com.ema.R;
+import io.realm.Realm;
 
 public class DataAnalysisActivity extends AppCompatActivity {
     private static final String TAG = "DataAnalysisActivity";
     final ArrayList<View> mCheckedViews = new ArrayList<View>();
     private Student student;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_analysis);
-        List<Student> studentsList = DataSupport.findAll(Student.class);
+        realm = Realm.getDefaultInstance();
+
+        List<Student> studentsList = realm.where(Student.class).findAll();
         final ListView users = (ListView) findViewById(R.id.studentslistView);
         final CheckBox usePositionsCB = new CheckBox(getApplicationContext());
 
@@ -74,7 +76,7 @@ public class DataAnalysisActivity extends AppCompatActivity {
                     mCheckedViews.add(view);
                     Object obj = users.getAdapter().getItem(position);
                     String nickName = obj.toString();
-                    student = DataSupport.where("nickname = ?",nickName).find(Student.class).get(0);
+                    student = realm.where(Student.class).equalTo("nickname",nickName).findFirst();
                 } else {
                     Log.i(TAG, "mCheckedViews.remove(view);");
                     mCheckedViews.remove(view);
@@ -144,9 +146,7 @@ public class DataAnalysisActivity extends AppCompatActivity {
     public void toStats(View view){
         Log.i(TAG,"stats about the user");
         Intent intent = new Intent(this,StatsActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("student", student);
-        intent.putExtras(bundle);
+        intent.putExtra("studentId", student.getId());
         startActivity(intent);
     }
 
@@ -154,5 +154,10 @@ public class DataAnalysisActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MenuActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 }

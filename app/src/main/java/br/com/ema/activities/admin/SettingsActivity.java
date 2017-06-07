@@ -16,7 +16,6 @@
 
 package br.com.ema.activities.admin;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -27,20 +26,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
-import org.litepal.crud.DataSupport;
-
 import java.util.Locale;
 
 import br.com.ema.R;
 import br.com.ema.entities.AppConfiguration;
+import io.realm.Realm;
 
 public class SettingsActivity extends AppCompatActivity {
 
     private AppConfiguration configuration;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        realm = Realm.getDefaultInstance();
         setContentView(R.layout.activity_settings);
         configuration  = getConfiguration();
         setRadioButtons();
@@ -76,15 +76,25 @@ public class SettingsActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.portugueseRadioButton:
                 if (checked){
-                    configuration.setLanguage("pt-br");
-                    configuration.save();
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            configuration.setLanguage("pt-br");
+                            realm.insertOrUpdate(configuration);
+                        }
+                    });
                     changeLocale("pt-br");
                 }
                     break;
             case R.id.englishRadioButton:
                 if (checked){
-                    configuration.setLanguage("en-us");
-                    configuration.save();
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            configuration.setLanguage("en-us");
+                            realm.insertOrUpdate(configuration);
+                        }
+                    });
                     changeLocale("en-us");
                 }
                     break;
@@ -99,14 +109,24 @@ public class SettingsActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.yesForShowWordRadioButton:
                 if (checked){
-                    configuration.setShowWord(true);
-                    configuration.save();
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            configuration.setShowWord(true);
+                            realm.insertOrUpdate(configuration);
+                        }
+                    });
                 }
                 break;
             case R.id.dontShowWordRadioButton:
                 if (checked){
-                    configuration.setShowWord(false);
-                    configuration.save();
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            configuration.setShowWord(false);
+                            realm.insertOrUpdate(configuration);
+                        }
+                    });
                 }
                 break;
         }
@@ -133,14 +153,19 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     private AppConfiguration getConfiguration(){
-        AppConfiguration config = DataSupport.findFirst(AppConfiguration.class);
+        AppConfiguration config = realm.where(AppConfiguration.class).findFirst();
         if( config == null ){
-            config = new AppConfiguration();
-            config.setLanguage("pt-br");
-            changeLocale("pt-br");
-            config.setShowWord(true);
-            config.save();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    AppConfiguration config = realm.createObject(AppConfiguration.class, 1);
+                    config.setLanguage("pt-br");
+                    changeLocale("pt-br");
+                    config.setShowWord(true);
+                }
+            });
         }
+        config = realm.where(AppConfiguration.class).findFirst();
         return config;
     }
 
@@ -162,6 +187,11 @@ public class SettingsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MenuActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 
 }

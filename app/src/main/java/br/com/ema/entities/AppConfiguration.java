@@ -1,24 +1,22 @@
 package br.com.ema.entities;
 
+import java.util.UUID;
 
-import org.litepal.annotation.Column;
-import org.litepal.crud.DataSupport;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-public class AppConfiguration extends DataSupport {
+public class AppConfiguration extends RealmObject {
 
-    private int id;
-    @Column
-    Boolean showWord;
-    @Column
-    String language;
+    @PrimaryKey
+    private String id = UUID.randomUUID().toString();
+    private Boolean showWord;
+    private String language;
 
-    //TODO add user to configuration.
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

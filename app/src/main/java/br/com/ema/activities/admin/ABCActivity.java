@@ -29,9 +29,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-
-import org.litepal.crud.DataSupport;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,20 +36,23 @@ import java.util.List;
 import br.com.ema.entities.Challenge;
 import br.com.ema.entities.SimpleChallenge;
 import br.com.ema.entities.Student;
-import br.com.ema.entities.relations.StudentChallenge;
 import br.com.ema.R;
+import br.com.ema.util.ContentUtils;
+import io.realm.Realm;
 
 public class ABCActivity extends AppCompatActivity {
     private static final String TAG = "ABCActivity";
     final ArrayList<View> mCheckedViews = new ArrayList<View>();
     List<String> wordsList = new ArrayList<>();
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        realm = Realm.getDefaultInstance();
         setContentView(R.layout.activity_abc);
-        List<Student> studentsList = DataSupport.findAll(Student.class,true);  //new Select().from(Student.class).queryList();
-        List<SimpleChallenge> simpleChallenges = DataSupport.findAll(SimpleChallenge.class, true); //  new Select().from(SimpleChallenge.class).queryList();
+        List<Student> studentsList = realm.where(Student.class).findAll();  //new Select().from(Student.class).queryList();
+        List<SimpleChallenge> simpleChallenges = realm.where(SimpleChallenge.class).findAll(); //  new Select().from(SimpleChallenge.class).queryList();
         final ListView users = (ListView) findViewById(R.id.studentslistView);
         final ListView words = (ListView) findViewById(R.id.wordsListView);
 
@@ -170,8 +170,7 @@ public class ABCActivity extends AppCompatActivity {
         Object user = users.getAdapter().getItem(users.getCheckedItemPosition());
         Log.d(TAG, "For user " + user.toString());
 
-        //Student student = new Select().from(Student.class).where(Condition.column(Student$Table.NICKNAME).eq(user.toString())).querySingle();
-        Student student = DataSupport.where("nickname = ?", user.toString()).find(Student.class).get(0); //TODO improve
+        final Student student = realm.where(Student.class).equalTo("nickname",user.toString()).findFirst();
         Log.d(TAG, "Words: " + user.toString());
         int length = words.getCount();
         SparseBooleanArray checked = words.getCheckedItemPositions();
@@ -179,25 +178,19 @@ public class ABCActivity extends AppCompatActivity {
             if (checked.get(i)) {
                 String word = wordsList.get(i);
                 Log.d(TAG, word);
-                SimpleChallenge tempChallenge = DataSupport.where("word = ?", word).find(SimpleChallenge.class).get(0);
-                Challenge challenge = new Challenge();
-                challenge.setName(tempChallenge.getWord());
-                challenge.setImagePath(tempChallenge.getImagePath());
-                challenge.setText(tempChallenge.getWord());
-                boolean sChallenge = challenge.save();
-                challenge.getStudents().add(student);
-                if(!sChallenge){
-                    Log.w(TAG, "Challenge not updated!");
-                }
-                student.getChallenges().add(challenge);
-                boolean sSaved = student.save();
-                if(!sSaved){
-                    Log.w(TAG, "Student not updated!");
-                }
-                challenge.save();
-                // workaround to solve the many2many queries.
-                StudentChallenge r = new StudentChallenge(student.getId(), challenge.getId());
-                r.save();
+                final SimpleChallenge tempChallenge = realm.where(SimpleChallenge.class).equalTo("word",word).findFirst();
+
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        Challenge challenge = new Challenge();
+                        challenge.setName(tempChallenge.getWord());
+                        challenge.setImage(tempChallenge.getImage());
+                        challenge.setText(tempChallenge.getWord());
+                        student.getChallenges().add(challenge);
+                        realm.insertOrUpdate(student);
+                    }
+                });
             }
         }
     }
@@ -206,8 +199,7 @@ public class ABCActivity extends AppCompatActivity {
         final ListView users = (ListView) findViewById(R.id.studentslistView);
         Object user = users.getAdapter().getItem(users.getCheckedItemPosition());
         Log.d(TAG, "For user " + user.toString());
-        Student student = DataSupport.where("nickname = ?", user.toString() ).find(Student.class).get(0);
-        final ListView words = (ListView) findViewById(R.id.wordsListView);
+        Student student = realm.where(Student.class).equalTo("nickname",user.toString()).findFirst();final ListView words = (ListView) findViewById(R.id.wordsListView);
         //TODO check saved items.
         final StableArrayAdapter adapter3 = new StableArrayAdapter(this,
                 android.R.layout.simple_list_item_multiple_choice,
@@ -227,5 +219,10 @@ public class ABCActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MenuActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 }

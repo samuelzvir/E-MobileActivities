@@ -1,28 +1,26 @@
 package br.com.ema.entities;
 
-import org.litepal.annotation.Column;
-import org.litepal.crud.DataSupport;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
-public class Challenge  extends DataSupport implements Serializable{
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-    private int id;
-    @Column
+public class Challenge  extends RealmObject implements Serializable{
+
+    @PrimaryKey
+    private String id = UUID.randomUUID().toString();
     private String name;
-    @Column
     private String text;
-    @Column
-    private String imagePath;
-    private List<Student> students = new ArrayList<>();
+    private byte[] image;
+    private RealmList<Student> students;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -42,19 +40,18 @@ public class Challenge  extends DataSupport implements Serializable{
         this.text = text;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public byte[] getImage() {
+        return image;
+    }
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public List<Student> getStudents() {
+    public RealmList<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(RealmList<Student> students) {
         this.students = students;
     }
 }
