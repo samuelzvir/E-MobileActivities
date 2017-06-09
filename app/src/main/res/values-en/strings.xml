@@ -12,6 +12,7 @@
     <string name="sound">Sound</string>
     <string name="ok">OK</string>
     <string name="noWordsMessage">This user does not have registered activity. Please Contact the Administrator</string>
+    <string name="NeedUserWords">Need user(s) and word(s)</string>
     <string name="you">You</string>
     <string name="made">made</string>
     <string name="points">point(s)</string>
