@@ -16,6 +16,7 @@
     <string name="made">fez</string>
     <string name="points">ponto(s)</string>
     <string name="noWordsMessage">Este usuário não possui atividade cadastrada. Por favor Contate o Administrador</string>
+    <string name="NeedUserWords">Precisa de usuário(s) e palavra(s)</string>
     <string name="title_activity_receive_text">ReceivTextActivity</string>
     <string name="playedActivities">Atividades jogadas</string>
     <string name="highestPointing">Pontuação mais alta</string>

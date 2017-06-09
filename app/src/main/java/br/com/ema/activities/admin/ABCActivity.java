@@ -16,6 +16,7 @@
 
 package br.com.ema.activities.admin;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -33,11 +34,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import br.com.ema.dialogs.EmptyUsersWordsDialog;
 import br.com.ema.entities.Challenge;
 import br.com.ema.entities.SimpleChallenge;
 import br.com.ema.entities.Student;
 import br.com.ema.R;
-import br.com.ema.util.ContentUtils;
 import io.realm.Realm;
 
 public class ABCActivity extends AppCompatActivity {
@@ -45,6 +46,7 @@ public class ABCActivity extends AppCompatActivity {
     final ArrayList<View> mCheckedViews = new ArrayList<View>();
     List<String> wordsList = new ArrayList<>();
     private Realm realm;
+    private boolean ready = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,12 @@ public class ABCActivity extends AppCompatActivity {
         List<SimpleChallenge> simpleChallenges = realm.where(SimpleChallenge.class).findAll(); //  new Select().from(SimpleChallenge.class).queryList();
         final ListView users = (ListView) findViewById(R.id.studentslistView);
         final ListView words = (ListView) findViewById(R.id.wordsListView);
-
+        if(studentsList.isEmpty() && simpleChallenges.isEmpty()){
+            ready = false;
+            EmptyUsersWordsDialog dialog = new EmptyUsersWordsDialog();
+            FragmentManager fm = getFragmentManager();
+            dialog.show(fm, "finish.");
+        }
         List<String> studentsNamesList = new ArrayList<>();
         for (Student s : studentsList){ // populate the words
             studentsNamesList.add(s.getNickname());
@@ -164,7 +171,9 @@ public class ABCActivity extends AppCompatActivity {
     }
 
     public void saveGame(View view){
-        Log.d(TAG,"Saving game");
+        if(ready){
+            Log.d(TAG,"Saving game");
+
         final ListView users = (ListView) findViewById(R.id.studentslistView);
         final ListView words = (ListView) findViewById(R.id.wordsListView);
         Object user = users.getAdapter().getItem(users.getCheckedItemPosition());
@@ -193,6 +202,8 @@ public class ABCActivity extends AppCompatActivity {
                 });
             }
         }
+        }
+        this.finish();
     }
 
     private void fillCheckedWords(){
