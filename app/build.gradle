@@ -32,5 +32,6 @@ dependencies {
     compile 'com.android.support:support-v4:23.1.+'
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
     compile 'me.grantland:autofittextview:0.2.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 

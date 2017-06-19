@@ -15,16 +15,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -40,70 +41,71 @@ import br.com.ema.entities.Student;
 import br.com.ema.services.Speaker;
 
 import io.realm.Realm;
-import me.grantland.widget.AutofitTextView;
 
 public class StudentGameActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
-
         private static final String TAG = "StudentGameActivity";
         private Vibrator vibrator;
         private final int CHECK_CODE = 0x1;
-        private String word = new String();
+        private String word = "";
         private List<Challenge> wordList;
         private Random generator = new Random();
-        private String answerString = new String();
+        private String answerString = "";
         private EditText answerText;
-        private TextView info;
-        private GridLayout scrambledLayout;
+        private LinearLayout scrambledLayout;
         private MediaPlayer correctSound;
         private MediaPlayer wrongSound;
         private Button nextButton;
-        private Button clearButton;
-
-        private static Speaker speaker;
-        private ToggleButton toggle;
-        private CompoundButton.OnCheckedChangeListener toggleListener;
+        private ImageButton clearButton;
         private Student student;
         private int counter = 0;
         private static int points = 0;
         private PlayStats activityStats;
         private boolean help;
         private Realm realm;
+        private Speaker speaker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-            realm = Realm.getDefaultInstance();
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_student_game);
-            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-            Intent intent = getIntent();
-            String studentId = intent.getStringExtra("studentId");
-            student = realm.where(Student.class).equalTo("id", studentId).findFirst();
-            Log.i(TAG,"Student "+ student.getNickname()+", ID = "+studentId );
-            Log.i(TAG,"With "+student.getChallenges().size()+" challenges.");
-            nextButton = (Button) findViewById(R.id.nextButton);
-            nextButton.setOnClickListener(this);
-            clearButton = (Button) findViewById(R.id.clear);
-            clearButton.setOnClickListener(this);
-            answerText = (EditText) findViewById(R.id.answer);
-            correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
-            wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
-            AppConfiguration config = realm.where(AppConfiguration.class).findFirst();
-            this.help = config.getShowWord();
-            this.wordList = student.getChallenges();
-            if(wordList.size() > 0){
-                startWord();
-                Log.d(TAG, "creating activity stats...");
-                activityStats = new PlayStats();
-                activityStats.setStart(new Date());
-                activityStats.setTotalPoints(0);
-                Log.d(TAG, "created.");
-            }else{
-                //alert informing that the student does not have any words registered for him.
-                NoWordsRegisteredDialog wordsRegisteredDialog = new NoWordsRegisteredDialog();
-                FragmentManager fm = getFragmentManager();
-                wordsRegisteredDialog.show(fm,"no words");
-            }
+        realm = Realm.getDefaultInstance();
+        super.onCreate(savedInstanceState);
+        //start speaker
+        speaker = new Speaker(getApplicationContext());
+        setContentView(R.layout.activity_student_game);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        Intent intent = getIntent();
+        String studentId = intent.getStringExtra("studentId");
+        student = realm.where(Student.class).equalTo("id", studentId).findFirst();
+        Log.i(TAG,"Student "+ student.getNickname()+", ID = "+studentId );
+        Log.i(TAG,"With "+student.getChallenges().size()+" challenges.");
+        nextButton = (Button) findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(this);
+        clearButton = (ImageButton) findViewById(R.id.backspaceBtn);
+        clearButton.setOnClickListener(this);
+        answerText = (EditText) findViewById(R.id.awnser);
+        correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
+        wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
+        AppConfiguration config = realm.where(AppConfiguration.class).findFirst();
+        //set space button
+        Button spaceButton = (Button)findViewById(R.id.spaceBtn);
+        spaceButton.setOnTouchListener(this);
+        spaceButton.setOnClickListener(this);
+        //---
+        this.help = config.getShowWord();
+        this.wordList = student.getChallenges();
+        if(wordList.size() > 0){
+           startWord();
+           Log.d(TAG, "creating activity stats...");
+           activityStats = new PlayStats();
+           activityStats.setStart(new Date());
+           activityStats.setTotalPoints(0);
+           Log.d(TAG, "created.");
+        }else{
+             //alert informing that the student does not have any words registered for him.
+             NoWordsRegisteredDialog wordsRegisteredDialog = new NoWordsRegisteredDialog();
+             FragmentManager fm = getFragmentManager();
+             wordsRegisteredDialog.show(fm,"no words");
         }
+    }
 
     @Override
     protected void onDestroy(){
@@ -120,11 +122,6 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         if(speaker != null){
             speaker.destroy();
         }
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
     }
 
     /**
@@ -149,133 +146,155 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         }else {
             word = challenge.getText();
             if(help){
-                AutofitTextView helpText = (AutofitTextView) findViewById(R.id.helpText);
-                helpText.setTextSize(75);
+                TextView helpText = (TextView) findViewById(R.id.tip);
                 helpText.setText(word.toUpperCase());
             }
             String scrambledWord = scramble(word);
-            scrambledLayout = (GridLayout) findViewById(R.id.scrambled);
+            scrambledLayout = (LinearLayout) findViewById(R.id.keyboardLayout);
             setImageView(challenge.getImage(), word);
 
-            info = (TextView) findViewById(R.id.information);
             Set<Character> letters = new HashSet<>();
-
             for (int i = 0; i < scrambledWord.length(); i++) {
-                if(!letters.contains(scrambledWord.charAt(i))){
-                    letters.add(scrambledWord.charAt(i));
-                    //TODO add button
-                    Button  button = new Button(this);
-                    button.setId(i);
-                    button.setText(Character.toString(scrambledWord.charAt(i)).toUpperCase());
-                    button.setTextSize(55);
-                    button.setOnTouchListener(this);
-                    button.setOnClickListener(this);
-                    //button.setBackgroundColor(Color.RED);
-                    scrambledLayout.addView(button);
-                }
+                letters.add(scrambledWord.charAt(i));
             }
-            toggle = (ToggleButton) findViewById(R.id.speechToggle);
 
-            toggleListener = new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton view, boolean isChecked) {
-                    if (isChecked) {
-                        speaker.allow(true);
-                        speaker.speak(word);
-                    } else {
-                        speaker.speak(word);
-                        speaker.allow(false);
+            if(letters.size() <= 10){
+                LinearLayout row = new LinearLayout(this);
+                row.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                row.setOrientation(LinearLayout.HORIZONTAL);
+                Iterator<Character> characters = letters.iterator();
+                while (characters.hasNext()) {
+                    Character c = characters.next();
+                    String l = Character.toString(c).toUpperCase();
+                    if (!l.trim().isEmpty()) {
+                        Button button = new Button(this);
+                        button.setId(c);
+                        button.setLayoutParams(new LinearLayout.LayoutParams(125, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        button.setText(Character.toString(c).toUpperCase());
+                        button.setTextSize(12);
+                        button.setMinHeight(5);
+                        button.setOnTouchListener(this);
+                        button.setOnClickListener(this);
+                        row.addView(button);
                     }
                 }
-            };
-            toggle.setOnCheckedChangeListener(toggleListener);
-            checkTTS();
+                scrambledLayout.addView(row);
+            }else{
+                LinearLayout row = new LinearLayout(this);
+                row.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                row.setOrientation(LinearLayout.HORIZONTAL);
+                Iterator<Character> characters = letters.iterator();
+                int counter = 0;
+                while (characters.hasNext()) {
+                    Character c = characters.next();
+                    counter++;
+                    String l = Character.toString(c).toUpperCase();
+                    if (!l.trim().isEmpty()) {
+                        Button button = new Button(this);
+                        button.setId(c);
+                        button.setLayoutParams(new LinearLayout.LayoutParams(125, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        button.setText(Character.toString(c).toUpperCase());
+                        button.setTextSize(12);
+                        button.setMinHeight(5);
+                        button.setOnTouchListener(this);
+                        button.setOnClickListener(this);
+                        row.addView(button);
+                    }
+                    if(counter % 10 == 0){
+                        scrambledLayout.addView(row);
+                        row = new LinearLayout(this);
+                        row.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        row.setOrientation(LinearLayout.HORIZONTAL);
+                    }
+                }
+                scrambledLayout.addView(row); // last line
+            }
         }
     }
 
 
+    /**
+     * Method called to speak the current word of the activity.
+     * @param view
+     */
+    public void speak(View view){
+        speaker.speak(word);
+    }
+
+
+    /**
+     * Method to process the actions of the buttons.
+     * @param v
+     */
     public void onClick(View v){
-        TextView clicked = (TextView) findViewById(v.getId());
-
-        if(answerText.getText().toString().length() == 0){
-            clearButton.setEnabled(Boolean.FALSE);
-        }
-
         if(clearButton.getId() == v.getId()){
-            if(answerText.getText().toString().length() == 1){
+            if(answerText.getText().toString().length() == 0){
                 clearButton.setEnabled(Boolean.FALSE);
+            }else {
+                answerText.setText(answerText.getText().toString().substring(0, answerText.getText().toString().length() - 1));
+                answerString = answerString.substring(0, answerString.length() - 1);
             }
-            answerText.setText(answerText.getText().toString().substring(0, answerText.getText().toString().length()-1));
-            answerString = answerString.substring(0, answerString.length()-1);
-        }
-        else if(nextButton.getId() == v.getId()) {
-            clearButton.setEnabled(Boolean.FALSE);
-            scrambledLayout.removeAllViews();
-            answerText.setText("");
-            answerString = "";
-            answerText.setTextColor(Color.rgb(0, 0, 0));
-            info.setTextColor(Color.DKGRAY);
-            info.setText(R.string.build_the_words);
-            info.setBackgroundColor(Color.TRANSPARENT);
-            //TODO
-            startWord();
-        }
-        else {
-            clearButton.setEnabled(Boolean.TRUE);
-            answerText.setText(answerText.getText().toString() + clicked.getText());
-            answerString += clicked.getText();
-
-            try {
-                if(answerString.length() == word.length()){
-                    if(answerString.equalsIgnoreCase(word)){
-                        clearButton.setEnabled(Boolean.FALSE);
-                        info.setBackgroundColor(Color.rgb(33, 196, 18));
-                        info.setTextColor(Color.WHITE);
-                        info.setText(R.string.correct);
-                        answerText.setTextColor(Color.rgb(33, 196, 18));
-                        correctSound.start();
-                        activityStats.addPoint(1);
-                        points++;
-                        new Handler().postDelayed(new Runnable()
-                        {
-                            @Override
-                            public void run()
-                            {
-                                scrambledLayout.removeAllViews();
-                                answerText.setText("");
-                                answerString = "";
-                                answerText.setTextColor(Color.rgb(0, 0, 0));
-                                info.setTextColor(Color.DKGRAY);
-                                info.setText(R.string.build_the_words);
-                                info.setBackgroundColor(Color.TRANSPARENT);
-                                startWord();
-                            }
-                        }, 1200);
-                    }
-                    else {
-                        clearButton.setEnabled(Boolean.FALSE);
-                        info.setBackgroundColor(Color.rgb(255, 0, 0));
-                        info.setTextColor(Color.WHITE);
-                        info.setText(R.string.wrong);
-                        answerText.setTextColor(Color.rgb(255, 0, 0));
-                        wrongSound.start();
-                        vibrator.vibrate(1500);
-
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                answerString = "";
-                                answerText.setText("");
-                                answerText.setTextColor(Color.rgb(0, 0, 0));
-                                info.setTextColor(Color.DKGRAY);
-                                info.setText(R.string.try_again);
-                                info.setBackgroundColor(Color.TRANSPARENT);
-                            }
-                        }, 1200);
-                    }
+        }else{
+            TextView clicked = (TextView) findViewById(v.getId());
+            if(nextButton.getId() == v.getId()) {
+                clearButton.setEnabled(Boolean.FALSE);
+                scrambledLayout.removeAllViews();
+                answerText.setText("");
+                answerString = "";
+                answerText.setTextColor(Color.rgb(0, 0, 0));
+                startWord();
+            }
+            else {
+                clearButton.setEnabled(Boolean.TRUE);
+                if(clicked.getText().toString().trim().isEmpty()){
+                    answerText.setText(answerText.getText().toString() + " ");
+                    answerString += " ";
+                }else{
+                    answerText.setText(answerText.getText().toString() + clicked.getText());
+                    answerString += clicked.getText();
                 }
-            } catch (Exception e){
-                e.printStackTrace();
+
+                try {
+                    if(answerString.length() == word.length()){
+                        if(answerString.equalsIgnoreCase(word)){
+                            clearButton.setEnabled(Boolean.FALSE);
+                            answerText.setTextColor(Color.rgb(33, 196, 18));
+                            correctSound.start();
+                            activityStats.addPoint(1);
+                            points++;
+                            new Handler().postDelayed(new Runnable()
+                            {
+                                @Override
+                                public void run()
+                                {
+                                    scrambledLayout.removeAllViews();
+                                    answerText.setText("");
+                                    answerString = "";
+                                    answerText.setTextColor(Color.rgb(0, 0, 0));
+                                    startWord();
+                                }
+                            }, 1200);
+                        }
+                        else {
+                            clearButton.setEnabled(Boolean.FALSE);
+                            answerText.setTextColor(Color.rgb(255, 0, 0));
+                            wrongSound.start();
+                            vibrator.vibrate(1500);
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    answerString = "";
+                                    answerText.setText("");
+                                    answerText.setTextColor(Color.rgb(0, 0, 0));
+                                    //TODO add
+                                }
+                            }, 1200);
+                        }
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -339,23 +358,14 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         return false;
     }
 
-
-    private void checkTTS(){
-        Intent check = new Intent();
-        check.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
-        startActivityForResult(check, CHECK_CODE);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == CHECK_CODE){
             if(resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS){
-                //TODO check bug
                 if(speaker == null){
                     speaker = new Speaker(this);
                 }else{
                     speaker.destroy();
-                    //TODO check bound error
                     speaker = new Speaker(this);
                 }
             }else {
@@ -393,6 +403,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         });
         dialog.show(fm, "finish the game");
     }
+
 
     public static int getPoints() {
         return points;
