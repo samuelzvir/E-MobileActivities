@@ -27,9 +27,8 @@
         android:text="@string/play"
         android:id="@+id/play"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:drawableTop="@drawable/ic_puzzle_black_48dp"
-        android:onClick="toPlay"
-        android:textSize="12sp" />
+        android:drawableTop="@drawable/abc"
+        android:onClick="toPlay" />
 
     <Button
         android:layout_width="match_parent"
@@ -38,9 +37,8 @@
         android:text="@string/logout"
         android:layout_gravity="center_vertical|center_horizontal"
         android:id="@+id/button"
-        android:drawableTop="@drawable/ic_directions_run_black_48dp"
-        android:onClick="logout"
-        android:textSize="12sp" />
+        android:drawableTop="@drawable/exit_64dp"
+        android:onClick="logout" />
 
 
 </LinearLayout>

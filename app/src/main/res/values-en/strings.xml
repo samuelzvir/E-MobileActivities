@@ -59,6 +59,7 @@
     <string name="play">Play</string>
     <string name="words">Words</string>
     <string name="Word">Word</string>
+    <string name="wordAudio">Word audio</string>
     <string name="deleteWord">Delete Word</string>
     <string name="deleteUsers">Delete User(s)</string>
     <string name="updateUser">Update User</string>
@@ -120,4 +121,7 @@
     <string name="ChooseAnotherName">Choose another name.</string>
     <string name="imageOf">Image of </string>
     <string name="logo">Logo</string>
+    <string name="comma">,</string>
+    <string name="keySpace">          </string>
+    <string name="erase">erase</string>
 </resources>
