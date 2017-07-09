@@ -33,13 +33,15 @@
             android:layout_height="0dp"
             android:layout_gravity="center_vertical|center_horizontal"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="102dp"
             app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" />
+            app:layout_constraintHorizontal_bias="0.1"
+            android:progress="25"/>
 
         <ImageView
             android:id="@+id/scrambbleImage"
@@ -159,8 +161,7 @@
         app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteX="209dp">
+        app:layout_constraintRight_toRightOf="parent">
 
         <Button
             android:id="@+id/spaceBtn"
@@ -217,6 +218,19 @@
         app:layout_constraintVertical_bias="1.0">
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/progressValue"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/zero"
+        app:layout_constraintLeft_toRightOf="@+id/progressBar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp" />
 
 </android.support.constraint.ConstraintLayout>
 
