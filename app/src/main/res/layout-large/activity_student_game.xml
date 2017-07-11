@@ -215,8 +215,8 @@
 
     <LinearLayout
         android:id="@+id/keyboardLayout"
-        android:layout_width="581dp"
-        android:layout_height="219dp"
+        android:layout_width="792dp"
+        android:layout_height="217dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -227,7 +227,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/awnser">
+        app:layout_constraintTop_toBottomOf="@+id/awnser"
+        tools:layout_editor_absoluteX="0dp">
 
     </LinearLayout>
 

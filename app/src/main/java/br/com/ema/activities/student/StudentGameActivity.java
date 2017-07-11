@@ -52,8 +52,8 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         private String answerString = "";
         private EditText answerText;
         private LinearLayout scrambledLayout;
-        private MediaPlayer correctSound;
-        private MediaPlayer wrongSound;
+        private MediaPlayer correctSound = null;
+        private MediaPlayer wrongSound = null;
         private Button nextButton;
         private ImageButton clearButton;
         private Student student;
@@ -82,8 +82,11 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         clearButton = (ImageButton) findViewById(R.id.backspaceBtn);
         clearButton.setOnClickListener(this);
         answerText = (EditText) findViewById(R.id.awnser);
-        correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
-        wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
+        AppConfiguration appConfiguration = realm.where(AppConfiguration.class).findFirst();
+        if(appConfiguration.getSound()){
+            correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
+            wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
+        }
         AppConfiguration config = realm.where(AppConfiguration.class).findFirst();
         //set space button
         Button spaceButton = (Button)findViewById(R.id.spaceBtn);
@@ -259,7 +262,9 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                         if(answerString.equalsIgnoreCase(word)){
                             clearButton.setEnabled(Boolean.FALSE);
                             answerText.setTextColor(Color.rgb(33, 196, 18));
-                            correctSound.start();
+                            if(correctSound != null){
+                                correctSound.start();
+                            }
                             activityStats.addPoint(1);
                             points++;
                             new Handler().postDelayed(new Runnable()
@@ -278,7 +283,9 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                         else {
                             clearButton.setEnabled(Boolean.FALSE);
                             answerText.setTextColor(Color.rgb(255, 0, 0));
-                            wrongSound.start();
+                            if(wrongSound != null){
+                                wrongSound.start();
+                            }
                             vibrator.vibrate(1500);
 
                             new Handler().postDelayed(new Runnable() {

@@ -130,18 +130,20 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/onRadioButton"
+                android:id="@+id/soundOn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/turnOn" />
+                android:text="@string/turnOn"
+                android:onClick="onSoundClicked"/>
 
             <RadioButton
-                android:id="@+id/offRadioButton"
+                android:id="@+id/soundOff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="@string/turnOff" />
+                android:text="@string/turnOff"
+                android:onClick="onSoundClicked"/>
         </RadioGroup>
     </LinearLayout>
 
@@ -164,15 +166,17 @@
             android:layout_height="wrap_content"
             android:text="@string/goBack"
             android:id="@+id/goBackBtn"
-            android:onClick="goBack"/>
+            android:onClick="goBack"
+            tools:ignore="ButtonStyle" />
 
         <Button
-            android:theme="@style/BlueButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/BlueButton"
             android:text="@string/save"
             android:id="@+id/menuButton"
-            android:onClick="save" />
+            android:onClick="save"
+            tools:ignore="ButtonStyle"/>
 
     </LinearLayout>
 </LinearLayout>
