@@ -7,6 +7,10 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
+
+/**
+ * Challenge associated to user(s)
+ */
 public class Challenge  extends RealmObject implements Serializable{
 
     @PrimaryKey
@@ -14,6 +18,7 @@ public class Challenge  extends RealmObject implements Serializable{
     private String name;
     private String text;
     private byte[] image;
+    private int imageRotation;
     private RealmList<Student> students;
 
     public String getId() {
@@ -53,5 +58,13 @@ public class Challenge  extends RealmObject implements Serializable{
 
     public void setStudents(RealmList<Student> students) {
         this.students = students;
+    }
+
+    public int getImageRotation() {
+        return imageRotation;
+    }
+
+    public void setImageRotation(int imageRotation) {
+        this.imageRotation = imageRotation;
     }
 }

@@ -132,5 +132,6 @@
     <string name="keySpace">          </string>
     <string name="erase">apagar</string>
     <string name="zero">0</string>
+    <string name="rotate">girar</string>
 
 </resources>

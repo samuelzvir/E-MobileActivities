@@ -2,10 +2,12 @@ package br.com.ema.activities.student;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.ExifInterface;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -157,7 +159,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             }
             String scrambledWord = scramble(word);
             scrambledLayout = (LinearLayout) findViewById(R.id.keyboardLayout);
-            setImageView(challenge.getImage(), word);
+            setImageView(challenge.getImage(), word, challenge.getImageRotation());
 
             Set<Character> letters = new HashSet<>();
             for (int i = 0; i < scrambledWord.length(); i++) {
@@ -390,13 +392,14 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
      * Sets the image path and the content description
      * @param contentDescription
      */
-    private void setImageView(byte[] image, String contentDescription) {
+    private void setImageView(byte[] image, String contentDescription, int rotation) {
         if (image != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
             ImageView imageView = (ImageView) findViewById(R.id.scrambbleImage);
             String prefix = getString(R.string.imageOf);
             imageView.setContentDescription(prefix+contentDescription);
             imageView.setImageBitmap(bitmap);
+            imageView.setRotation(rotation);
         }
     }
 
@@ -421,6 +424,34 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
 
     public static void setPoints(int points) {
         StudentGameActivity.points = points;
+    }
+
+
+    public int getCameraPhotoOrientation(Context context, Bitmap image){
+        int rotate = 0;
+        try {
+
+            ExifInterface exif = new ExifInterface("");
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotate = 270;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotate = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotate = 90;
+                    break;
+            }
+
+            Log.i("RotateImage", "Exif orientation: " + orientation);
+            Log.i("RotateImage", "Rotate value: " + rotate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rotate;
     }
 
 }

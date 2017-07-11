@@ -196,6 +196,7 @@ public class ABCActivity extends AppCompatActivity {
                         challenge.setName(tempChallenge.getWord());
                         challenge.setImage(tempChallenge.getImage());
                         challenge.setText(tempChallenge.getWord());
+                        challenge.setImageRotation(tempChallenge.getImageRotation());
                         student.getChallenges().add(challenge);
                         realm.insertOrUpdate(student);
                     }

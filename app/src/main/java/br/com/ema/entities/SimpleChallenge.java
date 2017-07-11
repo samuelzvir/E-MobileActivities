@@ -12,6 +12,7 @@ public class SimpleChallenge  extends RealmObject implements Serializable{
     public String id = UUID.randomUUID().toString();
     private String word;
     private byte[] image;
+    private int imageRotation;
     private String wordType;
     private double points;
 
@@ -49,5 +50,13 @@ public class SimpleChallenge  extends RealmObject implements Serializable{
 
     public void setPoints(double points) {
         this.points = points;
+    }
+
+    public int getImageRotation() {
+        return imageRotation;
+    }
+
+    public void setImageRotation(int imageRotation) {
+        this.imageRotation = imageRotation;
     }
 }

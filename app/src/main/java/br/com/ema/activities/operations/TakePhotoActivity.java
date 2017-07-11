@@ -18,6 +18,7 @@ package br.com.ema.activities.operations;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,8 @@ public class TakePhotoActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView mImageView;
     private String text;
+    private int rotation = 0;
+    private boolean newPicture = false;
 
     /**
      * onCreate method to set all necessary information to this activity.
@@ -58,6 +61,12 @@ public class TakePhotoActivity extends AppCompatActivity {
             Bundle  extras = data.getExtras();
             Bitmap photo = (Bitmap) extras.get("data");
             mImageView.setImageBitmap(photo);
+            newPicture = true;
+            float rot = mImageView.getRotation();
+            if(rot != 90){
+                mImageView.setRotation(90);
+                rotation = 90;
+            }
             Log.d(TAG,"the image has been set.");
         }
         Intent intent = getIntent();
@@ -78,12 +87,44 @@ public class TakePhotoActivity extends AppCompatActivity {
      */
     public void toChallenge(View view){
         Intent intent = new Intent(this,CreateTextActivity.class);
-        if(mImageView != null) {
+        if(mImageView != null && newPicture) {
             intent.putExtra("photo", ((BitmapDrawable)mImageView.getDrawable()).getBitmap());
+            intent.putExtra("imageRotation", rotation);
         }
         intent.putExtra("text", this.text);
         startActivity(intent);
         finish();
+    }
+
+    /**
+     * Method to rotate bitmaps
+     * @param source
+     * @param angle
+     * @return
+     */
+    public static Bitmap rotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+    }
+
+    public void rotate(View view){
+        if(mImageView != null){
+            if(rotation == 0){
+                mImageView.setRotation(90);
+                rotation = 90;
+            }else if(rotation == 90){
+                mImageView.setRotation(180);
+                rotation = 180;
+            }else if(rotation == 180 ){
+                mImageView.setRotation(270);
+                rotation = 270;
+            }else {
+                mImageView.setRotation(0);
+                rotation = 0;
+            }
+        }
     }
 
     protected void onDestroy() {

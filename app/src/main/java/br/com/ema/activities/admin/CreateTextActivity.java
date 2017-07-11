@@ -42,6 +42,7 @@ public class CreateTextActivity extends Activity {
 
     private static final String TAG = "CreateTextActivity";
     private ImageView imageView;
+    private int rotation;
     private String text;
     private Realm realm;
 
@@ -67,8 +68,10 @@ public class CreateTextActivity extends Activity {
         if(photo != null){
             imageView = (ImageView) findViewById(R.id.image);
             imageView.setImageBitmap(photo);
+            imageView.setRotation(90);
             edition = true;
         }
+        this.rotation = intent.getIntExtra("imageRotation",0);
         this.text = intent.getStringExtra("text");
         EditText t = (EditText) findViewById(R.id.word);
         t.setText(this.text);
@@ -78,7 +81,7 @@ public class CreateTextActivity extends Activity {
                     Log.d(TAG, "setting image to the view based on the saved image.");
                     SimpleChallenge temp = sc.get(0);
                     if(temp.getImage() != null && !edition){
-                        setImageView(temp.getImage());
+                        setImageView(temp.getImage(), temp.getImageRotation());
                     }
                 }
             }
@@ -102,6 +105,7 @@ public class CreateTextActivity extends Activity {
     public void saveWord(View view){
         EditText messageView = (EditText) findViewById(R.id.word);
         final String word = messageView.getText().toString();
+        final int rot = rotation;
         //TODO validate save button.
         if(this.text != null){
             List<SimpleChallenge> sc = realm.where(SimpleChallenge.class).equalTo("word",text).findAll();
@@ -115,6 +119,7 @@ public class CreateTextActivity extends Activity {
                         public void execute(Realm realm) {
                             c.setImage(content);
                             c.setWord(word);
+                            c.setImageRotation(rot);
                             realm.insertOrUpdate(c);
                         }
                     });
@@ -131,6 +136,7 @@ public class CreateTextActivity extends Activity {
             if(findViewById(R.id.image) != null){
                 byte[] content = ContentUtils.convertToByteArray(((BitmapDrawable)((ImageView)findViewById(R.id.image)).getDrawable()).getBitmap());
                 simpleChallenge.setImage(content);
+                simpleChallenge.setImageRotation(rot);
             }
             realm.executeTransaction(
                     new Realm.Transaction() {
@@ -178,11 +184,12 @@ public class CreateTextActivity extends Activity {
     /**
      * Adds the image to the view.
      */
-    private void setImageView(byte[] image) {
+    private void setImageView(byte[] image, int rotation) {
         Log.i(TAG, "Adding image ... ");
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         ImageView imageView = (ImageView) findViewById(R.id.image);
         imageView.setImageBitmap(bitmap);
+        imageView.setRotation(rotation);
     }
 
     protected void onDestroy() {

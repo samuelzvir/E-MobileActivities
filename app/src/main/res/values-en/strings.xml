@@ -125,4 +125,5 @@
     <string name="keySpace">          </string>
     <string name="erase">erase</string>
     <string name="zero">0</string>
+    <string name="rotate">rotate</string>
 </resources>
