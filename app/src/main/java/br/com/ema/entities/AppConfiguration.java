@@ -11,6 +11,7 @@ public class AppConfiguration extends RealmObject {
     private String id = UUID.randomUUID().toString();
     private Boolean showWord;
     private String language;
+    private Boolean sound;
 
     public String getId() {
         return id;
@@ -33,5 +34,17 @@ public class AppConfiguration extends RealmObject {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public Boolean getSound() {
+        return sound;
+    }
+
+    public void setSound(Boolean sound) {
+        this.sound = sound;
+    }
+
+    public void setSound(boolean sound) {
+        this.sound = sound;
     }
 }

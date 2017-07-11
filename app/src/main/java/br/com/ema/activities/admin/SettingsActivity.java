@@ -132,6 +132,37 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    public void onSoundClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch (view.getId()) {
+            case R.id.soundOn:
+                if (checked){
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            configuration.setSound(true);
+                            realm.insertOrUpdate(configuration);
+                        }
+                    });
+                }
+                break;
+            case R.id.soundOff:
+                if (checked){
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            configuration.setSound(false);
+                            realm.insertOrUpdate(configuration);
+                        }
+                    });
+                }
+                break;
+        }
+    }
+
     private void setRadioButtons() {
         String language = configuration.getLanguage();
         if (language.equalsIgnoreCase("pt-br")) {
@@ -148,6 +179,14 @@ public class SettingsActivity extends AppCompatActivity {
         } else  {
             ((RadioButton) findViewById(R.id.yesForShowWordRadioButton)).setChecked(false);
             ((RadioButton) findViewById(R.id.dontShowWordRadioButton)).setChecked(true);
+        }
+        Boolean sound = configuration.getSound();
+        if(sound){
+            ((RadioButton) findViewById(R.id.soundOn)).setChecked(true);
+            ((RadioButton) findViewById(R.id.soundOff)).setChecked(false);
+        } else  {
+            ((RadioButton) findViewById(R.id.soundOn)).setChecked(false);
+            ((RadioButton) findViewById(R.id.soundOff)).setChecked(true);
         }
     }
 

@@ -15,6 +15,7 @@ import br.com.ema.entities.Admin;
 import br.com.ema.entities.AppConfiguration;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmObjectSchema;
 
 public class InitialLoadingActivity extends Activity {
 
@@ -28,6 +29,7 @@ public class InitialLoadingActivity extends Activity {
         /* Realm initial config */
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder().build();
+    //    Realm.deleteRealm(config);
         Realm.setDefaultConfiguration(config);
         /*                      */
         realm = Realm.getDefaultInstance();
@@ -60,6 +62,7 @@ public class InitialLoadingActivity extends Activity {
                     AppConfiguration config = new AppConfiguration();
                     config.setLanguage("pt-br");
                     config.setShowWord(true);
+                    config.setSound(true);
                     realm.insertOrUpdate(config);
                 }
             });
