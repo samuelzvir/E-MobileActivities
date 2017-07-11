@@ -82,12 +82,12 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         clearButton = (ImageButton) findViewById(R.id.backspaceBtn);
         clearButton.setOnClickListener(this);
         answerText = (EditText) findViewById(R.id.awnser);
-        AppConfiguration appConfiguration = realm.where(AppConfiguration.class).findFirst();
-        if(appConfiguration.getSound()){
+        AppConfiguration config = realm.where(AppConfiguration.class).findFirst();
+        if(config.getSound()){
             correctSound = MediaPlayer.create(getApplicationContext(), R.raw.correct);
             wrongSound = MediaPlayer.create(getApplicationContext(), R.raw.wrongsound);
         }
-        AppConfiguration config = realm.where(AppConfiguration.class).findFirst();
+
         //set space button
         Button spaceButton = (Button)findViewById(R.id.spaceBtn);
         spaceButton.setOnTouchListener(this);
@@ -151,6 +151,9 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             if(help){
                 TextView helpText = (TextView) findViewById(R.id.tip);
                 helpText.setText(word.toUpperCase());
+            }else{
+                TextView helpText = (TextView) findViewById(R.id.tip);
+                helpText.setText("");
             }
             String scrambledWord = scramble(word);
             scrambledLayout = (LinearLayout) findViewById(R.id.keyboardLayout);
