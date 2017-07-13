@@ -52,7 +52,7 @@ public class StatsActivity extends Activity {
             chooseUser.show(fm,"Choose an user");
         }else{
             String id = student.getId();
-            List<PlayStats> statsActivities = realm.where(PlayStats.class).equalTo("id",id).findAll();
+            List<PlayStats> statsActivities = realm.where(PlayStats.class).equalTo("userId",id).findAll();
             long count = realm.where(PlayStats.class).count();
             Log.i(TAG,"Count: "+count);
             for (PlayStats stats : statsActivities){

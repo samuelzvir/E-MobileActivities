@@ -13,7 +13,7 @@ public class PlayStats  extends RealmObject {
     private Date start;
     private Date end;
     private double totalPoints;
-    private int userId;
+    private String userId;
 
     public String getId() {
         return id;
@@ -47,15 +47,16 @@ public class PlayStats  extends RealmObject {
         this.totalPoints = totalPoints;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public void addPoint(int point){
         this.totalPoints+=point;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 }

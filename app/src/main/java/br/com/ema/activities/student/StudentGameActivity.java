@@ -2,12 +2,10 @@ package br.com.ema.activities.student;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.media.ExifInterface;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -101,6 +99,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
            startWord();
            Log.d(TAG, "creating activity stats...");
            activityStats = new PlayStats();
+           activityStats.setUserId(student.getId());
            activityStats.setStart(new Date());
            activityStats.setTotalPoints(0);
            Log.d(TAG, "created.");
@@ -424,34 +423,6 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
 
     public static void setPoints(int points) {
         StudentGameActivity.points = points;
-    }
-
-
-    public int getCameraPhotoOrientation(Context context, Bitmap image){
-        int rotate = 0;
-        try {
-
-            ExifInterface exif = new ExifInterface("");
-            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-
-            switch (orientation) {
-                case ExifInterface.ORIENTATION_ROTATE_270:
-                    rotate = 270;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_180:
-                    rotate = 180;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_90:
-                    rotate = 90;
-                    break;
-            }
-
-            Log.i("RotateImage", "Exif orientation: " + orientation);
-            Log.i("RotateImage", "Rotate value: " + rotate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return rotate;
     }
 
 }

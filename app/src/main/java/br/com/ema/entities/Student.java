@@ -46,4 +46,5 @@ public class Student  extends RealmObject implements Serializable{
     public void setChallenges(RealmList<Challenge> challenges) {
         this.challenges = challenges;
     }
+
 }

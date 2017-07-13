@@ -29,7 +29,7 @@ public class InitialLoadingActivity extends Activity {
         /* Realm initial config */
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder().build();
-       // Realm.deleteRealm(config);
+      //  Realm.deleteRealm(config);
         Realm.setDefaultConfiguration(config);
         /*                      */
         realm = Realm.getDefaultInstance();
