@@ -16,4 +16,4 @@ E-MobileActivities, short name to "Easy" Mobile Activities, is an Android app bu
    - Realm database
    - Android App built using Java
 #### License
-Apache 2.0
+[Apache 2.0](https://github.com/samuelyuri/E-MobileActivities/blob/master/LICENSE)
