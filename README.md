@@ -12,7 +12,7 @@ E-MobileActivities, short name to "Easy" Mobile Activities, is an Android app bu
   - Scramble activities with multimedia(sound and pictures).
   - Admin panel to manage users, resources to build activities and statistics.
   - Statistics about the performance of the users.
-#### Used technologies/Frameworks to build this project
+#### Used technologies/frameworks to build this project
    - Realm database
    - Android App built using Java
 #### License
