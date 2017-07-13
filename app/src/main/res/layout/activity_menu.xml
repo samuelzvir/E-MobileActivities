@@ -25,7 +25,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:background="@color/white"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.com.ema.activities.admin.MenuActivity"
+    tools:context="com.ema.org.ema.activities.admin.MenuActivity"
     android:weightSum="1">
 
     <LinearLayout
@@ -44,7 +44,7 @@
         </LinearLayout>
 
 
-    <br.com.ema.widget.DashboardLayout
+    <org.ema.widget.DashboardLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 android:id="@+id/button"
                 android:drawableTop="@drawable/ic_directions_run_black_48dp"
                 android:onClick="logout"/>
-    </br.com.ema.widget.DashboardLayout>
+    </org.ema.widget.DashboardLayout>
 
 
 </LinearLayout>

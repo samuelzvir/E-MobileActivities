@@ -25,7 +25,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.com.ema.activities.admin.ProfilesActivity"
+    tools:context="com.ema.org.ema.activities.admin.ProfilesActivity"
     android:weightSum="1">
 
     <LinearLayout

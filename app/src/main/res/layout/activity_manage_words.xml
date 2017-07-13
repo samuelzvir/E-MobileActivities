@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/white"
-        tools:context="br.com.ema.activities.admin.WordsManagementActivity">
+        tools:context="com.ema.org.ema.activities.admin.WordsManagementActivity">
 
     <GridLayout
         android:layout_width="match_parent"

@@ -26,7 +26,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:layout_weight="0.3"
-    tools:context="br.com.ema.activities.admin.ABCActivity">
+    tools:context="com.ema.org.ema.activities.admin.ABCActivity">
 
     <TextView
         android:id="@+id/usersTitle"

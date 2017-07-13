@@ -78,6 +78,7 @@
     <string name="cancel">Cancel</string>
     <string name="onlyOneToEdit">Check only one user to edit</string>
     <string name="checkOneToEdit">Choose one user to edit</string>
+    <string name="areYouSure">Are you sure?</string>
 
 
     <string name="level">Level</string>

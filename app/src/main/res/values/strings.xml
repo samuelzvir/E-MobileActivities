@@ -124,8 +124,6 @@
     <string name="No">Não</string>
     <string name="ChooseAnotherNameAdm">Escolha outro nome, este é o nome do administrador.</string>
     <string name="ChooseAnotherName">Escolha outro nome.</string>
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="imageOf">Imagem de </string>
     <string name="logo">Logo</string>
     <string name="comma">,</string>
