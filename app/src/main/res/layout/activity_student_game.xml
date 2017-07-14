@@ -21,7 +21,7 @@
         android:id="@+id/MainLayout"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context="com.ema.org.ema.activities.student.StudentGameActivity"
+        tools:context="org.ema.activities.student.StudentGameActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.10">
