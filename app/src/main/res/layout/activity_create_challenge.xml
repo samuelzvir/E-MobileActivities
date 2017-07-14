@@ -14,42 +14,41 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:id="@+id/MainLayout"
     android:background="@color/white"
     android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context="org.ema.activities.admin.CreateTextActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.20"
-        android:orientation="horizontal">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="362dp"
+            android:layout_height="55dp"
             android:gravity="center"
             android:textColor="@color/blue"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Word"
             android:id="@+id/textView"
             android:textSize="40sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.30"
-        android:orientation="horizontal">
-
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/image"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.0" />
         <ImageView
             android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="360dp"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:contentDescription="@string/image"
@@ -62,32 +61,21 @@
             android:paddingRight="2dp"
             android:paddingStart="2dp"
             android:paddingTop="2dp"
-            android:src="@drawable/ic_photo_black_48dp" />
-    </LinearLayout>
+            android:src="@drawable/ic_photo_black_48dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/word" />
 
-
-
-
-    <LinearLayout
-        android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.20"
-        android:layout_gravity="center"
-        android:background="@color/white"
-        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/word"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
             android:layout_margin="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="2dp"
             android:adjustViewBounds="true"
             android:background="@color/blue"
             android:ems="10"
@@ -101,36 +89,51 @@
             android:paddingStart="2dp"
             android:paddingTop="2dp"
             android:textSize="24sp"
-            android:textStyle="bold" />
-        </LinearLayout>
+            android:textStyle="bold"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/send" />
 
-    <LinearLayout
-        android:id="@+id/actions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="0.10"
-        android:background="@color/white"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/cancel"
-            style="@style/DashboardButton"
-            android:drawableTop="@drawable/ic_cancel_black_48dp"
-            android:onClick="toWordsList"
-            android:text="@string/cancel" />
-        <Button
+    <Button
             android:id="@+id/send"
             style="@style/DashboardButton"
             android:drawableTop="@drawable/ic_save_black_48dp"
             android:onClick="saveWord"
-            android:text="@string/save" />
+            android:text="@string/save"
+        app:layout_constraintRight_toLeftOf="@+id/takePicture"
+        android:layout_marginRight="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/cancel"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        android:layout_marginBottom="8dp" />
 
         <Button
             android:id="@+id/takePicture"
             style="@style/DashboardButton"
             android:drawableTop="@drawable/ic_add_a_photo_black_48dp"
             android:onClick="onToCamera"
-            android:text="@string/newPhoto" />
-    </LinearLayout>
-</LinearLayout>
+            android:text="@string/newPhoto"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="9dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/cancel"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/ic_cancel_black_48dp"
+        android:onClick="toWordsList"
+        android:text="@string/cancel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp" />
+
+</android.support.constraint.ConstraintLayout>

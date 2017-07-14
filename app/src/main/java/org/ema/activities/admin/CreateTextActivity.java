@@ -65,13 +65,13 @@ public class CreateTextActivity extends Activity {
         if(!hasCamera()) {
             findViewById(org.ema.R.id.takePicture).setEnabled(false);
         }
+        rotation = intent.getIntExtra("imageRotation",0);
         if(photo != null){
             imageView = (ImageView) findViewById(org.ema.R.id.image);
             imageView.setImageBitmap(photo);
-            imageView.setRotation(90);
+            imageView.setRotation(rotation);
             edition = true;
         }
-        this.rotation = intent.getIntExtra("imageRotation",0);
         this.text = intent.getStringExtra("text");
         EditText t = (EditText) findViewById(org.ema.R.id.word);
         t.setText(this.text);
