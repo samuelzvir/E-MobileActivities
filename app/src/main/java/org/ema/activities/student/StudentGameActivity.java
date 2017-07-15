@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Date;
@@ -63,6 +64,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         private boolean help;
         private Realm realm;
         private Speaker speaker;
+        private static double progress = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +99,8 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         this.wordList = student.getChallenges();
         if(wordList.size() > 0){
            startWord();
+           TextView progressText = (TextView) findViewById(R.id.progressValue);
+           progressText.setText((int)(progress)+"/"+wordList.size());
            Log.d(TAG, "creating activity stats...");
            activityStats = new PlayStats();
            activityStats.setUserId(student.getId());
@@ -234,7 +238,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
      * @param v
      */
     public void onClick(View v){
-        if(clearButton.getId() == v.getId()){
+        if(clearButton.getId() == v.getId()){ //delete letter
             if(answerText.getText().toString().length() == 0){
                 clearButton.setEnabled(Boolean.FALSE);
             }else {
@@ -243,12 +247,16 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             }
         }else{
             TextView clicked = (TextView) findViewById(v.getId());
-            if(nextButton.getId() == v.getId()) {
+            if(nextButton.getId() == v.getId()) { // next word
                 clearButton.setEnabled(Boolean.FALSE);
                 scrambledLayout.removeAllViews();
                 answerText.setText("");
                 answerString = "";
                 answerText.setTextColor(Color.rgb(0, 0, 0));
+                ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+                progressBar.setProgress(getActivityProgress(1));
+                TextView progressText = (TextView) findViewById(R.id.progressValue);
+                progressText.setText((int)(progress)+"/"+wordList.size());
                 startWord();
             }
             else {
@@ -270,6 +278,10 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                                 correctSound.start();
                             }
                             activityStats.addPoint(1);
+                            ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+                            progressBar.setProgress(getActivityProgress(1));
+                            TextView progressText = (TextView) findViewById(R.id.progressValue);
+                            progressText.setText((int)(progress)+"/"+wordList.size());
                             points++;
                             new Handler().postDelayed(new Runnable()
                             {
@@ -413,6 +425,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                 realm.insertOrUpdate(activityStats);
             }
         });
+        progress = 0;
         dialog.show(fm, "finish the game");
     }
 
@@ -423,6 +436,13 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
 
     public static void setPoints(int points) {
         StudentGameActivity.points = points;
+    }
+
+
+    public int getActivityProgress(int add){
+        progress = progress + add;
+        double result = progress / wordList.size();
+        return (int) (result * 100);
     }
 
 }
