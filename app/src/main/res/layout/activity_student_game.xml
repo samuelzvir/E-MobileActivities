@@ -74,7 +74,7 @@
         android:layout_marginTop="8dp"
         android:cursorVisible="false"
         android:gravity="center"
-        android:hint="@string/Word"
+        android:hint="@string/blank"
         android:inputType=""
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -106,15 +106,15 @@
         android:id="@+id/stopBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:onClick="onFinish"
-        android:theme="@style/RedButton"
-        android:text="@string/finish"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="1.0"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:onClick="onFinish"
+        android:text="@string/finish"
+        android:theme="@style/RedButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/nextButton"
@@ -216,7 +216,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/awnser"
         app:layout_constraintVertical_bias="1.0">
-
     </LinearLayout>
 
     <TextView

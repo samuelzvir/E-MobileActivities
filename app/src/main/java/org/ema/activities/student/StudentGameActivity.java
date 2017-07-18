@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -100,7 +101,9 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         if(wordList.size() > 0){
            startWord();
            TextView progressText = (TextView) findViewById(R.id.progressValue);
-           progressText.setText((int)(progress)+"/"+wordList.size());
+           if(progressText != null){
+               progressText.setText((int)(progress)+"/"+wordList.size());
+           }
            Log.d(TAG, "creating activity stats...");
            activityStats = new PlayStats();
            activityStats.setUserId(student.getId());
@@ -169,7 +172,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                 letters.add(scrambledWord.charAt(i));
             }
 
-            if(letters.size() <= 10){
+            if(letters.size() <= 9){
                 LinearLayout row = new LinearLayout(this);
                 row.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 row.setOrientation(LinearLayout.HORIZONTAL);
@@ -180,10 +183,9 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                     if (!l.trim().isEmpty()) {
                         Button button = new Button(this);
                         button.setId(c);
-                        button.setLayoutParams(new LinearLayout.LayoutParams(125, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        button.setLayoutParams(new LinearLayout.LayoutParams(getButtonWidthBasedOnScreenDensity(), ViewGroup.LayoutParams.WRAP_CONTENT));
                         button.setText(Character.toString(c).toUpperCase());
                         button.setTextSize(12);
-                        button.setMinHeight(5);
                         button.setOnTouchListener(this);
                         button.setOnClickListener(this);
                         row.addView(button);
@@ -203,15 +205,14 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                     if (!l.trim().isEmpty()) {
                         Button button = new Button(this);
                         button.setId(c);
-                        button.setLayoutParams(new LinearLayout.LayoutParams(125, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        button.setLayoutParams(new LinearLayout.LayoutParams(getButtonWidthBasedOnScreenDensity(), ViewGroup.LayoutParams.WRAP_CONTENT));
                         button.setText(Character.toString(c).toUpperCase());
                         button.setTextSize(12);
-                        button.setMinHeight(5);
                         button.setOnTouchListener(this);
                         button.setOnClickListener(this);
                         row.addView(button);
                     }
-                    if(counter % 10 == 0){
+                    if(counter % 9 == 0){
                         scrambledLayout.addView(row);
                         row = new LinearLayout(this);
                         row.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -444,5 +445,18 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         double result = progress / wordList.size();
         return (int) (result * 100);
     }
+
+    public int getDpValue(int size){
+        float scale = getResources().getDisplayMetrics().density;
+        int dpAsPixels = (int) (size*scale + 0.5f);
+        return dpAsPixels;
+    }
+
+    public int getButtonWidthBasedOnScreenDensity(){
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int densityDpi = metrics.densityDpi;
+        return (int) (( densityDpi / 8 ) * 1.7) ;
+    }
+
 
 }

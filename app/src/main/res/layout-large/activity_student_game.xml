@@ -74,7 +74,7 @@
         android:layout_marginTop="27dp"
         android:cursorVisible="false"
         android:gravity="center"
-        android:hint="@string/Word"
+        android:hint="@string/blank"
         android:inputType=""
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -83,7 +83,7 @@
 
     <ImageButton
         android:id="@+id/speakerButton"
-        android:layout_width="61dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="8dp"
@@ -96,14 +96,13 @@
         android:onClick="speak"
         android:src="@drawable/speaker32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintLeft_toRightOf="@+id/stopBtn"
-        app:layout_constraintRight_toLeftOf="@+id/nextButton"
-        tools:layout_editor_absoluteY="834dp" />
+        app:layout_constraintRight_toLeftOf="@+id/nextButton" />
 
     <Button
         android:id="@+id/stopBtn"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:onClick="onFinish"
         android:theme="@style/RedButton"
@@ -115,7 +114,7 @@
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/progressValue"
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginLeft="8dp"
@@ -129,7 +128,7 @@
 
     <Button
         android:id="@+id/nextButton"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="53dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="15dp"
@@ -141,8 +140,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginEnd="15dp"
         app:layout_constraintTop_toBottomOf="@+id/fixedButtons"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="436dp" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TableLayout
         android:id="@+id/fixedButtons"
@@ -215,7 +213,7 @@
 
     <LinearLayout
         android:id="@+id/keyboardLayout"
-        android:layout_width="792dp"
+        android:layout_width="0dp"
         android:layout_height="217dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -224,11 +222,10 @@
         android:layout_marginTop="55dp"
         android:background="@color/blue"
         android:orientation="vertical"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.99"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/awnser"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintTop_toBottomOf="@+id/awnser">
 
     </LinearLayout>
 
