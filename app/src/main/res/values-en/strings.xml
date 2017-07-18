@@ -127,4 +127,5 @@
     <string name="erase">erase</string>
     <string name="zero">0</string>
     <string name="rotate">rotate</string>
+    <string name="blank"></string>
 </resources>

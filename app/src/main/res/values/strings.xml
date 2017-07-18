@@ -131,5 +131,6 @@
     <string name="erase">apagar</string>
     <string name="zero">0</string>
     <string name="rotate">girar</string>
+    <string name="blank"></string>
 
 </resources>
