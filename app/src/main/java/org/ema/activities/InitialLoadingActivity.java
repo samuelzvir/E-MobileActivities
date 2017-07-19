@@ -32,14 +32,12 @@ public class InitialLoadingActivity extends Activity {
         Realm.setDefaultConfiguration(config);
         /*                      */
         realm = Realm.getDefaultInstance();
-        setContentView(R.layout.activity_initial_loading);
         startLogic();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setContentView(R.layout.activity_initial_loading);
         startLogic();
     }
 
