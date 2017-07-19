@@ -68,6 +68,7 @@
             android:text="@string/goBack"
             android:theme="@style/GoBackButton"
             android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp" />
@@ -80,14 +81,15 @@
             android:text="@string/save"
             android:theme="@style/BlueButton"
             android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp" />
 
     <ListView
         android:id="@+id/wordsListView"
-        android:layout_width="341dp"
-        android:layout_height="229dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_weight="0.11"
         android:choiceMode="multipleChoice"
         android:clickable="true"
@@ -104,15 +106,16 @@
 
     <ListView
         android:id="@+id/studentslistView"
-        android:layout_width="342dp"
+        android:layout_width="0dp"
         android:layout_height="135dp"
         android:choiceMode="singleChoice"
         android:clickable="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         app:layout_constraintTop_toBottomOf="@+id/usersTitle"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.447" />
 
 </android.support.constraint.ConstraintLayout>
