@@ -2,10 +2,10 @@ package org.ema.activities.operations;
 
 
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -18,7 +18,7 @@ import org.ema.entities.Student;
 
 import io.realm.Realm;
 
-public class StatsActivity extends Activity {
+public class StatsActivity extends AppCompatActivity {
 
     private static final String TAG = "StatsActivity";
     private Student student;
@@ -82,7 +82,7 @@ public class StatsActivity extends Activity {
         }
     }
 
-    public void goBack(View view){
+    public void goBackToDataAnalysisActivity(View view){
         Intent intent = new Intent(this, DataAnalysisActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
