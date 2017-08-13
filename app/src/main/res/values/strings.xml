@@ -137,5 +137,6 @@
     <string name="tutorial_admin_form3">Defina o nome do usuário. Exemplo: admin</string>
     <string name="tutorial_admin_form4">Defina a senha do usuário. utilize mais de 6 caracteres</string>
     <string name="tutorial_admin_form5">Então clique em salvar.</string>
+    <string name="noStats">Sem estatísticas no momento.</string>
 
 </resources>

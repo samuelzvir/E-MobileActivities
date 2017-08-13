@@ -16,6 +16,7 @@
 
 package org.ema.activities.operations;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.ema.activities.admin.MenuActivity;
+import org.ema.dialogs.NoStatsYetDialog;
 import org.ema.entities.Student;
 import org.ema.R;
 import io.realm.Realm;
@@ -145,9 +147,16 @@ public class DataAnalysisActivity extends AppCompatActivity {
 
     public void toStats(View view){
         Log.i(TAG,"stats about the user");
-        Intent intent = new Intent(this,StatsActivity.class);
-        intent.putExtra("studentId", student.getId());
-        startActivity(intent);
+        if(student != null){
+            Intent intent = new Intent(this,StatsActivity.class);
+            intent.putExtra("studentId", student.getId());
+            startActivity(intent);
+        }else{
+            FragmentManager fm = getFragmentManager();
+            NoStatsYetDialog noStatsYetDialog = new NoStatsYetDialog();
+            noStatsYetDialog.show(fm,"no stats");
+        }
+
     }
 
     public void goBack(View view){

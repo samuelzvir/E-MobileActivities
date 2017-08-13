@@ -133,4 +133,5 @@
     <string name="tutorial_admin_form3">Define the user\'s name. ie: admin</string>
     <string name="tutorial_admin_form4">Define the user\'s password. Use more than 6 characters</string>
     <string name="tutorial_admin_form5">Then click on save.</string>
+    <string name="noStats">No statistics at the moment.</string>
 </resources>
