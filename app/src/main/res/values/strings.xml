@@ -132,5 +132,10 @@
     <string name="zero">0</string>
     <string name="rotate">girar</string>
     <string name="blank"></string>
+    <string name="tutorial_admin_form1">Bem Vindo!</string>
+    <string name="tutorial_admin_form2">Primeiro defina os dados do usuário administrador</string>
+    <string name="tutorial_admin_form3">Defina o nome do usuário. Exemplo: admin</string>
+    <string name="tutorial_admin_form4">Defina a senha do usuário. utilize mais de 6 caracteres</string>
+    <string name="tutorial_admin_form5">Então clique em salvar.</string>
 
 </resources>

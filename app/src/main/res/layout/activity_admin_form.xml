@@ -54,7 +54,7 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <EditText
-        android:layout_width="303dp"
+        android:layout_width="0dp"
         android:layout_height="37dp"
         android:id="@+id/username"
         android:inputType=""
@@ -64,9 +64,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        tools:layout_editor_absoluteY="154dp"
-        tools:layout_editor_absoluteX="9dp" />
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -86,7 +84,7 @@
 
     <EditText
         android:id="@+id/passwordField"
-        android:layout_width="335dp"
+        android:layout_width="0dp"
         android:layout_height="39dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="8dp"
@@ -97,8 +95,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordView"
-        tools:layout_editor_absoluteY="236dp" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordView" />
 
     <Button
         android:layout_width="wrap_content"

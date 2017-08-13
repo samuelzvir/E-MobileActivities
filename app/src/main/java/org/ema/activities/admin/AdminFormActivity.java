@@ -3,24 +3,42 @@ package org.ema.activities.admin;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
+
+import org.ema.R;
 import org.ema.entities.Admin;
 
 import io.realm.Realm;
 
-public class AdminFormActivity extends AppCompatActivity {
+public class AdminFormActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "AdminFormActivity";
     private Realm realm;
+    private int counter = 0;
+    private ShowcaseView showcaseView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(org.ema.R.layout.activity_admin_form);
         realm = Realm.getDefaultInstance();
+        showcaseView = new ShowcaseView.Builder(this)
+                .withNewStyleShowcase()
+                .setTarget(new ViewTarget(R.id.imageView, this))
+                .setContentTitle(R.string.tutorial_admin_form1)
+                .setContentText(R.string.tutorial_admin_form2)
+                .setOnClickListener(this)
+                .build();
+        showcaseView.setDetailTextAlignment(Layout.Alignment.ALIGN_CENTER);
+        showcaseView.setBackgroundColor(ContextCompat.getColor(this, R.color.blue));
+        showcaseView.setTitleTextAlignment(Layout.Alignment.ALIGN_CENTER);
     }
 
     public void save(View view){
@@ -52,4 +70,31 @@ public class AdminFormActivity extends AppCompatActivity {
         super.onDestroy();
         realm.close();
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (counter) {
+            case 0:
+                showcaseView.setBackgroundColor(Color.TRANSPARENT);
+                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.username)), true);
+                showcaseView.setContentTitle("");
+                showcaseView.setContentText(getString(R.string.tutorial_admin_form3));
+                break;
+            case 1:
+                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.passwordField)), true);
+                showcaseView.setContentText(getString(R.string.tutorial_admin_form4));
+                showcaseView.setContentTitle("");
+                break;
+            case 2:
+                showcaseView.setShowcase(new ViewTarget(findViewById(R.id.save)), true);
+                showcaseView.setContentText(getString(R.string.tutorial_admin_form5));
+                showcaseView.setContentTitle("");
+                break;
+            case 3:
+                showcaseView.hide();
+                break;
+        }
+        counter++;
+    }
+
 }
