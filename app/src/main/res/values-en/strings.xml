@@ -132,6 +132,17 @@
     <string name="tutorial_admin_form2">First, define your data of  the administrator user </string>
     <string name="tutorial_admin_form3">Define the user\'s name. ie: admin</string>
     <string name="tutorial_admin_form4">Define the user\'s password. Use more than 6 characters</string>
-    <string name="tutorial_admin_form5">Then click on save.</string>
+    <string name="tutorial_admin_form5">Add an email to recover the Administrator\'s password if necessary.</string>
+    <string name="tutorial_admin_form6">Then click on save.</string>
     <string name="noStats">No statistics at the moment.</string>
+    <string name="Email">Email</string>
+    <string name="anEmailWillbeSend">An email will be send.</string>
+    <string name="title_activity_new_admin_password">NewAdminPassword</string>
+    <string name="ConfirmPassword">Confirm Password</string>
+    <string name="newPassword">New Password</string>
+    <string name="ChangingPassword">Changing Password</string>
+    <string name="YourNewPasswordIs">Your new password is</string>
+    <string name="invalidEmail">Invalid e-mail.</string>
+    <string name="passwordWithLessThan6">Password with less than 6 characters.</string>
+    <string name="DifferentPasswords">Different Passwords.</string>
 </resources>

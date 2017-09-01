@@ -57,7 +57,7 @@ public class ABCActivity extends AppCompatActivity {
         List<SimpleChallenge> simpleChallenges = realm.where(SimpleChallenge.class).findAll(); //  new Select().from(SimpleChallenge.class).queryList();
         final ListView users = (ListView) findViewById(org.ema.R.id.studentslistView);
         final ListView words = (ListView) findViewById(org.ema.R.id.wordsListView);
-        if(studentsList.isEmpty() && simpleChallenges.isEmpty()){
+        if(studentsList.isEmpty() || simpleChallenges.isEmpty()){
             ready = false;
             EmptyUsersWordsDialog dialog = new EmptyUsersWordsDialog();
             FragmentManager fm = getFragmentManager();

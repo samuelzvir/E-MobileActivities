@@ -1,5 +1,6 @@
 package org.ema.activities;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +12,12 @@ import android.widget.TextView;
 import java.util.List;
 
 import org.ema.activities.admin.MenuActivity;
+import org.ema.activities.admin.NewAdminPassword;
 import org.ema.activities.student.StudentMenuActivity;
+import org.ema.dialogs.ResetPasswordDialog;
 import org.ema.entities.Admin;
 import org.ema.entities.Student;
+import org.ema.util.HashCodes;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -29,17 +33,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(View view){
-        EditText usernameET = (EditText)findViewById(org.ema.R.id.username);
+        EditText usernameET = (EditText)findViewById(org.ema.R.id.newPass);
         String username = usernameET.getText().toString();
-        EditText passwordET = (EditText)findViewById(org.ema.R.id.passwordField);
-        String password = passwordET.getText().toString();
+        EditText passwordET = (EditText)findViewById(org.ema.R.id.confirmaPass);
+        String password = HashCodes.get_SHA_512_SecurePassword(passwordET.getText().toString(),"eMobileActivities");
 
         RealmQuery<Admin> query = realm.where(Admin.class);
         query.equalTo("name",username);
         query.equalTo("password",password);
         List<Admin> admins = query.findAll();
         if(admins.size() > 0){
-            Intent intent = new Intent(this,MenuActivity.class);
+            //reset password?
+            Intent intent;
+            if(admins.get(0).getChangePassword()){
+                intent = new Intent(this,NewAdminPassword.class);
+            }else{
+                intent = new Intent(this,MenuActivity.class);
+            }
             startActivity(intent);
         }else{
             RealmQuery<Student> queryStudent = realm.where(Student.class);
@@ -64,5 +74,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         realm.close();
+    }
+
+    public void resetPassword(View view){
+        FragmentManager fm = getFragmentManager();
+        ResetPasswordDialog dialog = new ResetPasswordDialog();
+        dialog.show(fm,"");
     }
 }
