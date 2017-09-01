@@ -32,6 +32,7 @@ import org.ema.dialogs.CannotCreateUserAlreadyExists;
 import org.ema.dialogs.CannotCreateUserWithAdminName;
 import org.ema.entities.Admin;
 import org.ema.entities.Student;
+import org.ema.util.HashCodes;
 
 import io.realm.Realm;
 
@@ -53,7 +54,7 @@ public class UserActivity extends AppCompatActivity {
             List<Student> students = realm.where(Student.class).equalTo("nickname",studentName).findAll();
             if(students.size() == 1){
                 this.student = students.get(0);
-                EditText nameET = (EditText) findViewById(org.ema.R.id.username);
+                EditText nameET = (EditText) findViewById(org.ema.R.id.newPass);
                 nameET.setText(this.student.getNickname());
             }else{
                 Log.w(TAG,"Found "+students.size()+" with name "+studentName);
@@ -86,10 +87,10 @@ public class UserActivity extends AppCompatActivity {
 
     public void save(View view){
        if(student == null){
-            EditText nameET = (EditText) findViewById(org.ema.R.id.username);
-            EditText passwordET = (EditText) findViewById(org.ema.R.id.passwordField);
+            EditText nameET = (EditText) findViewById(org.ema.R.id.newPass);
+            EditText passwordET = (EditText) findViewById(org.ema.R.id.confirmaPass);
             String userName = nameET.getText().toString();
-            String password = passwordET.getText().toString();
+            String password = HashCodes.get_SHA_512_SecurePassword(passwordET.getText().toString(),"eMobileActivities");
             if(admin.getName().equalsIgnoreCase(userName)){
                 CannotCreateUserWithAdminName cannotCreateUserWithAdminName = new CannotCreateUserWithAdminName();
                 FragmentManager fm = getFragmentManager();
@@ -118,10 +119,10 @@ public class UserActivity extends AppCompatActivity {
                 }
             }
         }else{
-            EditText nameET = (EditText) findViewById(org.ema.R.id.username);
-            EditText passwordET = (EditText) findViewById(org.ema.R.id.passwordField);
+            EditText nameET = (EditText) findViewById(org.ema.R.id.newPass);
+            EditText passwordET = (EditText) findViewById(org.ema.R.id.confirmaPass);
             final String userName = nameET.getText().toString();
-            final String password = passwordET.getText().toString();
+            final String password = HashCodes.get_SHA_512_SecurePassword(passwordET.getText().toString(),"eMobileActivities");
 
             realm.executeTransaction(new Realm.Transaction() {
                 @Override

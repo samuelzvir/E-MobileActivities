@@ -5,7 +5,9 @@
 
         <!-- Customize your theme here. -->
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="ActionBarCompat">
@@ -45,12 +47,14 @@
         <item name="colorControlHighlight">@color/blue</item>
         <item name="colorAccent">@color/blue</item>
     </style>
+
     <style name="DeleteButton">
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Borderless.Colored</item>
         <item name="android:textStyle">bold</item>
         <item name="colorControlHighlight">@color/red</item>
         <item name="colorAccent">@color/red</item>
     </style>
+
     <style name="EditButton">
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Borderless.Colored</item>
         <item name="android:textStyle">bold</item>
@@ -74,26 +78,31 @@
         <item name="android:textStyle">bold</item>
         <item name="colorControlHighlight">@color/white</item>
     </style>
+
     <style name="PhotoButton" parent="Theme.AppCompat">
         <item name="colorButtonNormal">@color/green</item>
         <item name="android:textStyle">bold</item>
         <item name="colorControlHighlight">@color/white</item>
     </style>
+
     <style name="BlueButton" parent="Theme.AppCompat">
         <item name="colorButtonNormal">@color/blue</item>
         <item name="android:textStyle">bold</item>
         <item name="colorControlHighlight">@color/white</item>
     </style>
+
     <style name="CancelButton" parent="Theme.AppCompat">
         <item name="colorButtonNormal">@color/red</item>
         <item name="android:textStyle">bold</item>
         <item name="colorControlHighlight">@color/white</item>
     </style>
+
     <style name="GreenButton" parent="Theme.AppCompat">
         <item name="colorButtonNormal">@color/green</item>
         <item name="android:textStyle">bold</item>
         <item name="colorControlHighlight">@color/white</item>
     </style>
+
     <style name="GoBackButton" parent="Theme.AppCompat">
         <item name="colorButtonNormal">@color/gray</item>
         <item name="android:textStyle">bold</item>
