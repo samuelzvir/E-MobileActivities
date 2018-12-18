@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/samuelyuri/E-MobileActivities.svg?branch=master)](https://travis-ci.com/samuelyuri/E-MobileActivities)
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/samuelyuri/E-MobileActivities/master/app/src/main/res/drawable/logo.png"  width="80"/>
 </p>
