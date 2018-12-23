@@ -5,6 +5,7 @@
 # E-MobileActivities
 
 [![Build Status](https://travis-ci.com/samuelyuri/E-MobileActivities.svg?branch=master)](https://travis-ci.com/samuelyuri/E-MobileActivities)
+[![License](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/samuelyuri/E-MobileActivities/blob/master/LICENSE)
 
 ### Summary
 E-MobileActivities, short name to "Easy" Mobile Activities, is an Android app built to help children with autism to play contextualized activities based on photos and scrabble exercises with spelling.
@@ -34,7 +35,3 @@ E-MobileActivities, short name to "Easy" Mobile Activities, is an Android app bu
   <img src="https://github.com/samuelyuri/E-MobileActivities/blob/master/screenshots/10.png" width="80"/>
   <img src="https://github.com/samuelyuri/E-MobileActivities/blob/master/screenshots/11.png" width="80"/>
   <img src="https://github.com/samuelyuri/E-MobileActivities/blob/master/screenshots/12.png" width="80"/>
-
-
-#### License
-[Apache 2.0](https://github.com/samuelyuri/E-MobileActivities/blob/master/LICENSE)
