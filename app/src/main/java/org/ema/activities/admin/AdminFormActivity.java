@@ -35,9 +35,9 @@ public class AdminFormActivity extends AppCompatActivity implements View.OnClick
     public void save(View view){
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         final Admin admin = new Admin();
-        EditText usernameET = (EditText)findViewById(org.ema.R.id.newPass);
+        EditText usernameET = (EditText)findViewById(org.ema.R.id.newName);
         final String username = usernameET.getText().toString();
-        EditText emailET = (EditText)findViewById(R.id.emailField);
+        EditText emailET = (EditText)findViewById(R.id.emailTxt);
         final String email = emailET.getText().toString();
         Matcher matcher = pattern.matcher(email);
         if(!matcher.find()){
@@ -46,7 +46,7 @@ public class AdminFormActivity extends AppCompatActivity implements View.OnClick
             InvalidEmail dialog = new InvalidEmail();
             dialog.show(fm,"");
         }else{
-            EditText passwordET = (EditText)findViewById(org.ema.R.id.confirmaPass);
+            EditText passwordET = (EditText)findViewById(org.ema.R.id.passwordTxt);
             if(passwordET.getText().toString().length() < 6){
                 passwordET.getText().clear();
                 android.app.FragmentManager fm = getFragmentManager();

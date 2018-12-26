@@ -54,7 +54,7 @@ public class UserActivity extends AppCompatActivity {
             List<Student> students = realm.where(Student.class).equalTo("nickname",studentName).findAll();
             if(students.size() == 1){
                 this.student = students.get(0);
-                EditText nameET = (EditText) findViewById(org.ema.R.id.newPass);
+                EditText nameET = (EditText) findViewById(org.ema.R.id.newName);
                 nameET.setText(this.student.getNickname());
             }else{
                 Log.w(TAG,"Found "+students.size()+" with name "+studentName);
@@ -87,8 +87,8 @@ public class UserActivity extends AppCompatActivity {
 
     public void save(View view){
        if(student == null){
-            EditText nameET = (EditText) findViewById(org.ema.R.id.newPass);
-            EditText passwordET = (EditText) findViewById(org.ema.R.id.confirmaPass);
+            EditText nameET = (EditText) findViewById(org.ema.R.id.newName);
+            EditText passwordET = (EditText) findViewById(org.ema.R.id.passwordTxt);
             String userName = nameET.getText().toString();
             String password = HashCodes.get_SHA_512_SecurePassword(passwordET.getText().toString(),"eMobileActivities");
             if(admin.getName().equalsIgnoreCase(userName)){
@@ -119,8 +119,8 @@ public class UserActivity extends AppCompatActivity {
                 }
             }
         }else{
-            EditText nameET = (EditText) findViewById(org.ema.R.id.newPass);
-            EditText passwordET = (EditText) findViewById(org.ema.R.id.confirmaPass);
+            EditText nameET = (EditText) findViewById(org.ema.R.id.newName);
+            EditText passwordET = (EditText) findViewById(org.ema.R.id.passwordTxt);
             final String userName = nameET.getText().toString();
             final String password = HashCodes.get_SHA_512_SecurePassword(passwordET.getText().toString(),"eMobileActivities");
 

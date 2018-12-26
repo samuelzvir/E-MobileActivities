@@ -33,9 +33,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(View view){
-        EditText usernameET = (EditText)findViewById(org.ema.R.id.newPass);
+        EditText usernameET = (EditText)findViewById(org.ema.R.id.newName);
         String username = usernameET.getText().toString();
-        EditText passwordET = (EditText)findViewById(org.ema.R.id.confirmaPass);
+        EditText passwordET = (EditText)findViewById(org.ema.R.id.passwordTxt);
         String password = HashCodes.get_SHA_512_SecurePassword(passwordET.getText().toString(),"eMobileActivities");
 
         RealmQuery<Admin> query = realm.where(Admin.class);
