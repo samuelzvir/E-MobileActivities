@@ -31,8 +31,8 @@ public class NewAdminPassword extends AppCompatActivity {
 
     public void save(View view){
         final Admin admin = realm.where(Admin.class).findFirst();
-        EditText newPasswordET = (EditText)findViewById(R.id.newPass);
-        EditText passwordET = (EditText)findViewById(org.ema.R.id.confirmaPass);
+        EditText newPasswordET = (EditText)findViewById(R.id.newName);
+        EditText passwordET = (EditText)findViewById(org.ema.R.id.passwordTxt);
         if(passwordET.getText().toString().length() < 6){
             passwordET.getText().clear();
             newPasswordET.getText().clear();
