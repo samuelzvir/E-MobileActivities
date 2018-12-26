@@ -12,14 +12,11 @@ E-MobileActivities, short name to "Easy" Mobile Activities, is an Android app bu
 
 #### Features
   - Scramble activities with multimedia(sound and pictures).
-  - Admin panel to manage users, resources to build activities and statistics.
+  - Admin Panel:  
+ Management of users and resources(Images and other game resources)  
+ Build activities  
+ Statistics  
   - Statistics about the performance of the users.
-
-#### Used technologies/frameworks to build this project
-   - Android App built using Java
-   - Realm database
-   - ShowcaseView library
-
 
 #### Screenshots
   <img src="https://github.com/samuelyuri/E-MobileActivities/blob/master/screenshots/1.png" width="80"/> |
@@ -35,3 +32,4 @@ E-MobileActivities, short name to "Easy" Mobile Activities, is an Android app bu
   <img src="https://github.com/samuelyuri/E-MobileActivities/blob/master/screenshots/10.png" width="80"/>
   <img src="https://github.com/samuelyuri/E-MobileActivities/blob/master/screenshots/11.png" width="80"/>
   <img src="https://github.com/samuelyuri/E-MobileActivities/blob/master/screenshots/12.png" width="80"/>
+  
