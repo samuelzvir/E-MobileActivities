@@ -46,13 +46,16 @@ public class SendMailTask extends AsyncTask {
 
     @Override
     public void onProgressUpdate(Object... values) {
-        statusDialog.setMessage(values[0].toString());
-
+        if(statusDialog != null && values[0] != null ){
+            statusDialog.setMessage(values[0].toString());
+        }
     }
 
     @Override
     public void onPostExecute(Object result) {
-        statusDialog.dismiss();
+        if(statusDialog != null){
+            statusDialog.dismiss();
+        }
     }
 
 }
