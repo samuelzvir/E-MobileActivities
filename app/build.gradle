@@ -52,6 +52,7 @@ dependencies {
     testImplementation "org.powermock:powermock-module-junit4-rule:1.6.5"
     testImplementation "org.powermock:powermock-api-mockito:1.6.5"
     testImplementation "org.powermock:powermock-classloading-xstream:1.6.5"
+    testImplementation "io.github.benas:random-beans:3.7.0"
 
     testImplementation 'org.robolectric:shadows-support-v4:3.0'
     testImplementation 'org.robolectric:robolectric:4.1'
