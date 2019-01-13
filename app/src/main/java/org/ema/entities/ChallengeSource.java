@@ -6,15 +6,14 @@ import java.util.UUID;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class SimpleChallenge  extends RealmObject implements Serializable{
+public class ChallengeSource  extends RealmObject implements Serializable{
 
     @PrimaryKey
     public String id = UUID.randomUUID().toString();
     private String word;
-    private byte[] image;
-    private int imageRotation;
+    private Integer imageRotation;
     private String wordType;
-    private double points;
+    private ChallengeResource resource;
 
     public String getId() {
         return id;
@@ -32,9 +31,13 @@ public class SimpleChallenge  extends RealmObject implements Serializable{
         this.word = word;
     }
 
-    public byte[] getImage() { return image; }
+    public Integer getImageRotation() {
+        return imageRotation;
+    }
 
-    public void setImage(byte[] image) { this.image = image; }
+    public void setImageRotation(Integer imageRotation) {
+        this.imageRotation = imageRotation;
+    }
 
     public String getWordType() {
         return wordType;
@@ -44,19 +47,11 @@ public class SimpleChallenge  extends RealmObject implements Serializable{
         this.wordType = wordType;
     }
 
-    public double getPoints() {
-        return points;
+    public ChallengeResource getResource() {
+        return resource;
     }
 
-    public void setPoints(double points) {
-        this.points = points;
-    }
-
-    public int getImageRotation() {
-        return imageRotation;
-    }
-
-    public void setImageRotation(int imageRotation) {
-        this.imageRotation = imageRotation;
+    public void setResource(ChallengeResource resource) {
+        this.resource = resource;
     }
 }

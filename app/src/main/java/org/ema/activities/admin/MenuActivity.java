@@ -110,7 +110,7 @@ public class MenuActivity extends Activity {
                 public void execute(Realm realm) {
                     AppConfiguration config = realm.createObject(AppConfiguration.class, 1);
                     config.setLanguage("pt-br");
-                    config.setShowWord(true);
+                   // config.setShowWord(true); //TODO
                 }
             });
         }

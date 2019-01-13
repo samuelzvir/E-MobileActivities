@@ -13,7 +13,7 @@ public class Student  extends RealmObject implements Serializable{
     private String id = UUID.randomUUID().toString();
     private String nickname;
     private String password;
-    RealmList<Challenge> challenges;
+    RealmList<ChallengeConfiguration> challenges;
 
     public String getId() {
         return id;
@@ -27,7 +27,8 @@ public class Student  extends RealmObject implements Serializable{
         return nickname;
     }
 
-    public RealmList<Challenge> getChallenges() {
+    public RealmList<
+            ChallengeConfiguration> getChallenges() {
         return challenges;
     }
 
@@ -43,7 +44,7 @@ public class Student  extends RealmObject implements Serializable{
         this.password = password;
     }
 
-    public void setChallenges(RealmList<Challenge> challenges) {
+    public void setChallenges(RealmList<ChallengeConfiguration> challenges) {
         this.challenges = challenges;
     }
 

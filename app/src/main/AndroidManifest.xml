@@ -95,6 +95,10 @@
         <activity
             android:name=".activities.admin.NewAdminPassword"
             android:label="@string/title_activity_new_admin_password"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.admin.WordsManagementActivity$AbcWordsActivity"
+            android:label="@string/title_activity_abc_words"
             android:theme="@style/AppTheme"></activity>
     </application>
 

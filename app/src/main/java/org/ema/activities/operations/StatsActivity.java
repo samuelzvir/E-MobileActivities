@@ -1,7 +1,5 @@
 package org.ema.activities.operations;
 
-
-
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,10 +20,10 @@ public class StatsActivity extends AppCompatActivity {
 
     private static final String TAG = "StatsActivity";
     private Student student;
-    private int points = 0 ;
-    private int playedActivities = 0 ;
-    private int highestPointing = 0 ;
-    private int lowestPointing = 0 ;
+    private Double points = 0.00 ;
+    private Integer playedActivities = 0 ;
+    private Double highestPointing = 0.00 ;
+    private Double lowestPointing = 0.00;
     private TextView pointsTextView;
     private TextView playedActivitiesTextView;
     private TextView highestPointingTextView;
@@ -59,12 +57,12 @@ public class StatsActivity extends AppCompatActivity {
                 points += stats.getTotalPoints();
                 playedActivities++;
                 if(stats.getTotalPoints() > highestPointing){
-                    highestPointing = (int) stats.getTotalPoints();
+                    highestPointing = stats.getTotalPoints();
                 }
                 if(lowestPointing == 0){
-                    lowestPointing = (int) stats.getTotalPoints();
+                    lowestPointing = stats.getTotalPoints();
                 }else if(stats.getTotalPoints() < lowestPointing){
-                    lowestPointing = (int) stats.getTotalPoints();
+                    lowestPointing = stats.getTotalPoints();
                 }
 
             } // for end.

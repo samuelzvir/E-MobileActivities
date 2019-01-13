@@ -1,5 +1,6 @@
 package org.ema.entities;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,8 +13,14 @@ public class PlayStats  extends RealmObject {
     private String id = UUID.randomUUID().toString();
     private Date start;
     private Date end;
-    private double totalPoints;
+    private String challengeId;
+    private Boolean correct;
+    private Boolean showWord;
+    private Boolean voiceHelp;
+    private Boolean playedTip;
+    private Double totalPoints;
     private String userId;
+    private String extra;
 
     public String getId() {
         return id;
@@ -39,11 +46,51 @@ public class PlayStats  extends RealmObject {
         this.end = end;
     }
 
-    public double getTotalPoints() {
+    public String getChallengeId() {
+        return challengeId;
+    }
+
+    public void setChallengeId(String challengeId) {
+        this.challengeId = challengeId;
+    }
+
+    public Boolean getCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(Boolean correct) {
+        this.correct = correct;
+    }
+
+    public Boolean getShowWord() {
+        return showWord;
+    }
+
+    public void setShowWord(Boolean showWord) {
+        this.showWord = showWord;
+    }
+
+    public Boolean getVoiceHelp() {
+        return voiceHelp;
+    }
+
+    public void setVoiceHelp(Boolean voiceHelp) {
+        this.voiceHelp = voiceHelp;
+    }
+
+    public Boolean getPlayedTip() {
+        return playedTip;
+    }
+
+    public void setPlayedTip(Boolean playedTip) {
+        this.playedTip = playedTip;
+    }
+
+    public Double getTotalPoints() {
         return totalPoints;
     }
 
-    public void setTotalPoints(double totalPoints) {
+    public void setTotalPoints(Double totalPoints) {
         this.totalPoints = totalPoints;
     }
 
@@ -55,8 +102,11 @@ public class PlayStats  extends RealmObject {
         this.userId = userId;
     }
 
-    public void addPoint(int point){
-        this.totalPoints+=point;
+    public String getExtra() {
+        return extra;
     }
 
+    public void setExtra(String extra) {
+        this.extra = extra;
+    }
 }

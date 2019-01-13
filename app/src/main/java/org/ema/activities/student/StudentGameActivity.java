@@ -96,8 +96,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
         spaceButton.setOnTouchListener(this);
         spaceButton.setOnClickListener(this);
         //---
-        this.help = config.getShowWord();
-        this.wordList = student.getChallenges();
+        //this.wordList = student.getChallenges(); //TODO
         if(wordList.size() > 0){
            startWord();
            TextView progressText = (TextView) findViewById(R.id.progressValue);
@@ -108,7 +107,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
            activityStats = new PlayStats();
            activityStats.setUserId(student.getId());
            activityStats.setStart(new Date());
-           activityStats.setTotalPoints(0);
+           //activityStats.setTotalPoints(0);
            Log.d(TAG, "created.");
         }else{
              //alert informing that the student does not have any words registered for him.
@@ -165,7 +164,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
             }
             String scrambledWord = scramble(word);
             scrambledLayout = (LinearLayout) findViewById(R.id.keyboardLayout);
-            setImageView(challenge.getImage(), word, challenge.getImageRotation());
+           // setImageView(challenge.getImage(), word, challenge.getImageRotation());
 
             Set<Character> letters = new HashSet<>();
             for (int i = 0; i < scrambledWord.length(); i++) {
@@ -278,7 +277,7 @@ public class StudentGameActivity extends Activity implements View.OnClickListene
                             if(correctSound != null){
                                 correctSound.start();
                             }
-                            activityStats.addPoint(1);
+                            //activityStats.addPoint(1);
                             ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
                             progressBar.setProgress(getActivityProgress(1));
                             TextView progressText = (TextView) findViewById(R.id.progressValue);

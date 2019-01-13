@@ -33,7 +33,7 @@ import java.util.List;
 
 import org.ema.activities.operations.TakePhotoActivity;
 import org.ema.dialogs.WordSavedDialog;
-import org.ema.entities.SimpleChallenge;
+import org.ema.entities.ChallengeSource;
 import org.ema.util.ContentUtils;
 
 import io.realm.Realm;
@@ -76,13 +76,13 @@ public class CreateTextActivity extends Activity {
         EditText t = (EditText) findViewById(org.ema.R.id.word);
         t.setText(this.text);
         if(this.text != null){
-            List<SimpleChallenge> sc = realm.where(SimpleChallenge.class).equalTo("word",text).findAll();
+            List<ChallengeSource> sc = realm.where(ChallengeSource.class).equalTo("word",text).findAll();
             if(sc.size() > 0){
                     Log.d(TAG, "setting image to the view based on the saved image.");
-                    SimpleChallenge temp = sc.get(0);
-                    if(temp.getImage() != null && !edition){
-                        setImageView(temp.getImage(), temp.getImageRotation());
-                    }
+                    ChallengeSource temp = sc.get(0);
+//                    if(temp.getImage() != null && !edition){ //TODO
+//                        setImageView(temp.getImage(), temp.getImageRotation());
+//                    }
                 }
             }
     }
@@ -108,16 +108,16 @@ public class CreateTextActivity extends Activity {
         final int rot = rotation;
         //TODO validate save button.
         if(this.text != null){
-            List<SimpleChallenge> sc = realm.where(SimpleChallenge.class).equalTo("word",text).findAll();
+            List<ChallengeSource> sc = realm.where(ChallengeSource.class).equalTo("word",text).findAll();
             if(sc != null && sc.size() > 0){
-                final SimpleChallenge c = sc.get(0);
+                final ChallengeSource c = sc.get(0);
                 Log.d(TAG, "updating word " + c.getWord() +" to "+word);
                 if(findViewById(org.ema.R.id.image) != null){
                     final byte[] content = ContentUtils.convertToByteArray(((BitmapDrawable)((ImageView)findViewById(org.ema.R.id.image)).getDrawable()).getBitmap());
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            c.setImage(content);
+                           // c.setImage(content); //TODO
                             c.setWord(word);
                             c.setImageRotation(rot);
                             realm.insertOrUpdate(c);
@@ -131,18 +131,18 @@ public class CreateTextActivity extends Activity {
             }
         }else{
             Log.d(TAG, "adding new word " + word);
-            final SimpleChallenge simpleChallenge = new SimpleChallenge();
-            simpleChallenge.setWord(word);
+            final ChallengeSource ChallengeSource = new ChallengeSource();
+            ChallengeSource.setWord(word);
             if(findViewById(org.ema.R.id.image) != null){
                 byte[] content = ContentUtils.convertToByteArray(((BitmapDrawable)((ImageView)findViewById(org.ema.R.id.image)).getDrawable()).getBitmap());
-                simpleChallenge.setImage(content);
-                simpleChallenge.setImageRotation(rot);
+               // ChallengeSource.setImage(content); //TODO
+                ChallengeSource.setImageRotation(rot);
             }
             realm.executeTransaction(
                     new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            realm.insertOrUpdate(simpleChallenge);
+                            realm.insertOrUpdate(ChallengeSource);
                         }
                     }
             );

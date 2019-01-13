@@ -58,7 +58,6 @@ public class InitialLoadingActivity extends Activity {
                 public void execute(Realm realm) {
                     AppConfiguration config = new AppConfiguration();
                     config.setLanguage("pt-br");
-                    config.setShowWord(true);
                     config.setSound(true);
                     realm.insertOrUpdate(config);
                 }

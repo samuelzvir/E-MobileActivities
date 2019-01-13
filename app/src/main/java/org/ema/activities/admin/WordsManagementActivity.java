@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.ema.entities.SimpleChallenge;
+import org.ema.entities.ChallengeSource;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -182,7 +182,7 @@ public class WordsManagementActivity extends AppCompatActivity {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                RealmResults<SimpleChallenge> result = realm.where(SimpleChallenge.class).equalTo("word", word).findAll();
+                RealmResults<ChallengeSource> result = realm.where(ChallengeSource.class).equalTo("word", word).findAll();
                 result.deleteAllFromRealm();
             }
         });
@@ -261,10 +261,10 @@ public class WordsManagementActivity extends AppCompatActivity {
 
 
     private void listWords(){
-        List<SimpleChallenge> s = realm.where(SimpleChallenge.class).findAll();
+        List<ChallengeSource> s = realm.where(ChallengeSource.class).findAll();
         ListView  wordsListView = (ListView) findViewById(org.ema.R.id.wordsListView);
         words.clear();
-        for (SimpleChallenge simpleChallenge : s){ // populates the words
+        for (ChallengeSource simpleChallenge : s){ // populates the words
             words.add(simpleChallenge.getWord());
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
@@ -283,8 +283,8 @@ public class WordsManagementActivity extends AppCompatActivity {
 
     private StableArrayAdapter getAdapter(){
         this.challenges = (ListView) findViewById(org.ema.R.id.wordsListView);
-        List<SimpleChallenge> simpleChallenges = realm.where(SimpleChallenge.class).findAll();
-        for (SimpleChallenge challenge : simpleChallenges){ // populates the words
+        List<ChallengeSource> simpleChallenges = realm.where(ChallengeSource.class).findAll();
+        for (ChallengeSource challenge : simpleChallenges){ // populates the words
             this.challengesList.add(challenge.getWord());
         }
 

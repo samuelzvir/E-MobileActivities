@@ -1,46 +1,27 @@
-/*
- * Copyright 2015 Samuel Yuri Zvir
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package org.ema.activities.admin;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import org.ema.R;
+import org.ema.entities.ChallengeSource;
+import org.ema.entities.Student;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.ema.R;
-import org.ema.dialogs.EmptyUsersWordsDialog;
-import org.ema.entities.ChallengeSource;
-import org.ema.entities.Student;
-
 import io.realm.Realm;
 
-public class ABCActivity extends AppCompatActivity {
+public class AbcWordsActivity  extends AppCompatActivity {
     private static final String TAG = "ABCActivity";
     final ArrayList<View> mCheckedViews = new ArrayList<View>();
     List<String> wordsList = new ArrayList<>();
@@ -50,64 +31,22 @@ public class ABCActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         realm = Realm.getDefaultInstance();
         setContentView(R.layout.activity_abc_user);
-        List<Student> studentsList = realm.where(Student.class).findAll();  //new Select().from(Student.class).queryList();
-        List<ChallengeSource> simpleChallenges = realm.where(ChallengeSource.class).findAll(); //  new Select().from(SimpleChallenge.class).queryList();
-        final ListView users = (ListView) findViewById(org.ema.R.id.studentslistView);
+        List<ChallengeSource> simpleChallenges = realm.where(ChallengeSource.class).findAll(); //  new Select().from(ChallengeSource.class).queryList();
         final ListView words = (ListView) findViewById(org.ema.R.id.wordsListView);
-        if(studentsList.isEmpty() || simpleChallenges.isEmpty()){
-            ready = false;
-            EmptyUsersWordsDialog dialog = new EmptyUsersWordsDialog();
-            FragmentManager fm = getFragmentManager();
-            dialog.show(fm, "finish.");
-        }
+
         List<String> studentsNamesList = new ArrayList<>();
-        for (Student s : studentsList){ // populate the words
-            studentsNamesList.add(s.getNickname());
-        }
 
         for (ChallengeSource s : simpleChallenges){
             wordsList.add(s.getWord());
         }
 
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,
+        final AbcWordsActivity.StableArrayAdapter adapter = new AbcWordsActivity.StableArrayAdapter(this,
                 android.R.layout.simple_list_item_single_choice,
                 studentsNamesList);
 
-        users.setAdapter(adapter);
-        users.setItemsCanFocus(false);
-        users.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-        users.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                boolean checked = users.isItemChecked(position);
-                if (checked) {
-                    Log.i(TAG, "mCheckedViews.add(view);");
-                    mCheckedViews.add(view);
-                    words.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                            boolean checked = users.isItemChecked(position);
-                            if (checked) {
-                                Log.i(TAG, "mCheckedViews.add(view);");
-                                mCheckedViews.add(view);
-                            } else {
-                                Log.i(TAG, "mCheckedViews.remove(view);");
-                                mCheckedViews.remove(view);
-                            }
-                        }
-                    });
-
-                } else {
-                    Log.i(TAG, "mCheckedViews.remove(view);");
-                    mCheckedViews.remove(view);
-                }
-            }
-        });
         mCheckedViews.clear();
         adapter.notifyDataSetChanged();
     }

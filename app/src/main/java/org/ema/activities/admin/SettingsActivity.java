@@ -103,33 +103,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void onLevelClicked(View view) {
         // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        switch (view.getId()) {
-            case org.ema.R.id.yesForShowWordRadioButton:
-                if (checked){
-                    realm.executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            configuration.setShowWord(true);
-                            realm.insertOrUpdate(configuration);
-                        }
-                    });
-                }
-                break;
-            case org.ema.R.id.dontShowWordRadioButton:
-                if (checked){
-                    realm.executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            configuration.setShowWord(false);
-                            realm.insertOrUpdate(configuration);
-                        }
-                    });
-                }
-                break;
-        }
+//        boolean checked = ((RadioButton) view).isChecked();//TODO
     }
 
     public void onSoundClicked(View view) {
@@ -172,14 +146,6 @@ public class SettingsActivity extends AppCompatActivity {
             ((RadioButton) findViewById(org.ema.R.id.englishRadioButton)).setChecked(true);
             ((RadioButton) findViewById(org.ema.R.id.portugueseRadioButton)).setChecked(false);
         }
-        Boolean showWord = configuration.getShowWord();
-        if (showWord) {
-            ((RadioButton) findViewById(org.ema.R.id.yesForShowWordRadioButton)).setChecked(true);
-            ((RadioButton) findViewById(org.ema.R.id.dontShowWordRadioButton)).setChecked(false);
-        } else  {
-            ((RadioButton) findViewById(org.ema.R.id.yesForShowWordRadioButton)).setChecked(false);
-            ((RadioButton) findViewById(org.ema.R.id.dontShowWordRadioButton)).setChecked(true);
-        }
         Boolean sound = configuration.getSound();
         if(sound){
             ((RadioButton) findViewById(org.ema.R.id.soundOn)).setChecked(true);
@@ -200,7 +166,6 @@ public class SettingsActivity extends AppCompatActivity {
                     AppConfiguration config = realm.createObject(AppConfiguration.class, 1);
                     config.setLanguage("pt-br");
                     changeLocale("pt-br");
-                    config.setShowWord(true);
                 }
             });
         }
