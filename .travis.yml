@@ -27,5 +27,7 @@ before_script:
     - echo '' >> "$ANDROID_HOME/licenses/android-sdk-license"
     - echo $LICENSE_1 >> "$ANDROID_HOME/licenses/android-sdk-license"
     - echo $LICENSE_2 >> "$ANDROID_HOME/licenses/android-sdk-license"
+    - echo '' >> "$ANDROID_HOME/licenses/intel-android-extra-license"
+    - echo $LICENSE_3 >> "$ANDROID_HOME/licenses/intel-android-extra-license"
 script:
     - ./gradlew build check
