@@ -24,8 +24,20 @@ android:
 before_script:
     # Prepare pre-accepted licenses to not be promted at installation
     - mkdir -p "$ANDROID_HOME/licenses"
+    - echo '' >> "$ANDROID_HOME/licenses/android-googletv-license"
+    - echo $LICENSE_TV_1 >> "$ANDROID_HOME/licenses/android-googletv-license"
     - echo '' >> "$ANDROID_HOME/licenses/android-sdk-license"
-    - echo $LICENSE_1 >> "$ANDROID_HOME/licenses/android-sdk-license"
-    - echo $LICENSE_2 >> "$ANDROID_HOME/licenses/android-sdk-license"
+    - echo $LICENSE_SDK_1 >> "$ANDROID_HOME/licenses/android-sdk-license"
+    - echo $LICENSE_SDK_2 >> "$ANDROID_HOME/licenses/android-sdk-license"
+    - echo $LICENSE_SDK_3 >> "$ANDROID_HOME/licenses/android-sdk-license"
+    - echo '' >> "$ANDROID_HOME/licenses/android-sdk-preview-license"
+    - echo $LICENSE_SDK_PREV_1 >> "$ANDROID_HOME/licenses/android-sdk-preview-license"
+    - echo '' >> "$ANDROID_HOME/licenses/google-gdk-license"
+    - echo $LICENSE_GDK_1 >> "$ANDROID_HOME/licenses/google-gdk-license"
+    - echo '' >> "$ANDROID_HOME/licenses/intel-android-extra-license"
+    - echo $LICENSE_EXTRA_1 >> "$ANDROID_HOME/licenses/intel-android-extra-license"
+    - echo '' >> "$ANDROID_HOME/licenses/mips-android-sysimage-license"
+    - echo $LICENSE_SYSIMAGE_1 >> "$ANDROID_HOME/licenses/mips-android-sysimage-license"
+
 script:
     - ./gradlew build check
